@@ -20,6 +20,16 @@
 </head>
 <body>
     {{>navigation}}
+    {{#if listExists}}
+    <table>
+            <h6>GRP NO   |  TITLE |  Member-1 |Member-2 | Member-3  | Mentor </h6><hr>
+            {{#each rows}}
+            <h6>{{this.grpno}}        {{this.title}} {{this.rno}} {{this.rno1}} {{this.rno2}} {{this.mentor_name}}</h6>
+            <hr>
+        {{/each}} 
+    </table>
+        
+    {{/if}}
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Group</button>
     <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -35,37 +45,30 @@
                 <form method="post" action="/groups">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Member-1</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="g_m_1">
-                        {{#if listExists}}
-                            {{#each rows}}
-                                <option>{{this.s_no}}</option>
-                            {{/each}}
-                        {{/if}}
-                        </select>
+                        <input class="form-control" id="exampleFormControlSelect1" type='text' name="g_m_1">
+                        </input>
                     </div>        
                     <div class="form-group">
-                        <label for="exampleFormControlSelect2">Member-1</label>
-                        <select class="form-control" id="exampleFormControlSelect2" name="g_m_2">
-                        {{#if listExists}}
-                            {{#each rows}}
-                                <option>{{this.s_no}}</option>
-                            {{/each}}
-                        {{/if}}
-                        </select>
+                        <label for="exampleFormControlSelect2">Member-2</label>
+                        <input class="form-control" id="exampleFormControlSelect2" type='text' name="g_m_2">
+                        </input>
                     </div> 
                     <div class="form-group">
-                    <label for="exampleFormControlSelect3">Member-1</label>
-                        <select class="form-control" id="exampleFormControlSelect3" name="g_m_3">
-                        {{#if listExists}}
-                            {{#each rows}}
-                                <option>{{this.s_no}}</option>
-                            {{/each}}
-                        {{/if}}
-                        </select>
+                    <label for="exampleFormControlSelect3">Member-3</label>
+                        <input class="form-control" id="exampleFormControlSelect3" type='text' name="g_m_3">
+                        </input>
                     </div> 
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Group No</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Group number" name="gpno" />
+                    </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Project Title</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="project title"/>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Project title" name="title"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Group Mentor</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Group mentor" name="gpmn"/>
                     </div>
             </div>
             <div class="modal-footer">

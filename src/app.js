@@ -1,13 +1,13 @@
 /* nodejs navigation codes */
 
 /*Libraries*/
-const path = require("path")
-const hbs = require("hbs")
-const express = require("express")
-const request = require("request")
-const { Client } = require("pg")
-const bodyParser = require("body-parser")
-const app = express()
+const path = require("path");
+const hbs = require("hbs");
+const express = require("express");
+const request = require("request");
+const { Client } = require("pg");
+const bodyParser = require("body-parser");
+const app = express();
 
 
 // ---------------static page----------------
@@ -15,11 +15,11 @@ const app = express()
 // app.use(express.static(dir))
 
 // path
-const viewpath = path.join(__dirname, "../pages/views")
-const partialpath = path.join(__dirname, "../pages/partials")
-app.set("view engine", "hbs")
-app.set("views", viewpath)
-hbs.registerPartials(partialpath)
+const viewpath = path.join(__dirname, "../pages/views");
+const partialpath = path.join(__dirname, "../pages/partials");
+app.set("view engine", "hbs");
+app.set("views", viewpath);
+hbs.registerPartials(partialpath);
 
 //may be its wrong!!So dont use it
 // var connect = 'postgres://be_portal:123456@localhost/be_portal'
@@ -34,7 +34,7 @@ hbs.registerPartials(partialpath)
     // client.connect()
     //     .then(() => console.log("connected SUCCESSFULLY!!"))
     //     // .then(() => client.query("insert into students values($1, $2)", [26, 'Raymond']))
-    //     .then(() => client.query("select * from Students"))
+    //     .then(() => client.query("select * from groups"))
     //         .then(result => res.render("index", { 
     //             students: result.rows
     //          }))
@@ -49,7 +49,7 @@ hbs.registerPartials(partialpath)
 
 // Navigator
 app.get('/' ,(req, res) => {   
-    var str = "select * from students"
+    var str = "select * from groups";
 
     execute(str)
         //------- callback method -------//
@@ -58,54 +58,53 @@ app.get('/' ,(req, res) => {
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
             var client = new Client({
-                user: "be_portal",
-                password: "123456",
-                host: "localhost",
-                port: 5432,
-                database: "be_portal"
-            })
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
 
             await client.connect()
             console.log("Connected successfully.")
             const {rows} = await client.query(str)
-            console.log(rows)
+            console.table(rows)
             res.render("index", {
                 rows,
                 listExists: true
-            })
+            });
         }
         catch (ex)
         {
-            console.log(`Something wrong happend ${ex}`)
+            console.log(`Something wrong happend ${ex}`);
         }
         finally 
         {
-            await client.end()
-            console.log("Client disconnected successfully.")    
+            await client.end();
+            console.log("Client disconnected successfully.")  ;  
         }
     }
 })
-
 var urlencodedParser = app.use(bodyParser.urlencoded({
     extended: false
 }))
 
 app.post("/groups", urlencodedParser, (req, res) => {
-    str = "insert into groups(g_m_1, g_m_2, g_m_3, title) values($1, $2, $3, $4)"
-    values = [req.body.g_m_1, req.body.g_m_2, req.body.g_m_3, req.body.title]
-    execute(str, values)
+    str = "insert into groups values($1, $2, $3, $4, $5)";
+    values = [ParseInt(req.body.g_m_1),req.body.title,ParseInt(req.body.gpno),ParseInt(req.body.g_m_2), ParseInt(req.body.g_m_3),req.body.gpnm];
+    
         //------- callback method -------//
     async function execute(str, values) {
         try{
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
             var client = new Client({
-                user: "be_portal",
-                password: "123456",
-                host: "localhost",
-                port: 5432,
-                database: "be_portal"
-            })
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
 
             await client.connect()
             console.log("Connected successfully.")
@@ -114,7 +113,7 @@ app.post("/groups", urlencodedParser, (req, res) => {
             res.render("index", {
                 rows,
                 listExists: true
-            })
+            });
         }
         catch (ex)
         {
@@ -126,6 +125,7 @@ app.post("/groups", urlencodedParser, (req, res) => {
             console.log("Client disconnected successfully.")    
         }
     }
+    execute(str, values);
 })
 
 app.get('/7-sem' ,(req, res) => {
