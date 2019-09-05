@@ -57,13 +57,23 @@ app.get('/' ,(req, res) => {
         try{
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
+            //Database: Princeton(put my database-codes in comments when you r using yours)
+            // var client = new Client({
+            //     user : "postgres",
+            //     password : "Prince@99",
+            //     host : "localhost",
+            //     port : 5432,
+            //     database : "postgres"
+            // });
+
+            //Database: Carol
             var client = new Client({
-                user : "postgres",
-                password : "Prince@99",
-                host : "localhost",
-                port : 5432,
-                database : "postgres"
-            });
+                user: "be_portal",
+                password: "123456",
+                host: "localhost",
+                port: 5432,
+                database: "be_portal"
+            })
 
             await client.connect()
             console.log("Connected successfully.")
@@ -86,25 +96,37 @@ app.get('/' ,(req, res) => {
     }
 })
 var urlencodedParser = app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true,
 }))
 
 app.post("/", (req, res) => {
     str = "insert into groups values($1, $2, $3, $4, $5, $6)";
-    values = [parseInt(req.body.g_m_1),req.body.title,parseInt(req.body.gpno),parseInt(req.body.g_m_2),parseInt(req.body.g_m_3),req.body.gpmn];
+    // values = [parseInt(req.body.g_m_1),req.body.title,parseInt(req.body.gpno),parseInt(req.body.g_m_2),parseInt(req.body.g_m_3),req.body.gpmn];
+    values = [parseInt(req.body.g_id), parseInt(req.body.g_m_1), parseInt(req.body.g_m_2), parseInt(req.body.g_m_3), req.body.title, req.body.gpmn];
     console.log("Hello");
         //------- callback method -------//
     async function executed(str, values) {
         try{
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
+            //Database: Princeton(put my database-codes in comments when you r using yours)
+            // var client = new Client({
+            //     user : "postgres",
+            //     password : "Prince@99",
+            //     host : "localhost",
+            //     port : 5432,
+            //     database : "postgres"
+            // });
+
+
+            //Database: Carol
             var client = new Client({
-                user : "postgres",
-                password : "Prince@99",
-                host : "localhost",
-                port : 5432,
-                database : "postgres"
-            });
+                user: "be_portal",
+                password: "123456",
+                host: "localhost",
+                port: 5432,
+                database: "be_portal"
+            })
 
             await client.connect()
             console.log("Connected successfully.")
@@ -117,7 +139,7 @@ app.post("/", (req, res) => {
         }
         catch (ex)
         {
-            console.log(`Something wrong happend ${ex}`)
+            console.log(`Something wrong happened ${ex}`)
         }
         finally 
         {
