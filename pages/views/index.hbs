@@ -24,7 +24,7 @@
     <table>
             <h6>GRP NO   |  TITLE |  Member-1 |Member-2 | Member-3  | Mentor </h6><hr>
             {{#each rows}}
-            <h6>{{this.grpno}}        {{this.title}} {{this.rno}} {{this.rno1}} {{this.rno2}} {{this.mentor_name}}</h6>
+            <h6>{{this.grpno}} {{this.title}} {{this.rno}} {{this.rno1}} {{this.rno2}} {{this.mentor_name}}</h6>
             <hr>
         {{/each}} 
     </table>
@@ -42,7 +42,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/groups">
+                <form method="post" action="/">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Member-1</label>
                         <input class="form-control" id="exampleFormControlSelect1" type='text' name="g_m_1">
@@ -60,7 +60,7 @@
                     </div> 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Group No</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Group number" name="gpno" />
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Group number" name="gpno"/>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Project Title</label>

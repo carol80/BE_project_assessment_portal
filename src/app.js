@@ -89,12 +89,12 @@ var urlencodedParser = app.use(bodyParser.urlencoded({
     extended: false
 }))
 
-app.post("/groups", urlencodedParser, (req, res) => {
-    str = "insert into groups values($1, $2, $3, $4, $5)";
-    values = [ParseInt(req.body.g_m_1),req.body.title,ParseInt(req.body.gpno),ParseInt(req.body.g_m_2), ParseInt(req.body.g_m_3),req.body.gpnm];
-    
+app.post("/", (req, res) => {
+    str = "insert into groups values($1, $2, $3, $4, $5, $6)";
+    values = [parseInt(req.body.g_m_1),req.body.title,parseInt(req.body.gpno),parseInt(req.body.g_m_2),parseInt(req.body.g_m_3),req.body.gpmn];
+    console.log("Hello");
         //------- callback method -------//
-    async function execute(str, values) {
+    async function executed(str, values) {
         try{
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
@@ -125,7 +125,7 @@ app.post("/groups", urlencodedParser, (req, res) => {
             console.log("Client disconnected successfully.")    
         }
     }
-    execute(str, values);
+    executed(str, values);
 })
 
 app.get('/7-sem' ,(req, res) => {
