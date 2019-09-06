@@ -1,0 +1,92 @@
+<!-----Teacher Page----->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Landing page</title>
+    <!--Bootstrap libraries-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!--customised libraries-->
+    <link rel="stylesheet" type="text/css" style="css/style.css">
+    <link rel="stylesheet" type="text/css" style="css/responsive.css">
+</head>
+<body>
+    {{>navigation}}
+    <h1>WELCOME {{teacher}}</h1>
+    {{#if listExists}}
+    <table>
+            <h6>GRP NO   |  TITLE |  Member-1 |Member-2 | Member-3  | Mentor </h6><hr>
+            {{#each rows}}
+            <h6>{{this.grpno}} {{this.title}} {{this.rno}} {{this.rno1}} {{this.rno2}} {{this.mentor_name}}</h6>
+            <hr>
+        {{/each}} 
+    </table>
+        
+    {{/if}}
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Group Title</button>
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Group Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/mentors">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Group Leader Roll Number</label>
+                        <input class="form-control" id="exampleFormControlSelect1" type='text' name="leader_rno">
+                        </input>
+                    </div>        
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect2">Project Title</label>
+                        <input class="form-control" id="exampleFormControlSelect2" type='text' name="title">
+                        </input>
+                    </div> 
+                    {{!-- auto-generate?? --}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="ADD" />
+            </div>
+        </div>
+    </div>
+    </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Fill Forms</button>
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Details of Group</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="get" action="/mentors/grpno">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Group Leader Roll Number</label>
+                        <input class="form-control" id="exampleFormControlSelect1" type='text' name="leader_rno">
+                        </input>
+                    </div>        
+                    {{!-- auto-generate?? --}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="Search" />
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+</html>

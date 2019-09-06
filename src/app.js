@@ -9,7 +9,8 @@ const { Client } = require("pg");
 const bodyParser = require("body-parser");
 const app = express();
 
-
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json())
 // ---------------static page----------------
 // const dir = path.join(__dirname,'../public')
 // app.use(express.static(dir))
@@ -100,10 +101,9 @@ var urlencodedParser = app.use(bodyParser.urlencoded({
 }))
 
 app.post("/", (req, res) => {
-    str = "insert into groups values($1, $2, $3, $4, $5, $6)";
-    values = [parseInt(req.body.g_m_1),req.body.title,parseInt(req.body.gpno),parseInt(req.body.g_m_2),parseInt(req.body.g_m_3),req.body.gpmn];
+    str = "insert into groups (rno,rno1,rno2,title,mentor_name) values($1, $2, $3, $4, $5)";
+    values = [parseInt(req.body.g_m_1),parseInt(req.body.g_m_2),parseInt(req.body.g_m_3),req.body.title,req.body.gpmn];
     // values = [parseInt(req.body.g_id), parseInt(req.body.g_m_1), parseInt(req.body.g_m_2), parseInt(req.body.g_m_3), req.body.title, req.body.gpmn];
-    // console.log("Hello");
         //------- callback method -------//
     async function executed(str, values) {
         try{
@@ -150,11 +150,12 @@ app.post("/", (req, res) => {
     executed(str, values);
 })
 
-app.get('/mentors',(req,res)=>{
-    var str = "select * from groups";
-    execute(str)
+app.get('/:mentors',(req,res)=>{
+    var str = "select * from groups where mentor_name=$1";
+    values=[req.params.mentors]
+    execute(str,values)
         //------- callback method -------//
-    async function execute(str) {
+    async function execute(str,values) {
         try{
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
@@ -178,12 +179,12 @@ app.get('/mentors',(req,res)=>{
 
             await client.connect()
             console.log("Connected successfully.")
-            const {rows} = await client.query(str)
+            const {rows} = await client.query(str,values)
             console.table(rows)
             res.render("teacher", {
                 rows,
                 listExists: true,
-                teacher : 'kalpana'
+                teacher : req.params.mentors
             });
         }
         catch (ex)
@@ -199,6 +200,82 @@ app.get('/mentors',(req,res)=>{
 });
 
 app.post("/mentors", (req, res) => {
+    strteacher = 'kalpana'
+    str = "update groups set title= $1 where mentor_name= $2 and rno= $3 ";
+    values = [req.body.title,strteacher,parseInt(req.body.leader_rno)];
+    
+        //------- callback method -------//
+    async function executed(str, values) {
+        try{
+
+            //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
+            //Database: Princeton(put my database-codes in comments when you r using yours)
+            var client = new Client({
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
+
+
+            //Database: Carol
+            // var client = new Client({
+            //     user: "be_portal",
+            //     password: "123456",
+            //     host: "localhost",
+            //     port: 5432,
+            //     database: "be_portal"
+            // })
+
+            await client.connect()
+            console.log("Connected successfully.")
+            const {rows} = await client.query(str,values)
+            console.log(rows)
+            res.render("group_details", {
+                rows,
+                listExists: true
+            });
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happened ${ex}`)
+        }
+        finally 
+        {
+            await client.end()
+            console.log("Client disconnected successfully.")    ;
+        }
+    }
+    executed(str, values);
+});
+
+app.get('/mentors/:grpno',(req,res)=>{
+    var str = "select ";
+    grpno = req.params.grpno;
+    execute(str)
+        //------- callback method -------//
+    async function execute(str) {
+        try{
+            res.render("group_details", {
+                teacher : 'kalpana',
+                grpno : grpno
+            });
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happend ${ex}`);
+        }
+        finally 
+        {
+            await client.end();
+            console.log("Client disconnected successfully.")  ;  
+        }
+    }
+});
+
+
+app.post("/mentors/grpno", (req, res) => {
     strteacher = 'kalpana'
     str = "update groups set title= $1 where mentor_name= $2 and rno= $3 ";
     values = [req.body.title,strteacher,parseInt(req.body.leader_rno)];
@@ -249,7 +326,6 @@ app.post("/mentors", (req, res) => {
     }
     executed(str, values);
 });
-
 
 app.get('/7-sem' ,(req, res) => {
     res.render("7-sem",{
