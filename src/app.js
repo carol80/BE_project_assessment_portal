@@ -58,22 +58,22 @@ app.get('/' ,(req, res) => {
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
             //Database: Princeton(put my database-codes in comments when you r using yours)
-            // var client = new Client({
-            //     user : "postgres",
-            //     password : "Prince@99",
-            //     host : "localhost",
-            //     port : 5432,
-            //     database : "postgres"
-            // });
+            var client = new Client({
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
 
             //Database: Carol
-            var client = new Client({
-                user: "be_portal",
-                password: "123456",
-                host: "localhost",
-                port: 5432,
-                database: "be_portal"
-            })
+            // var client = new Client({
+            //     user: "be_portal",
+            //     password: "123456",
+            //     host: "localhost",
+            //     port: 5432,
+            //     database: "be_portal"
+            // })
 
             await client.connect()
             console.log("Connected successfully.")
@@ -101,32 +101,32 @@ var urlencodedParser = app.use(bodyParser.urlencoded({
 
 app.post("/", (req, res) => {
     str = "insert into groups values($1, $2, $3, $4, $5, $6)";
-    // values = [parseInt(req.body.g_m_1),req.body.title,parseInt(req.body.gpno),parseInt(req.body.g_m_2),parseInt(req.body.g_m_3),req.body.gpmn];
-    values = [parseInt(req.body.g_id), parseInt(req.body.g_m_1), parseInt(req.body.g_m_2), parseInt(req.body.g_m_3), req.body.title, req.body.gpmn];
-    console.log("Hello");
+    values = [parseInt(req.body.g_m_1),req.body.title,parseInt(req.body.gpno),parseInt(req.body.g_m_2),parseInt(req.body.g_m_3),req.body.gpmn];
+    // values = [parseInt(req.body.g_id), parseInt(req.body.g_m_1), parseInt(req.body.g_m_2), parseInt(req.body.g_m_3), req.body.title, req.body.gpmn];
+    // console.log("Hello");
         //------- callback method -------//
     async function executed(str, values) {
         try{
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
             //Database: Princeton(put my database-codes in comments when you r using yours)
-            // var client = new Client({
-            //     user : "postgres",
-            //     password : "Prince@99",
-            //     host : "localhost",
-            //     port : 5432,
-            //     database : "postgres"
-            // });
+            var client = new Client({
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
 
 
             //Database: Carol
-            var client = new Client({
-                user: "be_portal",
-                password: "123456",
-                host: "localhost",
-                port: 5432,
-                database: "be_portal"
-            })
+            // var client = new Client({
+            //     user: "be_portal",
+            //     password: "123456",
+            //     host: "localhost",
+            //     port: 5432,
+            //     database: "be_portal"
+            // })
 
             await client.connect()
             console.log("Connected successfully.")
@@ -149,6 +149,107 @@ app.post("/", (req, res) => {
     }
     executed(str, values);
 })
+
+app.get('/mentors',(req,res)=>{
+    var str = "select * from groups";
+    execute(str)
+        //------- callback method -------//
+    async function execute(str) {
+        try{
+
+            //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
+            //Database: Princeton(put my database-codes in comments when you r using yours)
+            var client = new Client({
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
+
+            //Database: Carol
+            // var client = new Client({
+            //     user: "be_portal",
+            //     password: "123456",
+            //     host: "localhost",
+            //     port: 5432,
+            //     database: "be_portal"
+            // })
+
+            await client.connect()
+            console.log("Connected successfully.")
+            const {rows} = await client.query(str)
+            console.table(rows)
+            res.render("teacher", {
+                rows,
+                listExists: true,
+                teacher : 'kalpana'
+            });
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happend ${ex}`);
+        }
+        finally 
+        {
+            await client.end();
+            console.log("Client disconnected successfully.")  ;  
+        }
+    }
+});
+
+app.post("/mentors", (req, res) => {
+    strteacher = 'kalpana'
+    str = "update groups set title= $1 where mentor_name= $2 and rno= $3 ";
+    values = [req.body.title,strteacher,parseInt(req.body.leader_rno)];
+    // values = [parseInt(req.body.g_id), parseInt(req.body.g_m_1), parseInt(req.body.g_m_2), parseInt(req.body.g_m_3), req.body.title, req.body.gpmn];
+    // console.log("Hello");
+        //------- callback method -------//
+    async function executed(str, values) {
+        try{
+
+            //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
+            //Database: Princeton(put my database-codes in comments when you r using yours)
+            var client = new Client({
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
+
+
+            //Database: Carol
+            // var client = new Client({
+            //     user: "be_portal",
+            //     password: "123456",
+            //     host: "localhost",
+            //     port: 5432,
+            //     database: "be_portal"
+            // })
+
+            await client.connect()
+            console.log("Connected successfully.")
+            const {rows} = await client.query(str,values)
+            console.log(rows)
+            res.render("teacher", {
+                rows,
+                listExists: true
+            });
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happened ${ex}`)
+        }
+        finally 
+        {
+            await client.end()
+            console.log("Client disconnected successfully.")    ;
+        }
+    }
+    executed(str, values);
+});
+
 
 app.get('/7-sem' ,(req, res) => {
     res.render("7-sem",{
