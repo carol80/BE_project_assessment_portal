@@ -59,22 +59,22 @@ app.get('/' ,(req, res) => {
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
             //Database: Princeton(put my database-codes in comments when you r using yours)
-            var client = new Client({
-                user : "postgres",
-                password : "Prince@99",
-                host : "localhost",
-                port : 5432,
-                database : "postgres"
-            });
+            // var client = new Client({
+            //     user : "postgres",
+            //     password : "Prince@99",
+            //     host : "localhost",
+            //     port : 5432,
+            //     database : "postgres"
+            // });
 
             //Database: Carol
-            // var client = new Client({
-            //     user: "be_portal",
-            //     password: "123456",
-            //     host: "localhost",
-            //     port: 5432,
-            //     database: "be_portal"
-            // })
+            var client = new Client({
+                user: "be_portal",
+                password: "123456",
+                host: "localhost",
+                port: 5432,
+                database: "be_portal"
+            })
 
             await client.connect()
             console.log("Connected successfully.")
@@ -110,23 +110,23 @@ app.post("/", (req, res) => {
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
             //Database: Princeton(put my database-codes in comments when you r using yours)
-            var client = new Client({
-                user : "postgres",
-                password : "Prince@99",
-                host : "localhost",
-                port : 5432,
-                database : "postgres"
-            });
+            // var client = new Client({
+            //     user : "postgres",
+            //     password : "Prince@99",
+            //     host : "localhost",
+            //     port : 5432,
+            //     database : "postgres"
+            // });
 
 
             //Database: Carol
-            // var client = new Client({
-            //     user: "be_portal",
-            //     password: "123456",
-            //     host: "localhost",
-            //     port: 5432,
-            //     database: "be_portal"
-            // })
+            var client = new Client({
+                user: "be_portal",
+                password: "123456",
+                host: "localhost",
+                port: 5432,
+                database: "be_portal"
+            })
 
             await client.connect()
             console.log("Connected successfully.")
@@ -160,22 +160,22 @@ app.get('/:mentors',(req,res)=>{
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
             //Database: Princeton(put my database-codes in comments when you r using yours)
-            var client = new Client({
-                user : "postgres",
-                password : "Prince@99",
-                host : "localhost",
-                port : 5432,
-                database : "postgres"
-            });
+            // var client = new Client({
+            //     user : "postgres",
+            //     password : "Prince@99",
+            //     host : "localhost",
+            //     port : 5432,
+            //     database : "postgres"
+            // });
 
             //Database: Carol
-            // var client = new Client({
-            //     user: "be_portal",
-            //     password: "123456",
-            //     host: "localhost",
-            //     port: 5432,
-            //     database: "be_portal"
-            // })
+            var client = new Client({
+                user: "be_portal",
+                password: "123456",
+                host: "localhost",
+                port: 5432,
+                database: "be_portal"
+            })
 
             await client.connect()
             console.log("Connected successfully.")
@@ -210,23 +210,23 @@ app.post("/mentors", (req, res) => {
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
             //Database: Princeton(put my database-codes in comments when you r using yours)
-            var client = new Client({
-                user : "postgres",
-                password : "Prince@99",
-                host : "localhost",
-                port : 5432,
-                database : "postgres"
-            });
+            // var client = new Client({
+            //     user : "postgres",
+            //     password : "Prince@99",
+            //     host : "localhost",
+            //     port : 5432,
+            //     database : "postgres"
+            // });
 
 
             //Database: Carol
-            // var client = new Client({
-            //     user: "be_portal",
-            //     password: "123456",
-            //     host: "localhost",
-            //     port: 5432,
-            //     database: "be_portal"
-            // })
+            var client = new Client({
+                user: "be_portal",
+                password: "123456",
+                host: "localhost",
+                port: 5432,
+                database: "be_portal"
+            })
 
             await client.connect()
             console.log("Connected successfully.")
@@ -287,23 +287,23 @@ app.post("/mentors/grpno", (req, res) => {
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
             //Database: Princeton(put my database-codes in comments when you r using yours)
-            var client = new Client({
-                user : "postgres",
-                password : "Prince@99",
-                host : "localhost",
-                port : 5432,
-                database : "postgres"
-            });
+            // var client = new Client({
+            //     user : "postgres",
+            //     password : "Prince@99",
+            //     host : "localhost",
+            //     port : 5432,
+            //     database : "postgres"
+            // });
 
 
             //Database: Carol
-            // var client = new Client({
-            //     user: "be_portal",
-            //     password: "123456",
-            //     host: "localhost",
-            //     port: 5432,
-            //     database: "be_portal"
-            // })
+            var client = new Client({
+                user: "be_portal",
+                password: "123456",
+                host: "localhost",
+                port: 5432,
+                database: "be_portal"
+            })
 
             await client.connect()
             console.log("Connected successfully.")
