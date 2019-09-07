@@ -19,65 +19,19 @@
 </head>
 <body>
     {{>navigation}}
-    <h1>WELCOME {{teacher}}</h1>
-    {{#if listExists}}
-    <table>
-            <h6>GRP NO   |  TITLE |  Member-1 |Member-2 | Member-3  | Mentor </h6><hr>
-            {{#each rows}}
-            <h6>{{this.grpno}} {{this.title}} {{this.rno}} {{this.rno1}} {{this.rno2}} {{this.mentor_name}}</h6>
-            <hr>
-        {{/each}} 
-    </table>
-        
-    {{/if}}
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Group Title</button>
-    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Group Title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="/mentors">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Group Leader Roll Number</label>
-                        <input class="form-control" id="exampleFormControlSelect1" type='text' name="leader_rno">
-                        </input>
-                    </div>        
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect2">Project Title</label>
-                        <input class="form-control" id="exampleFormControlSelect2" type='text' name="title">
-                        </input>
-                    </div> 
-                    {{!-- auto-generate?? --}}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-primary" value="ADD" />
-            </div>
-        </div>
-    </div>
-    </div>
+    <h1>{{teacher}} Student</h1>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Fill Forms</button>
     <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Details of Group</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Form Type</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="get" action="/mentors/grpno">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Group Leader Roll Number</label>
-                        <input class="form-control" id="exampleFormControlSelect1" type='text' name="leader_rno">
-                        </input>
-                    </div>        
+                <button href="/{{teacher}}/{{grpno}}/7-sem-term" class="btn btn-secondary">7th Sem Term Work</button>      
                     {{!-- auto-generate?? --}}
             </div>
             <div class="modal-footer">

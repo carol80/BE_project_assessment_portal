@@ -41,7 +41,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/mentors">
+                <form method="post" action="/{{teacher}}/">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Group Leader Roll Number</label>
                         <input class="form-control" id="exampleFormControlSelect1" type='text' name="leader_rno">
@@ -57,34 +57,6 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <input type="submit" class="btn btn-primary" value="ADD" />
-            </div>
-        </div>
-    </div>
-    </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fill">Fill Forms</button>
-    <div class="modal fade" id="fill" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Details of Group</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="/mentors/grpno">
-                <fieldset>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Group Leader Roll Number</label>
-                        <input class="form-control" id="exampleFormControlSelect1" type='number' name="leader_rno">
-                        </input>
-                    </div>       
-                </fieldset> 
-                    {{!-- auto-generate?? --}}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-primary" value="Search" />
             </div>
         </div>
     </div>
