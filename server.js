@@ -26,7 +26,8 @@ hbs.registerPartials(partialpath);
             Internal App Modules/Packages Required
 ============================================================ */
 var routes = require('./server/routes.js');						//Exchange routes & DB Queries 
-
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json())
 /* ========================================================== 
                     Use Middleware
 ============================================================ */
