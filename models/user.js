@@ -7,7 +7,6 @@ var conString = database.conString;
 
 // create a sequelize instance with our local postgres database information.
 const sequelize = new Sequelize(conString, {
-  host: 'localhost',
   dialect: 'postgres'
 });
 // var sequelize = new Sequelize({
@@ -30,7 +29,8 @@ var User = sequelize.define('users', {
         type: Sequelize.STRING,
         allowNull: false
     }
-}, {
+},
+{
     hooks: {
       beforeCreate: (user) => {
         const salt = bcrypt.genSaltSync();
