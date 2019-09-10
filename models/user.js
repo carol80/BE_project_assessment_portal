@@ -20,6 +20,10 @@ var User = sequelize.define('users', {
         unique: true,
         allowNull: false
     },
+    role: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     email: {
         type: Sequelize.STRING,
         unique: true,
@@ -29,20 +33,35 @@ var User = sequelize.define('users', {
         type: Sequelize.STRING,
         allowNull: false
     }
-},
-{
-    hooks: {
-      beforeCreate: (user) => {
-        const salt = bcrypt.genSaltSync();
-        user.password = bcrypt.hashSync(user.password, salt);
-      }
-    },
-    instanceMethods: {
-      validPassword: function(password) {
-        return bcrypt.compareSync(password, this.password);
-      }
-    }    
+},  {
+  hooks: {
+    beforeCreate: (user) => {
+      const salt = bcrypt.genSaltSync();
+      user.password = bcrypt.hashSync(user.password, salt);
+    }
+  }
 });
+
+
+// User.prototype.beforeCreate = async function(user) {
+//   const salt = await bcrypt.genSalt(10); //whatever number you want
+//   user.password = await bcrypt.hash(user.password, salt);
+// }
+User.prototype.validPassword = async function(password) {
+  return await bcrypt.compare(password, this.password);
+}
+User.prototype.roles = async function() {
+  return await this.role;
+}
+
+// User.beforeCreate = (user) => {
+//   const salt = bcrypt.genSaltSync();
+//   user.password = bcrypt.hashSync(user.password, salt);
+// }
+
+// User.validPassword = (password) => {
+//   return bcrypt.CompareSync(password, this.password);
+// }
 
 // create all the defined tables in the specified database.
 sequelize.sync()
