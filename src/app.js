@@ -323,33 +323,53 @@ app.post("/:mentors/:grpno", (req, res) => {
     executed(str, values);
 });
 
-app.get('/7term' ,(req, res) => {
+app.get('/:mentors/:grpno/7term' ,(req, res) => {
+    teacher = req.params.mentors
+    grpno = req.params.grpno
     res.render("7term",{
-        title: "7-term assessment Page"
+        title: "7-term assessment Page",
+        teacher : teacher,
+        grpno : grpno
     })
 })
 
-app.get('/7oral' ,(req, res) => {
+app.get('/:mentors/:grpno/7oral' ,(req, res) => {
+    teacher = req.params.mentors
+    grpno = req.params.grpno
     res.render("7oral",{
-        title: "7-oral assessment Page"
+        title: "7-oral assessment Page",
+        teacher : teacher,
+        grpno : grpno
     })
 })
 
-app.get('/8term' ,(req, res) => {
+app.get('/:mentors/:grpno/8term' ,(req, res) => {
+    teacher = req.params.mentors
+    grpno = req.params.grpno
     res.render("8term",{
-        title: "8-term assessment Page!"
+        title: "8-term assessment Page!",
+        teacher : teacher,
+        grpno : grpno
     })
 })
 
-app.get('/8oral' ,(req, res) => {
+app.get('/:mentors/:grpno/8oral' ,(req, res) => {
+    teacher = req.params.mentors
+    grpno = req.params.grpno
     res.render("8oral",{
-        title: "8-oral assessment Page!"
+        title: "8-oral assessment Page!",
+        teacher : teacher,
+        grpno : grpno
     })
 })
 
-app.get('final', (req ,res) => {
+app.get('/:mentors/:grpno/final', (req ,res) => {
+    teacher = req.params.mentors
+    grpno = req.params.grpno
     res.render("final",{
-        title: "Final assessment Page"
+        title: "Final assessment Page",
+        teacher : teacher,
+        grpno : grpno
     })
 })
 
