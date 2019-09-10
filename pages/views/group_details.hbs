@@ -19,7 +19,7 @@
 </head>
 <body>
     {{>navigation}}
-    <h1>{{teacher}} Student</h1>
+    <h1>{{teacher}} Student : {{grpno}}</h1>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Fill Forms</button>
     <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -31,21 +31,114 @@
                 </button>
             </div>
             <div class="modal-body">
-                <button href="/{{teacher}}/{{grpno}}/7-sem-term" class="btn btn-secondary">7th Sem Term Work</button>      
-                <button href="/{{teacher}}/{{grpno}}/7-sem-oral" class="btn btn-secondary">7th Sem Oral Work</button>
+                <button  id="7term" onclick="term_7()" class="btn btn-secondary">7th Sem Term Work</button>      
+                <button  id="7oral"  class="btn btn-secondary">7th Sem Oral Work</button>
                 <hr>
-                <button href="/{{teacher}}/{{grpno}}/8-sem-term" class="btn btn-secondary">8th Sem Term Work</button>
-                <button href="/{{teacher}}/{{grpno}}/8-sem-oral" class="btn btn-secondary">8th Sem Oral Work</button>
+                <button  id="8term"  class="btn btn-secondary">8th Sem Term Work</button>
+                <button  id="8oral"  class="btn btn-secondary">8th Sem Oral Work</button>
                 <hr>
-                <button href="/{{teacher}}/{{grpno}}/final" class="btn btn-secondary">Final Assesment</button>
+                <button id="final"  class="btn btn-secondary">Final Assesment</button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-primary" value="Fill" />
             </div>
         </div>
     </div>
     </div>
 
 </body>
+<script>
+    function term_7(){
+            const btn2 = document.getElementById('7term');
+            btn2.addEventListener('click'),(e)=>{
+            console.log('7th term was clicked....')
+
+            try{
+                fetch('/7term', {method:'GET'}).then((response)=>{//export grpno,teacher and then put it in the fetch
+                console.log('Page loaded....')
+                })
+            }
+            catch (ex)
+            {
+                console.log(`Something wrong happend ${ex}`);
+            }
+            finally 
+            {
+                console.log("7th term action done!!!!")  ;  
+            }
+        }
+    }
+    const btn2 = document.getElementById('7oral');
+    btn2.addEventListener('click7oral'),(e)=>{
+        console.log('7th Oral was clicked....')
+
+        try{
+            fetch('/7oral', {method:'GET'}).then((response)=>{//export grpno,teacher and then put it in the fetch
+            console.log('Page loaded....')
+            })
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happend ${ex}`);
+        }
+        finally 
+        {
+            console.log("7th oral action done!!!!")  ;  
+        }
+    }
+    const btn3 = document.getElementById('8term');
+    btn3.addEventListener('click8term'),(e)=>{
+        console.log('8th Term was clicked....')
+
+        try{
+            fetch('/8term', {method:'GET'}).then((response)=>{//export grpno,teacher and then put it in the fetch
+            console.log('Page loaded....')
+            })
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happend ${ex}`);
+        }
+        finally 
+        {
+            console.log("8th term action done!!!!")  ;  
+        }
+    }
+    const btn4 = document.getElementById('8oral');
+    btn4.addEventListener('click8oral'),(e)=>{
+        console.log('8th Oral was clicked....')
+
+        try{
+            fetch('/8oral', {method:'GET'}).then((response)=>{//export grpno,teacher and then put it in the fetch
+            console.log('Page loaded....')
+            })
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happend ${ex}`);
+        }
+        finally 
+        {
+            console.log("8th oral action done!!!!")  ;  
+        }
+    }
+    const btn5 = document.getElementById('final');
+    btn5.addEventListener('clickfinal'),(e)=>{
+        console.log('Final was clicked....')
+
+        try{
+            fetch('/final', {method:'GET'}).then((response)=>{//export grpno,teacher and then put it in the fetch
+            console.log('Page loaded....')
+            })
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happend ${ex}`);
+        }
+        finally 
+        {
+            console.log("final action done!!!!")  ;  
+        }
+    }
+</script>
 </html>

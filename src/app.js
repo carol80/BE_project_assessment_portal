@@ -323,15 +323,27 @@ app.post("/:mentors/:grpno", (req, res) => {
     executed(str, values);
 });
 
-app.get('/7-sem' ,(req, res) => {
-    res.render("7-sem",{
-        title: "7-sem assessment Page"
+app.get('/7term' ,(req, res) => {
+    res.render("7term",{
+        title: "7-term assessment Page"
     })
 })
 
-app.get('/8-sem' ,(req, res) => {
-    res.render("8-sem",{
-        title: "8-sem assessment Page!"
+app.get('/7oral' ,(req, res) => {
+    res.render("7oral",{
+        title: "7-oral assessment Page"
+    })
+})
+
+app.get('/8term' ,(req, res) => {
+    res.render("8term",{
+        title: "8-term assessment Page!"
+    })
+})
+
+app.get('/8oral' ,(req, res) => {
+    res.render("8oral",{
+        title: "8-oral assessment Page!"
     })
 })
 

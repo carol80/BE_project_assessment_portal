@@ -29,7 +29,7 @@ module.exports = function(app) {
 	app.post('/', appRoutes.insertGroups);
     app.get('/', appRoutes.showGroups);
     app.get('/:mentors', appRoutes.getMentors);
-    app.post('/mentors', appRoutes.updateGroups);
+    app.post('/:mentors', appRoutes.updateGroups);
 	// app.put('/api/todos/:todo_id', appRoutes.updateTodo);
 	// app.delete('/api/todos/:todo_id', appRoutes.deleteTodo);
 };
