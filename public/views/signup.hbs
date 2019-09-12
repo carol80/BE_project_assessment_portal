@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Sign Up</title>
+</head>
+<body>
+    <form class="form" action="/signup" method="post">
+      <h1>SIGN UP</h1>
+      <div class="form-group">
+        <input type="text" placeholder=" " id="name" name="username" required>
+        <label for="name">Username</label>
+        <div class="error">
+          <i class="fas fa-exclamation-circle"></i>
+          Error encountered!
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="role" placeholder=" " id="role" name="role" required>
+        <label for="role">Role</label>
+        <div class="error">
+          <i class="fas fa-exclamation-circle"></i>
+        </div>
+      </div>
+        {{!-- <select class="form-control" placeholder=" " id="role" name="role" required>
+          <option>Admin</option>
+          <option>Mentor</option>
+        </select>
+        <div class="error">
+          <i class="fas fa-exclamation-circle"></i>
+        </div>
+      </div> --}}
+      <div class="form-group">
+        <input type="email" placeholder=" " id="email" name="email" required>
+        <label for="email">Email-Id</label>
+        <div class="error">
+          <i class="fas fa-exclamation-circle"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="password" placeholder=" " id="password" name="password" required>
+        <label for="password">Password</label>
+        <div class="error">
+          <i class="fas fa-exclamation-circle"></i>
+        </div>
+      </div>
+      <input class="btn btn-primary" type="submit" value="Sign Up"/>
+      <div class="form-bottom">
+        <a href="login">Forgot Password?</a>
+      </div>
+    </form>
+</body>
+</html>

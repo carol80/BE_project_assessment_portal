@@ -16,8 +16,8 @@ const app = express()
 /*================================================================
                     Path Declarations
 =================================================================*/
-const viewpath = path.join(__dirname, "./pages/views");
-const partialpath = path.join(__dirname, "./pages/partials");
+const viewpath = path.join(__dirname, "./public/views");
+const partialpath = path.join(__dirname, "./public/views/partials");
 app.set("view engine", "hbs");
 app.set("views", viewpath);
 hbs.registerPartials(partialpath);
@@ -25,7 +25,8 @@ hbs.registerPartials(partialpath);
 /* ========================================================== 
             Internal App Modules/Packages Required
 ============================================================ */
-var routes = require('./server/routes.js');						//Exchange routes & DB Queries 
+var Admin = require('./server/Admin.js');                       //Exchange routes & DB Queries
+var Mentor = require('./server/Mentor.js');						//Exchange routes & DB Queries 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json())
 /* ========================================================== 
@@ -40,7 +41,7 @@ app.use(logger('dev')); 	//log every request to the console
 // initialize body-parser to parse incoming parameters requests to req.body
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+app.use(express.static(path.join(__dirname, './public')))
 
 // initialize cookie-parser to allow us access the cookies stored in the browser. 
 app.use(cookieParser());
@@ -66,11 +67,21 @@ app.use((req, res, next) => {
     next();
 });
 
-
 // middleware function to check for logged-in users
+// {issues to b fixed here!!}
 var sessionChecker = (req, res, next) => {
     if (req.session.user && req.cookies.user_sid) {
-        res.redirect('/dashboard');
+        if (this.role === "Admin") {
+            res.redirect('/index', {
+                Admin: this.username
+            })
+            console.log("inside Admin");
+        } else if (this.role === "Mentor"){
+            res.redirect('/teacher',{
+                teacher: this.username
+            })
+            console.log("Inside Mentor")
+        }
     } else {
         next();
     }    
@@ -86,7 +97,7 @@ app.get('/', sessionChecker, (req, res) => {
 // route for user signup
 app.route('/signup')
     .get(sessionChecker, (req, res) => {
-        res.sendFile(__dirname + '/public/signup.html');
+        res.render("signup");
     })
     .post((req, res) => {
         User.create({
@@ -95,12 +106,22 @@ app.route('/signup')
             email: req.body.email,
             password: req.body.password
         })
-        .then(user => {
+        .then(async (user) => {
             req.session.user = user.dataValues;
-            res.redirect('/dashboard');
+                if (await user.roles() === "Admin") {
+                    res.render('index', {
+                        Admin: username
+                    });
+                    console.log("inside Admin");
+                } else if (await user.roles() === "Mentor"){
+                    res.render('teacher',{
+                        teacher: username
+                    });
+                    console.log("Inside Mentor")
+                }
         })
         .catch(error => {
-            res.redirect('/signup');
+            res.render('signup');
         });
     });
 
@@ -108,7 +129,7 @@ app.route('/signup')
 // route for user Login
 app.route('/login')
     .get(sessionChecker, (req, res) => {
-        res.sendFile(__dirname + '/public/login.html');
+        res.render('login')
     })
     .post((req, res) => {
         var username = req.body.username,
@@ -116,18 +137,22 @@ app.route('/login')
 
         User.findOne({ where: { username: username } }).then(async function (user) {
             if (!user) {
-                res.redirect('/login');
+                res.render('/login');
             } else if (!await user.validPassword(password)) {
-                res.redirect('/login');
+                res.render('/login');
             } else {
                 req.session.user = user.dataValues;
                 // var role = await client.query("select role from users where username= $1",[username])
                 // console.log("dashboard")
                 if (await user.roles() === "Admin") {
-                    res.redirect('/index');
+                    res.render('index', {
+                        Admin: username
+                    });
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
-                    res.redirect('/teacher');
+                    res.render('teacher',{
+                        teacher: username
+                    });
                     console.log("Inside Mentor")
                 }
             }
@@ -135,23 +160,31 @@ app.route('/login')
     });
 
 
-// route for user's dashboard
-app.get('/index', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.sendFile(__dirname + '/public/dashboard.html');
-    } else {
-        res.redirect('/login');
-    }
-});
 
-// route for user's dashboard
-app.get('/teacher', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.render("index");
-    } else {
-        res.redirect('/login');
-    }
-});
+/* ========================================================== 
+                    ROUTES - for Express
+============================================================ */
+
+// route for Admin's dashboard
+Admin(app);
+// app.get('/index', (req, res) => {
+//     if (req.session.user && req.cookies.user_sid) {
+//         // res.sendFile(__dirname + '/public/dashboard.html');
+//         res.render("index");
+//     } else {
+//         res.redirect('/login');
+//     }
+// });
+
+// route for Mentor's dashboard
+Mentor(app);
+// app.get('/teacher', (req, res) => {
+//     if (req.session.user && req.cookies.user_sid) {
+//         res.render("teacher");
+//     } else {
+//         res.redirect('/login');
+//     }
+// });
 
 
 // route for user logout
@@ -174,27 +207,6 @@ app.use(function (req, res, next) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ========================================================== 
-                    ROUTES - for Express
-============================================================ */
-routes(app);
 
 /* ========================================================== 
                     Other Stupid Pages
