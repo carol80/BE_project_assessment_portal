@@ -134,7 +134,7 @@ app.route('/login')
     .post((req, res) => {
         var username = req.body.username,
             password = req.body.password;
-
+        console.log('Hello')
         User.findOne({ where: { username: username } }).then(async function (user) {
             if (!user) {
                 res.render('/login');

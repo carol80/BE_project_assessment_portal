@@ -12,6 +12,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!--customised libraries-->
     <link rel="stylesheet" type="text/css" style="css/style.css">
@@ -21,12 +24,17 @@
     {{>navigation}}
     <h1>WELCOME {{teacher}}</h1>
     {{#if listExists}}
-    <table>
-            <h6>GRP NO   |  TITLE |  Member-1 |Member-2 | Member-3  | Mentor </h6><hr>
+    <table class="table table-striped">
+            <thead>
+                <tr><th>GRP NO</th><th>TITLE</th><th>Member-1</th><th>Member-2</th><th>Member-3</th><th>Mentor</th></tr>
+            </thead>
+            <tbody>
             {{#each rows}}
-            <h6>{{this.grpno}} {{this.title}} {{this.rno}} {{this.rno1}} {{this.rno2}} {{this.mentor_name}}</h6>
-            <hr>
-        {{/each}} 
+            <tr>
+                <td>{{this.grpno}}</td><td>{{this.title}}</td><td>{{this.rno1}}</td><td>{{this.rno1}}</td><td>{{this.rno2}}</td><td>{{this.mentor_name}}</td>
+            </tr>
+            {{/each}} 
+            </tbody>
     </table>
         
     {{/if}}
