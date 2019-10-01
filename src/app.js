@@ -76,6 +76,15 @@ app.get('/' ,(req, res) => {
             //     database: "be_portal"
             // })
 
+            //Database: Jason
+            /* var client = new Client({
+                user: "forms",
+                password: "",
+                host: "localhost",
+                port: 63034,
+                database: "forms"
+            }); */
+
             await client.connect()
             console.log("Connected successfully.")
             const {rows} = await client.query(str)
@@ -292,13 +301,22 @@ app.post("/:mentors/:grpno", (req, res) => {
 
 
             //Database: Carol
-            var client = new Client({
-                user: "be_portal",
-                password: "123456",
+            /* var client = new Client({
+               user: "be_portal",
+               password: "123456",
+               host: "localhost",
+               port: 5432,
+               database: "be_portal"
+            }) */
+
+            //Database: Jason
+            /* var client = new Client({
+                user: "forms",
+                password: "",
                 host: "localhost",
-                port: 5432,
-                database: "be_portal"
-            })
+                port: 63034,
+                database: "forms"
+            }); */
 
             await client.connect()
             console.log("Connected successfully.")
@@ -323,14 +341,130 @@ app.post("/:mentors/:grpno", (req, res) => {
     executed(str, values);
 });
 
-app.get('/:mentors/:grpno/7term' ,(req, res) => {
+app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending Testing
     teacher = req.params.mentors
     grpno = req.params.grpno
-    res.render("7term",{
-        title: "7-term assessment Page",
-        teacher : teacher,
-        grpno : grpno
-    })
+    
+    values = [teacher,parseInt(grpno)]
+
+    var str = "select * from form where teacher=$1 and grpno=$2";
+
+    execute(str)
+        //------- callback method -------//
+    async function execute(str) {
+        try{
+
+            //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
+            //Database: Princeton(put my database-codes in comments when you r using yours)
+            var client = new Client({
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
+
+            //Database: Carol
+            // var client = new Client({
+            //     user: "be_portal",
+            //     password: "123456",
+            //     host: "localhost",
+            //     port: 5432,
+            //     database: "be_portal"
+            // })
+
+            //Database: Jason
+            /* var client = new Client({
+                user: "forms",
+                password: "",
+                host: "localhost",
+                port: 63034,
+                database: "forms"
+            }); */
+
+            await client.connect()
+            console.log("Connected successfully.")
+            const {rows} = await client.query(str,values)
+            console.table(rows)
+            res.render("7term",{
+                title: "7-term assessment Page",
+                grpno : grpno,
+                l_CO1 : l_CO1,
+                l_CO2 : l_CO2,
+                title : title,
+                mentor : mentor
+            })
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happend ${ex}`);
+        }
+        finally 
+        {
+            await client.end();
+            console.log("Client disconnected successfully.")  ;  
+        }
+    }
+
+})
+
+app.post('/:mentors/:grpno/7term' ,(req, res) => {  //Written by Jason, pending Testing
+    teacher = req.params.mentors
+    grpno = req.params.grpno
+    
+    str = "insert into form (grpno,l_CO1,l_CO2,title,mentor) values ($1, $2, $3, $4, $5)";
+    values = [parseInt(req.body.grpno),parseInt(req.body.l_CO1),parseInt(req.body.l_CO2),req.body.title,req.body.mentor];
+
+    executed(str, values);
+
+        //------- callback method -------//
+    async function executed(str, values) {
+        try{
+
+            //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
+            //Database: Princeton(put my database-codes in comments when you r using yours)
+            var client = new Client({
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
+
+            //Database: Carol
+            // var client = new Client({
+            //     user: "be_portal",
+            //     password: "123456",
+            //     host: "localhost",
+            //     port: 5432,
+            //     database: "be_portal"
+            // })
+
+            //Database: Jason
+            /* var client = new Client({
+                user: "forms",
+                password: "",
+                host: "localhost",
+                port: 63034,
+                database: "forms"
+            }); */
+
+            await client.connect()
+            console.log("Connected successfully.")
+            const {rows} = await client.query(str,values)
+            console.log(rows)
+            res.redirect('/:mentors/:grpno/7term');
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happened ${ex}`)
+        }
+        finally 
+        {
+            await client.end()
+            console.log("Client disconnected successfully.")    ;
+        }
+    };
 })
 
 app.get('/:mentors/:grpno/7oral' ,(req, res) => {
