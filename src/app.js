@@ -82,7 +82,8 @@ app.get('/' ,(req, res) => {
             console.table(rows)
             res.render("index", {
                 rows,
-                listExists: true
+                listExists: true,
+                Admin: 'raju'
             });
         }
         catch (ex)
