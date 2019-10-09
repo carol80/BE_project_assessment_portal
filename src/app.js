@@ -292,13 +292,13 @@ app.post("/:mentors/:grpno", (req, res) => {
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
             //Database: Princeton(put my database-codes in comments when you r using yours)
-            // var client = new Client({
-            //     user : "postgres",
-            //     password : "Prince@99",
-            //     host : "localhost",
-            //     port : 5432,
-            //     database : "postgres"
-            // });
+            var client = new Client({
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
 
 
             //Database: Carol
@@ -348,7 +348,7 @@ app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending 
     
     values = [teacher,parseInt(grpno)]
 
-    var str = "select * from form where teacher=$1 and grpno=$2";
+    var str = "select * from t7form where mentor=$1 and grpno=$2";
 
     execute(str)
         //------- callback method -------//
@@ -381,10 +381,7 @@ app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending 
             res.render("7term",{
                 title: "7-term assessment Page",
                 grpno : grpno,
-                CO1 : CO1,
-                CO2 : CO2,
-                title : title,
-                mentor : mentor
+                teacher : teacher
             })
         }
         catch (ex)
@@ -404,8 +401,8 @@ app.post('/:mentors/:grpno/7term' ,(req, res) => {  //Written by Jason, pending 
     teacher = req.params.mentors
     grpno = req.params.grpno
     
-    str = "insert into form (grpno,CO1,CO2,title,mentor) values ($1, $2, $3, $4, $5)";
-    values = [parseInt(req.body.grpno),parseInt(req.body.CO1),parseInt(req.body.CO2),req.body.title,req.body.mentor];
+    str = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10)";
+    values = [parseInt(req.body.rollno1),parseInt(req.body.rollno2),parseInt(req.body.rollno3),parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co1_3),parseInt(req.body.co2_3),teacher];
 
     executed(str, values);
 

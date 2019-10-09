@@ -62,12 +62,12 @@
     {{#if listExists}}
         <table class="table table-striped" >
             <thead>
-                <tr><th>GRP NO</th><th>TITLE</th><th>Member-1</th><th>Member-2</th><th>Member-3</th><th>Mentor</th><th>Forms</th></tr>
+                <tr><th>GRP NO</th><th>TITLE</th><th>Member-1</th><th>Member-2</th><th>Member-3</th><th>Mentor</th><th>Details</th></tr>
             </thead>
             <tbody>
             {{#each rows}}
             <tr>
-                <td>{{this.grpno}}</td><td>{{this.title}}</td><td>{{this.rno}}</td><td>{{this.rno1}}</td><td>{{this.rno2}}</td><td>{{this.mentor_name}}</td><td><button onclick="formClick({{this.rno}})"class="btn btn-primary">Fill Form</button></td>
+                <td>{{this.grpno}}</td><td>{{this.title}}</td><td>{{this.rno}}</td><td>{{this.rno1}}</td><td>{{this.rno2}}</td><td>{{this.mentor_name}}</td><td><button onclick="formClick({{this.rno}})"class="btn btn-primary">Fill Details</button></td>
             </tr>
             {{/each}} 
             </tbody>
@@ -79,7 +79,7 @@
         function formClick(rno){
             console.log('Fill form for '+rno+' was clicked....')
             try{
-                window.location.replace("{{teacher}}/"+rno)
+                window.location.assign("{{teacher}}/"+rno)
             
                 console.log('Page loaded....')
             }

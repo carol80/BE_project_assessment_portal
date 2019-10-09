@@ -31,13 +31,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <button  id="7term" onclick="term_7()" class="btn btn-secondary">7th Sem Term Work</button>      
-                <button  id="7oral" onclick="oral_7()" class="btn btn-secondary">7th Sem Oral Work</button>
+                <button  id="7term" onclick="term_7({{grpno}})" class="btn btn-secondary">7th Sem Term Work</button>      
+                <button  id="7oral" onclick="oral_7({{grpno}})" class="btn btn-secondary">7th Sem Oral Work</button>
                 <hr>
-                <button  id="8term" onclick="term_8()" class="btn btn-secondary">8th Sem Term Work</button>
-                <button  id="8oral" onclick="oral_8()" class="btn btn-secondary">8th Sem Oral Work</button>
+                <button  id="8term" onclick="term_8({{grpno}})" class="btn btn-secondary">8th Sem Term Work</button>
+                <button  id="8oral" onclick="oral_8({{grpno}})" class="btn btn-secondary">8th Sem Oral Work</button>
                 <hr>
-                <button id="final" onclick="final()" class="btn btn-secondary">Final Assesment</button>
+                <button id="final" onclick="final({{grpno}})" class="btn btn-secondary">Final Assesment</button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -48,10 +48,10 @@
 
 </body>
 <script>
-    function term_7(){
+    function term_7(rno){
             console.log('7th term was clicked....')
             try{
-                window.location.replace("{{grpno}}/7term")
+                window.location.assign(rno+"/7term")
             
                 console.log('Page loaded....')
             }
@@ -64,10 +64,10 @@
                 console.log("7th term action done!!!!")  ;  
             }
         }
-    function oral_7(){
+    function oral_7(rno){
             console.log('7th oral was clicked....')
             try{
-                window.location.replace("{{grpno}}/7oral")
+                window.location.assign(rno+"/7oral")
             
                 console.log('Page loaded....')
             }
@@ -80,10 +80,10 @@
                 console.log("7th oral action done!!!!")  ;  
             }
         }
-    function term_8(){
+    function term_8(rno){
             console.log('8th term was clicked....')
             try{
-                window.location.replace("{{grpno}}/8term")
+                window.location.assign(rno+"/8term")
             
                 console.log('Page loaded....')
             }
@@ -96,10 +96,10 @@
                 console.log("8th term action done!!!!")  ;  
             }
         }
-    function oral_8(){
+    function oral_8(rno){
             console.log('8th oral was clicked....')
             try{
-                window.location.replace("{{grpno}}/8oral")
+                window.location.assign(rno+"/8oral")
             
                 console.log('Page loaded....')
             }
@@ -112,10 +112,10 @@
                 console.log("8th oral action done!!!!")  ;  
             }
         }
-    function final(){
+    function final(rno){
             console.log('Final was clicked....')
             try{
-                window.location.replace("{{grpno}}/final")
+                window.location.assign(rno+"/final")
             
                 console.log('Page loaded....')
             }
