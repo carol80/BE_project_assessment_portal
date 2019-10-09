@@ -11,7 +11,7 @@ const sequelize = new Sequelize(conString, {
 });
 // var sequelize = new Sequelize({
 //     connectionString: conString,
-// });
+// }); 
 
 // setup User model and its fields.
 var User = sequelize.define('users', {
