@@ -211,8 +211,8 @@ app.use(function (req, res, next) {
 /* ========================================================== 
                     Other Stupid Pages
 ============================================================ */
-app.get('/7-sem' ,(req, res) => {
-    res.render("7-sem",{
+app.get('/7term' ,(req, res) => {
+    res.render("7term",{
         title: "7-sem assessment Page"
     })
 })

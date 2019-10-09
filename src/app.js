@@ -374,15 +374,6 @@ app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending 
             //     database: "be_portal"
             // })
 
-            //Database: Jason
-            /* var client = new Client({
-                user: "forms",
-                password: "",
-                host: "localhost",
-                port: 63034,
-                database: "forms"
-            }); */
-
             await client.connect()
             console.log("Connected successfully.")
             const {rows} = await client.query(str,values)
@@ -390,8 +381,8 @@ app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending 
             res.render("7term",{
                 title: "7-term assessment Page",
                 grpno : grpno,
-                l_CO1 : l_CO1,
-                l_CO2 : l_CO2,
+                CO1 : CO1,
+                CO2 : CO2,
                 title : title,
                 mentor : mentor
             })
@@ -413,8 +404,8 @@ app.post('/:mentors/:grpno/7term' ,(req, res) => {  //Written by Jason, pending 
     teacher = req.params.mentors
     grpno = req.params.grpno
     
-    str = "insert into form (grpno,l_CO1,l_CO2,title,mentor) values ($1, $2, $3, $4, $5)";
-    values = [parseInt(req.body.grpno),parseInt(req.body.l_CO1),parseInt(req.body.l_CO2),req.body.title,req.body.mentor];
+    str = "insert into form (grpno,CO1,CO2,title,mentor) values ($1, $2, $3, $4, $5)";
+    values = [parseInt(req.body.grpno),parseInt(req.body.CO1),parseInt(req.body.CO2),req.body.title,req.body.mentor];
 
     executed(str, values);
 
