@@ -501,9 +501,10 @@ app.get('/:mentors/:grpno/7termReport', (req,res) =>{
     str2 = "select rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3 from t7form where rollno1=$1"
     values2 = [grpno]
 
-    str3 = "select "
+    str3 = "select co1_1,co2_1,co1_2,co2_2,co1_3,co2_3 from t7oral where rollno1=$1"
+    values3 = [grpno]
 
-    async function execute(str1,values1,str2,values2){
+    async function execute(str1,values1,str2,values2,str3,values3){
         try {
              //Database: Princeton
              var client = new Client({
@@ -522,11 +523,18 @@ app.get('/:mentors/:grpno/7termReport', (req,res) =>{
             const {rows2} = await client.query(str2,values2)
             console.log(rows2)
 
+            const {rows3} = await client.query(str3,values3)
+            console.log(rows3)
+
+            var total1b = rows3.co1_1 + rows3.co2_1;
+            var total2b = rows3.co1_2 + rows3.co2_2;
+            var total3b = rows3.co1_3 + rows3.co2_3;
+
             var total1 = rows2.co1_1 + rows2.co2_1;
             var total2 = rows2.co1_2 + rows2.co2_2;
             var total3 = rows2.co1_3 + rows2.co2_3;
 
-            res.render('../public/views/partials/7termtable.html',{
+            res.render('../public/views/partials/7termReport',{
                 teacher : teacher,
                 rows1 : rows1,
                 rows2 : rows2,
