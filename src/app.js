@@ -402,12 +402,15 @@ app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending 
 app.post('/:mentors/:grpno/7term' ,(req, res) => {  //Written by Jason, pending Testing
     teacher = req.params.mentors
     grpno = req.params.grpno
+    rno2 = null
+    rno3 = null
     
     str2 = "select rno1,rno2 from groups where rno=$1";
     values2 =[grpno];
+
     
     str1 = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10)";
-    values1 = [grpno,parseInt(req.body.rollno2),parseInt(req.body.rollno3),parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co1_3),parseInt(req.body.co2_3),teacher];
+    values1 = [grpno,rno2,rno3,parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co1_3),parseInt(req.body.co2_3),teacher];
 
     executed(str1,values1,str2,values2);
 
@@ -437,10 +440,13 @@ app.post('/:mentors/:grpno/7term' ,(req, res) => {  //Written by Jason, pending 
             await client.connect()
             console.log("Connected successfully.")
 
-            const {rows1} = await client.query(str2,values2)
-            console.log(rows1[0])
+            const {rows2} = await client.query(str2,values2)
+            console.log(rows2[0])
 
-            const {rows} = await client.query(str,values)
+            rno2 = rows2[0].rno1
+            rno3 = rows2[0].rno2
+            console.log("hello2")
+            const {rows} = await client.query(str1,values1)
             console.log(rows)
 
             res.redirect('/:mentors/:grpno/7term');
@@ -512,6 +518,8 @@ app.get('/:mentors/:grpno/7termReport', (req,res) =>{
     str3 = "select co1_1,co2_1,co1_2,co2_2,co1_3,co2_3 from t7oral where rollno1=$1"
     values3 = [grpno]
 
+    execute(str1,values1,str2,values2,str3,values3);
+
     async function execute(str1,values1,str2,values2,str3,values3){
         try {
              //Database: Princeton
@@ -525,30 +533,48 @@ app.get('/:mentors/:grpno/7termReport', (req,res) =>{
 
             await client.connect()
             console.log("Connected successfully.")
-            const {rows1} = await client.query(str1,values1)
-            console.log(rows1)
+            const rows1 = await client.query(str1,values1)
+            console.log(rows1.rows[0].co1_1)
 
-            const {rows2} = await client.query(str2,values2)
-            console.log(rows2)
+            const rows2 = await client.query(str2,values2)
+            console.log(rows2.rows[0])
 
-            const {rows3} = await client.query(str3,values3)
-            console.log(rows3)
+            const rows3 = await client.query(str3,values3)
+            console.log(rows3.rows[0])
 
-            var total1b = rows3.co1_1 + rows3.co2_1;
-            var total2b = rows3.co1_2 + rows3.co2_2;
-            var total3b = rows3.co1_3 + rows3.co2_3;
+            var total1b = (rows3.rows[0].co1_1) + (rows3.rows[0].co2_1);
+            var total2b = (rows3.rows[0].co1_2) + (rows3.rows[0].co2_2);
+            var total3b = (rows3.rows[0].co1_3) + (rows3.rows[0].co2_3);
 
-            var total1 = rows2.co1_1 + rows2.co2_1;
-            var total2 = rows2.co1_2 + rows2.co2_2;
-            var total3 = rows2.co1_3 + rows2.co2_3;
+            var total1 = (rows2.rows[0].co1_1) + (rows2.rows[0].co2_1);
+            var total2 = (rows2.rows[0].co1_2) + (rows2.rows[0].co2_2);
+            var total3 = (rows2.rows[0].co1_3) + (rows2.rows[0].co2_3);
 
-            res.render('../public/views/partials/7termReport',{
+            var total1ab = total1 + total1b;
+            var total2ab = total2 + total2b;
+            var total3ab = total3 + total3b;
+
+
+            res.render('7termReport',{
                 teacher : teacher,
-                rows1 : rows1,
-                rows2 : rows2,
+                rollno1 : grpno,
+                co1_1 : rows2.rows[0].co1_1,
+                co2_1 : rows2.rows[0].co2_1,
+                rollno2 : rows2.rows[0].rollno2,
+                co1_2 : rows2.rows[0].co1_2,
+                co2_2 : rows2.rows[0].co2_2,
+                rollno3 : rows2.rows[0].rollno3,
+                co1_3 : rows2.rows[0].co1_3,
+                co2_3 : rows2.rows[0].co2_3,
                 total1 : total1,
                 total2 : total2,
-                total3 : total3
+                total3 : total3,
+                total1b : total1b,
+                total2b : total2b,
+                total3b : total3b,
+                total1ab : total1ab,
+                total2ab : total2ab,
+                total3ab : total3ab
             });
         }
         catch (ex)
@@ -561,12 +587,6 @@ app.get('/:mentors/:grpno/7termReport', (req,res) =>{
             console.log("Client disconnected successfully.")    ;
         }
     }
-
-    res.render("report",{
-        title : "Final Group Report",
-        teacher : teacher,
-        grpno : grpno
-    })
 })
 
 

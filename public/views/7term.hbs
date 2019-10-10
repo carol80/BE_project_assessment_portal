@@ -46,13 +46,13 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="/test">
+                        <form method="post" action="/{{teacher}}/{{grpno}}/7term"> <!-- Action to be checked -->
                             <!-- <div class="form-group">
                                 <label for="exampleFormControlSelect1">Leader Roll No:</label>
                                 <input class="form-control" id="exampleFormControlSelect1" type='text' name="rollno1">
                                 </input>
                             </div> -->
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="exampleFormControlSelect2">Member 1 Roll No:</label>
                                 <input class="form-control" id="exampleFormControlSelect2" type='text' name="rollno2">
                                 </input>
@@ -61,14 +61,14 @@
                                 <label for="exampleFormControlSelect2">Member 2 Roll No:</label>
                                 <input class="form-control" id="exampleFormControlSelect2" type='text' name="rollno3">
                                 </input>
-                            </div>
+                            </div> -->
                             <div class="form-group">
-                                <label for="exampleFormControlSelect2">Leader CO 1 Score:</label>
+                                <label for="exampleFormControlSelect2">{{grpno}} Leader CO 1 Score:</label>
                                 <input class="form-control" id="exampleFormControlSelect2" type='text' name="co1_1">
                                 </input>
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlSelect2">Leader CO 2 Score:</label>
+                                <label for="exampleFormControlSelect2">{{grpno}} Leader CO 2 Score:</label>
                                 <input class="form-control" id="exampleFormControlSelect2" type='text' name="co2_1">
                                 </input>
                             </div>
@@ -95,8 +95,8 @@
                             <!-- <div class="form-group">
                                 <label for="exampleFormControlInput1">Group Mentor</label>
                                 <input class="form-control" id="exampleFormControlInput1" type="text" name="mentor"
-                                    placeholder="Group mentor"/> -->
-                            </div>
+                                    placeholder="Group mentor"/> 
+                            </div>-->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
