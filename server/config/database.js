@@ -22,3 +22,6 @@ Database Connection Settings
     //     port: 5432,
     //     database: "be_portal"
     // })
+
+    //Database: Elephant SQL
+    //exports.conString='postgres://uxaehhgm:2Hko3bO3sGu49LlVvRRcehc5hYMF1cFK@john.db.elephantsql.com:5432/uxaehhgm'
