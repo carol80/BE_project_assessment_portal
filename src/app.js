@@ -348,7 +348,7 @@ app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending 
     
     values = [teacher,parseInt(grpno)]
 
-    var str = "select * from t7form where mentor=$1 and grpno=$2";
+    var str = "select * from t7form where mentor=$1 and rollno1=$2";
 
     execute(str)
         //------- callback method -------//
