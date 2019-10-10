@@ -8,11 +8,11 @@
 #2991CF - RICH ELECTRIC BLUE
 */
 
-/* 
+
 body, html {
     height: 95%;
     font-family: sans-serif;
-    background: url('../images/back2.gif') no-repeat scroll center center;
+    /* background: url('../images/back2.gif') no-repeat scroll center center; */
     background-size: cover;
   }
   
@@ -152,10 +152,10 @@ body, html {
     border: 1.5px solid rgb(31,187,176);
     background-color: rgba(248,255,174, 0.2);
     color: rgba(196, 211, 33, 0.9);
-  } */
+  }
 
 
-  * {
+  /* * {
     box-sizing: border-box;
   }
   
@@ -404,4 +404,4 @@ body, html {
     .select {
       padding: 10px;
     }
-  }
+  } */
