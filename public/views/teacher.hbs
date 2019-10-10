@@ -8,23 +8,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Landing page</title>
     <!--Bootstrap libraries-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> --}}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {{!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
+    {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {{!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> --}}
 
     <!--customised libraries-->
     {{!-- <link rel="stylesheet" type="text/css" style="css/style.css"> --}}
     <link rel="stylesheet" type="text/css" style="css/responsive.css">
-    <link rel="stylesheet" href="../css/stylehome.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body style="background-color: lightblue">
+<body>
     {{>navigation}}
-    <h1>WELCOME {{teacher}}</h1>
-    <div class="container" style="text-align: center">
+    {{!-- <div class="container" style="text-align: center">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Group Title</button>
         <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -47,7 +46,6 @@
                                 <input class="form-control" id="exampleFormControlSelect2" type='text' name="title">
                                 </input>
                             </div> 
-                            {{!-- auto-generate?? --}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -57,23 +55,125 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container" style="padding-top: 10px">
+    </div> --}}
+
+<div class="part1" style="padding-bottom: 5rem">
+<h1>
+  WELCOME {{teacher}}
+</h1>
+<p>
+  Be good to students and give them good grades!!
+</p>
+<main>
+  <div class="container">
     {{#if listExists}}
-        <table class="table table-striped" >
+  <table id="table">
+    <thead>
+        <tr><th>GRP NO</th><th>TITLE</th><th>Member-1</th><th>Member-2</th><th>Member-3</th><th>Details</th></tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th colspan='3'>
+          Year: 2018-19
+        </th>
+      </tr>
+    </tfoot>
+    <tbody>
+        {{#each rows}}
+        <tr>
+            <td data-title='GRP NO'>{{this.grpno}}</td>
+            <td data-title='TITLE'>{{this.title}}</td>
+            <td data-title='Member-1'>{{this.rno}}</td>
+            <td data-title='Member-2'>{{this.rno1}}</td>
+            <td data-title='Member-3'>{{this.rno2}}</td>
+            <td class='select'>
+                <a class='button' href='#'>
+                    Details
+                </a>
+            </td>
+        </tr>
+        {{/each}} 
+    </tbody>
+  </table>
+    {{/if}}
+</div>
+
+  <div class='detail'>
+    <div class='detail-container'>
+      <dl>
+        <dt>
+          Group No. :
+        </dt>
+        <dd>
+          Title
+        </dd>
+        <dt>
+          <Member-1></Member-1>
+        </dt>
+        <dd>
+          Mentor
+        </dd>
+        <dt>
+          Member-2
+        </dt>
+        <dd>
+          Member-3
+        </dd>
+        <dt>
+          Phone-Number
+        </dt>
+        <dd>
+          555-555-5555
+        </dd>
+        <dt>
+          Last Update
+        </dt>
+        <dd>
+          Jun 20 2014
+        </dd>
+        <dt>
+          Notes
+        </dt>
+        <dd>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+        </dd>
+      </dl>
+    </div>
+    <div class='detail-nav'>
+      <button class='close'>
+        Close
+      </button>
+    </div>
+  </div>
+</main>
+</div>
+
+<div class="part2">
+
+</div>
+
+    {{!-- <div class="container">
+    {{#if listExists}}
+        <table class="table" style="padding-top: 10px; padding-bottom: 10px;">
             <thead>
                 <tr><th>GRP NO</th><th>TITLE</th><th>Member-1</th><th>Member-2</th><th>Member-3</th><th>Mentor</th><th>Details</th></tr>
             </thead>
             <tbody>
             {{#each rows}}
             <tr>
-                <td>{{this.grpno}}</td><td>{{this.title}}</td><td>{{this.rno}}</td><td>{{this.rno1}}</td><td>{{this.rno2}}</td><td>{{this.mentor_name}}</td><td><button onclick="formClick({{this.rno}})"class="btn btn-primary">Fill Details</button></td>
+                <td>{{this.grpno}}</td>
+                <td>{{this.title}}</td>
+                <td>{{this.rno}}</td>
+                <td>{{this.rno1}}</td>
+                <td>{{this.rno2}}</td>
+                <td>{{this.mentor_name}}</td>
+                <td><button onclick="formClick({{this.rno}})"class="btn btn-primary">Fill Details</button></td>
             </tr>
             {{/each}} 
             </tbody>
         </table>        
     {{/if}}
-    </div>
+    </div> --}}
 </body>
 <script>
         function formClick(rno){
@@ -92,5 +192,11 @@
                 console.log("7th term action done!!!!")  ;  
             }
         }
+
+        $('.button, .close').on('click', function(e) {
+            e.preventDefault();
+            $('.detail, html, body').toggleClass('open');
+        });
+
     </script>
 </html>
