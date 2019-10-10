@@ -381,7 +381,9 @@ app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending 
             res.render("7term",{
                 title: "7-term assessment Page",
                 grpno : grpno,
-                teacher : teacher
+                teacher : teacher,
+                rows : rows,
+                listExists : true
             })
         }
         catch (ex)
