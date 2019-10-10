@@ -27,8 +27,15 @@ module.exports = function(app) {
 	                            ROUTES
     =================================================================*/
 
-    app.route('teacher')
+    app.route('/:mentors')
         .get(appRoutes.getMentors)
         .post(appRoutes.updateGroups)
 
+    app.route('/:mentors/:grpno')
+        .get(appRoutes.getgrpno)
+        .post(appRoutes.updategrpno)
+
+    app.route('/:mentors/:grpno/7term')
+        .get(appRoutes.get7term)
+        .post(appRoutes.update7term)
 };
