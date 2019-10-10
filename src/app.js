@@ -514,7 +514,7 @@ app.get('/:mentors/:grpno/report', (req,res) =>{
 
             await client.connect()
             console.log("Connected successfully.")
-            const {rows1} = await client.query(str1,values2)
+            const {rows1} = await client.query(str1,values1)
             console.log(rows1)
             const {rows2} = await client.query(str2,values2)
             console.log(rows2)
