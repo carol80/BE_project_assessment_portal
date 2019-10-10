@@ -403,13 +403,16 @@ app.post('/:mentors/:grpno/7term' ,(req, res) => {  //Written by Jason, pending 
     teacher = req.params.mentors
     grpno = req.params.grpno
     
-    str = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10)";
-    values = [grpno,parseInt(req.body.rollno2),parseInt(req.body.rollno3),parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co1_3),parseInt(req.body.co2_3),teacher];
+    str2 = "select rno1,rno2 from groups where rno=$1";
+    values2 =[grpno];
+    
+    str1 = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10)";
+    values1 = [grpno,parseInt(req.body.rollno2),parseInt(req.body.rollno3),parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co1_3),parseInt(req.body.co2_3),teacher];
 
-    executed(str, values);
+    executed(str1,values1,str2,values2);
 
         //------- callback method -------//
-    async function executed(str, values) {
+    async function executed(str1,values1,str2,values2) {
         try{
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
@@ -433,8 +436,13 @@ app.post('/:mentors/:grpno/7term' ,(req, res) => {  //Written by Jason, pending 
 
             await client.connect()
             console.log("Connected successfully.")
+
+            const {rows1} = await client.query(str2,values2)
+            console.log(rows1[0])
+
             const {rows} = await client.query(str,values)
             console.log(rows)
+
             res.redirect('/:mentors/:grpno/7term');
         }
         catch (ex)
