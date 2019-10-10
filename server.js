@@ -43,120 +43,120 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, './public')))
 
-// // initialize cookie-parser to allow us access the cookies stored in the browser. 
-// app.use(cookieParser());
+// initialize cookie-parser to allow us access the cookies stored in the browser. 
+app.use(cookieParser());
 
-// // initialize express-session to allow us track the logged-in user across sessions.
-// app.use(session({
-//     key: 'user_sid',
-//     secret: 'somerandonstuffs',
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//         expires: 600000
-//     }
-// }));
-
-
-// // This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
-// // This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
-// app.use((req, res, next) => {
-//     if (req.cookies.user_sid && !req.session.user) {
-//         res.clearCookie('user_sid');        
-//     }
-//     next();
-// });
-
-// // middleware function to check for logged-in users
-// // {issues to b fixed here!!}
-// var sessionChecker = (req, res, next) => {
-//     if (req.session.user && req.cookies.user_sid) {
-//         if (this.role === "Admin") {
-//             res.redirect('/index', {
-//                 Admin: this.username
-//             })
-//             console.log("inside Admin");
-//         } else if (this.role === "Mentor"){
-//             res.redirect('/teacher',{
-//                 teacher: this.username
-//             })
-//             console.log("Inside Mentor")
-//         }
-//     } else {
-//         next();
-//     }    
-// };
+// initialize express-session to allow us track the logged-in user across sessions.
+app.use(session({
+    key: 'user_sid',
+    secret: 'somerandonstuffs',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    }
+}));
 
 
-// // route for Home-Page
-// app.get('/', sessionChecker, (req, res) => {
-//     res.redirect('/login');
-// });
+// This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
+// This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
+app.use((req, res, next) => {
+    if (req.cookies.user_sid && !req.session.user) {
+        res.clearCookie('user_sid');        
+    }
+    next();
+});
+
+// middleware function to check for logged-in users
+// {issues to b fixed here!!}
+var sessionChecker = (req, res, next) => {
+    if (req.session.user && req.cookies.user_sid) {
+        if (this.role === "Admin") {
+            res.redirect('/index', {
+                Admin: this.username
+            })
+            console.log("inside Admin");
+        } else if (this.role === "Mentor"){
+            res.redirect('/teacher',{
+                teacher: this.username
+            })
+            console.log("Inside Mentor")
+        }
+    } else {
+        next();
+    }    
+};
 
 
-// // route for user signup
-// app.route('/signup')
-//     .get(sessionChecker, (req, res) => {
-//         res.render("signup");
-//     })
-//     .post((req, res) => {
-//         User.create({
-//             username: req.body.username,
-//             role: req.body.role,
-//             email: req.body.email,
-//             password: req.body.password
-//         })
-//         .then(async (user) => {
-//             req.session.user = user.dataValues;
-//                 if (await user.roles() === "Admin") {
-//                     res.render('index', {
-//                         Admin: username
-//                     });
-//                     console.log("inside Admin");
-//                 } else if (await user.roles() === "Mentor"){
-//                     res.render('teacher',{
-//                         teacher: username
-//                     });
-//                     console.log("Inside Mentor")
-//                 }
-//         })
-//         .catch(error => {
-//             res.render('signup');
-//         });
-//     });
+// route for Home-Page
+app.get('/', sessionChecker, (req, res) => {
+    res.redirect('/login');
+});
 
 
-// // route for user Login
-// app.route('/login')
-//     .get(sessionChecker, (req, res) => {
-//         res.render('login')
-//     })
-//     .post((req, res) => {
-//         var username = req.body.username,
-//             password = req.body.password;
-//         User.findOne({ where: { username: username } }).then(async function (user) {
-//             if (!user) {
-//                 res.render('/login');
-//             } else if (!await user.validPassword(password)) {
-//                 res.render('/login');
-//             } else {
-//                 req.session.user = user.dataValues;
-//                 // var role = await client.query("select role from users where username= $1",[username])
-//                 // console.log("dashboard")
-//                 if (await user.roles() === "Admin") {
-//                     res.render('index', {
-//                         Admin: username
-//                     });
-//                     console.log("inside Admin");
-//                 } else if (await user.roles() === "Mentor"){
-//                     res.render('teacher',{
-//                         teacher: username
-//                     });
-//                     console.log("Inside Mentor")
-//                 }
-//             }
-//         });
-//     });
+// route for user signup
+app.route('/signup')
+    .get(sessionChecker, (req, res) => {
+        res.render("signup");
+    })
+    .post((req, res) => {
+        User.create({
+            username: req.body.username,
+            role: req.body.role,
+            email: req.body.email,
+            password: req.body.password
+        })
+        .then(async (user) => {
+            req.session.user = user.dataValues;
+                if (await user.roles() === "Admin") {
+                    res.render('index', {
+                        Admin: username
+                    });
+                    console.log("inside Admin");
+                } else if (await user.roles() === "Mentor"){
+                    res.render('teacher',{
+                        teacher: username
+                    });
+                    console.log("Inside Mentor")
+                }
+        })
+        .catch(error => {
+            res.render('signup');
+        });
+    });
+
+
+// route for user Login
+app.route('/login')
+    .get(sessionChecker, (req, res) => {
+        res.render('login')
+    })
+    .post((req, res) => {
+        var username = req.body.username,
+            password = req.body.password;
+        User.findOne({ where: { username: username } }).then(async function (user) {
+            if (!user) {
+                res.render('/login');
+            } else if (!await user.validPassword(password)) {
+                res.render('/login');
+            } else {
+                req.session.user = user.dataValues;
+                // var role = await client.query("select role from users where username= $1",[username])
+                // console.log("dashboard")
+                if (await user.roles() === "Admin") {
+                    res.render('index', {
+                        Admin: username
+                    });
+                    console.log("inside Admin");
+                } else if (await user.roles() === "Mentor"){
+                    res.render('teacher',{
+                        teacher: username
+                    });
+                    console.log("Inside Mentor")
+                }
+            }
+        });
+    });
 
 
 
