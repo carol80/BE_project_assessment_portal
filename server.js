@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 const http = require("http");
 const session = require('express-session');
 var cookieParser = require('cookie-parser');
-// const User = require('./models/user');
+const User = require('./models/user');
 const app = express()
 
 /*================================================================
