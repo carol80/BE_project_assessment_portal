@@ -348,7 +348,7 @@ app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending 
     
     values = [teacher,parseInt(grpno)]
 
-    var str = "select * from t7form where mentor=$1 and grpno=$2";
+    var str = "select * from t7form where mentor=$1 and rollno1=$2";
 
     execute(str)
         //------- callback method -------//
@@ -429,15 +429,6 @@ app.post('/:mentors/:grpno/7term' ,(req, res) => {  //Written by Jason, pending 
             //     database: "be_portal"
             // })
 
-            //Database: Jason
-            /* var client = new Client({
-                user: "forms",
-                password: "",
-                host: "localhost",
-                port: 63034,
-                database: "forms"
-            }); */
-
             await client.connect()
             console.log("Connected successfully.")
             const {rows} = await client.query(str,values)
@@ -491,6 +482,43 @@ app.get('/:mentors/:grpno/final', (req ,res) => {
     grpno = req.params.grpno
     res.render("final",{
         title: "Final assessment Page",
+        teacher : teacher,
+        grpno : grpno
+    })
+})
+
+
+
+app.get('/:mentors/:grpno/report', (req,res) =>{
+    teacher = req.params.mentors
+    grpno = req.params.grpno
+
+    str1 = "select "
+    values1 = []
+
+    async function execute(str1,values1,str2,values2){
+        try {
+             //Database: Princeton(put my database-codes in comments when you r using yours)
+             var client = new Client({
+                user : "postgres",
+                password : "Prince@99",
+                host : "localhost",
+                port : 5432,
+                database : "postgres"
+            });
+
+            await client.connect()
+            console.log("Connected successfully.")
+            const {rows1} = await client.query(str1,values2)
+            console.log(rows1)
+            const {rows2} = await client.query(str2,values2)
+            console.log(rows2)
+            res.redirect('/:mentors/:grpno/report');
+        }
+    }
+
+    res.render("report",{
+        title : "Final Group Report",
         teacher : teacher,
         grpno : grpno
     })
