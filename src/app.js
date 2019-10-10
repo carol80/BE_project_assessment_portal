@@ -496,9 +496,12 @@ app.get('/:mentors/:grpno/report', (req,res) =>{
     str1 = "select "
     values1 = []
 
+    str2 = "select "
+    values2 = []
+
     async function execute(str1,values1,str2,values2){
         try {
-             //Database: Princeton(put my database-codes in comments when you r using yours)
+             //Database: Princeton
              var client = new Client({
                 user : "postgres",
                 password : "Prince@99",
@@ -514,6 +517,15 @@ app.get('/:mentors/:grpno/report', (req,res) =>{
             const {rows2} = await client.query(str2,values2)
             console.log(rows2)
             res.redirect('/:mentors/:grpno/report');
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happened ${ex}`)
+        }
+        finally 
+        {
+            await client.end()
+            console.log("Client disconnected successfully.")    ;
         }
     }
 
