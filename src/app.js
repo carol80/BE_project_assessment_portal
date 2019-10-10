@@ -499,15 +499,17 @@ app.get('/:mentors/:grpno/final', (req ,res) => {
 
 
 
-app.get('/:mentors/:grpno/report', (req,res) =>{
+app.get('/:mentors/:grpno/7termReport', (req,res) =>{
     teacher = req.params.mentors
     grpno = req.params.grpno
 
-    str1 = "select "
-    values1 = []
+    str1 = "select title from groups where rno=$1"
+    values1 = [grpno]
 
-    str2 = "select "
-    values2 = []
+    str2 = "select rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3 from t7form where rollno1=$1"
+    values2 = [grpno]
+
+    str3 = "select "
 
     async function execute(str1,values1,str2,values2){
         try {
@@ -522,11 +524,24 @@ app.get('/:mentors/:grpno/report', (req,res) =>{
 
             await client.connect()
             console.log("Connected successfully.")
-            const {rows1} = await client.query(str1,values2)
+            const {rows1} = await client.query(str1,values1)
             console.log(rows1)
+
             const {rows2} = await client.query(str2,values2)
             console.log(rows2)
-            res.redirect('/:mentors/:grpno/report');
+
+            var total1 = rows2.co1_1 + rows2.co2_1;
+            var total2 = rows2.co1_2 + rows2.co2_2;
+            var total3 = rows2.co1_3 + rows2.co2_3;
+
+            res.render('../public/views/partials/7termtable.html',{
+                teacher : teacher,
+                rows1 : rows1,
+                rows2 : rows2,
+                total1 : total1,
+                total2 : total2,
+                total3 : total3
+            });
         }
         catch (ex)
         {
