@@ -402,7 +402,7 @@ app.post('/:mentors/:grpno/7term' ,(req, res) => {  //Written by Jason, pending 
     grpno = req.params.grpno
     
     str = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10)";
-    values = [parseInt(req.body.rollno1),parseInt(req.body.rollno2),parseInt(req.body.rollno3),parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co1_3),parseInt(req.body.co2_3),teacher];
+    values = [grpno,parseInt(req.body.rollno2),parseInt(req.body.rollno3),parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co1_3),parseInt(req.body.co2_3),teacher];
 
     executed(str, values);
 
