@@ -9,10 +9,10 @@
 */
 
 
-body, html {
+/* body, html {
     height: 95%;
     font-family: sans-serif;
-    /* background: url('../images/back2.gif') no-repeat scroll center center; */
+    background: url('../images/back2.gif') no-repeat scroll center center;
     background-size: cover;
   }
   
@@ -152,10 +152,10 @@ body, html {
     border: 1.5px solid rgb(31,187,176);
     background-color: rgba(248,255,174, 0.2);
     color: rgba(196, 211, 33, 0.9);
-  }
+  } */
 
 
-  /* * {
+  * {
     box-sizing: border-box;
   }
   
@@ -171,16 +171,12 @@ body, html {
   
   body {
     padding: 20px;
-    background-color: #5BB9B8;
+    background-color: rgba(20, 26, 25, 0.836) ;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     color: #fff;
     font-size: 1.6rem;
     font-family: 'Lato', sans-serif;
-  }
-
-  .part1 {
-
   }
 
   .part2 {
@@ -198,8 +194,108 @@ body, html {
   }
   
   h1 {
+    color: #f1c40f;
+    font-size: 4rem;
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
     text-align: center;
-    font-weight: 300;
+  }
+  @media screen and (max-width: 600px) {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  .btn {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    background-color: transparent;
+    border: 2px solid #e74c3c;
+    border-radius: 0.6em;
+    color: #e74c3c;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+  .btn:hover, .btn:focus {
+    color: #fff;
+    outline: 0;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+  }
+  
+  .popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+  }
+  .popup .closex {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .popup .closex:hover {
+    color: #06D85F;
+  }
+  .popup .content {
+    max-height: 30%;
+    overflow: auto;
+  }
+  
+  @media screen and (max-width: 700px){
+    .popup{
+      width: 70%;
+    }
+  }
+
+  .first {
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    text-align: center;
+  }
+  .first:hover {
+    box-shadow: 0 0 40px 40px #e74c3c inset;
   }
   
   table {
@@ -266,14 +362,14 @@ body, html {
   
   .select {
     padding-bottom: 20px;
-    border-bottom: 1px solid #28333f;
+    border-bottom: 1px solid #323232;
   }
   .select:before {
     display: none;
   }
   
   .detail {
-    background-color: #BD2A4E;
+    background-color: #111;
     width: 100%;
     height: 100%;
     padding: 40px 0;
@@ -290,6 +386,7 @@ body, html {
     -webkit-transition: -webkit-transform 0.3s ease-out;
     transition: transform 0.3s ease-out;
   }
+
   .detail.open {
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
@@ -300,11 +397,25 @@ body, html {
   .detail-container {
     margin: 0 auto;
     padding: 40px;
-    max-width: 500px;
+    width: 70%;
   }
+
+  .lnr {
+    font-family: 'Linearicons-Free';
+    /* speak: none; */
+    color: #FF0000;
+    font-size: 130px;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    }
   
   dl {
-    margin: 0;
+    margin: auto;
     padding: 0;
   }
   
@@ -320,8 +431,8 @@ body, html {
     border-bottom: 1px solid #ac2647;
     box-shadow: 0 1px 0 #c52c51;
   }
-  
-  .close {
+
+  .closex {
     background: none;
     padding: 18px;
     color: #fff;
@@ -338,7 +449,7 @@ body, html {
     -webkit-transition: border 0.3s linear;
     transition: border 0.3s linear;
   }
-  .close:hover, .close:focus {
+  .closex:hover, .closex:focus {
     background-color: #a82545;
     border: 1px solid #a82545;
   }
@@ -404,4 +515,4 @@ body, html {
     .select {
       padding: 10px;
     }
-  } */
+  }
