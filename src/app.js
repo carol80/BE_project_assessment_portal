@@ -342,7 +342,7 @@ app.post("/:mentors/:grpno", (req, res) => {
     executed(str, values);
 });
 
-app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending Testing
+app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason,modified by Princeton
     teacher = req.params.mentors
     grpno = req.params.grpno
     
@@ -350,9 +350,11 @@ app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending 
 
     var str = "select * from t7form where mentor=$1 and rollno1=$2";
 
-    execute(str)
+    str2 = "select rno1,rno2 from groups where rno=$1";
+    values2 =[grpno];
+    execute(str,values,str2,values2)
         //------- callback method -------//
-    async function execute(str) {
+    async function execute(str,values,str2,values2) {
         try{
 
             //======== connecting to Postgresql database ========//(inside the func. to avoid the reuse of client)
@@ -378,11 +380,17 @@ app.get('/:mentors/:grpno/7term' ,(req, res) => {   //Written by Jason, pending 
             console.log("Connected successfully.")
             const {rows} = await client.query(str,values)
             console.table(rows)
+
+            const rows2 = await client.query(str2,values2)
+            console.log(rows2.rows[0].rno1)
+
             res.render("7term",{
                 title: "7-term assessment Page",
                 grpno : grpno,
                 teacher : teacher,
                 rows : rows,
+                rno1 : rows2.rows[0].rno1,
+                rno2 : rows2.rows[0].rno2,
                 listExists : true
             })
         }
@@ -534,7 +542,7 @@ app.get('/:mentors/:grpno/7termReport', (req,res) =>{
             await client.connect()
             console.log("Connected successfully.")
             const rows1 = await client.query(str1,values1)
-            console.log(rows1.rows[0].co1_1)
+            console.log(rows1.rows[0].title)
 
             const rows2 = await client.query(str2,values2)
             console.log(rows2.rows[0])
@@ -558,6 +566,7 @@ app.get('/:mentors/:grpno/7termReport', (req,res) =>{
             res.render('7termReport',{
                 teacher : teacher,
                 rollno1 : grpno,
+                title : rows1.rows[0].title,
                 co1_1 : rows2.rows[0].co1_1,
                 co2_1 : rows2.rows[0].co2_1,
                 rollno2 : rows2.rows[0].rollno2,

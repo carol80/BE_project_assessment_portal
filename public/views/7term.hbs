@@ -21,14 +21,18 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-
+    <style>
+        body{
+            background-image : url("../images/edu1.jpg");
+        }
+    </style>
     <!--customised libraries-->
     {{!-- <link rel="stylesheet" href="../css/style.css"> --}}
     <link rel="stylesheet" href="../css/stylehome.css">
     <link rel="stylesheet" type="text/css" style="../css/responsive.css">
 </head>
 
-<body style="background-color: lightblue">
+<body>
     {{>navigation}}
 
     <h1 class="form">7th Semester Termwork</h1>
@@ -46,62 +50,50 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="/{{teacher}}/{{grpno}}/7term"> <!-- Action to be checked -->
-                            <!-- <div class="form-group">
-                                <label for="exampleFormControlSelect1">Leader Roll No:</label>
-                                <input class="form-control" id="exampleFormControlSelect1" type='text' name="rollno1">
-                                </input>
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <label for="exampleFormControlSelect2">Member 1 Roll No:</label>
-                                <input class="form-control" id="exampleFormControlSelect2" type='text' name="rollno2">
-                                </input>
+                        {{!-- <form method="post" action="/{{teacher}}/{{grpno}}/7term"> <!-- Action to be checked --> --}}
+                        <form method="post" action="/{{teacher}}/{{grpno}}/7term">
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    {{grpno}}:
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <input type="number" class="form-control" id="member1_1" placeholder="CO_1">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <input type="number" class="form-control" id="member1_1" placeholder="CO_2">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Member 2 Roll No:</label>
-                                <input class="form-control" id="exampleFormControlSelect2" type='text' name="rollno3">
-                                </input>
-                            </div> -->
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">{{grpno}} Leader CO 1 Score:</label>
-                                <input class="form-control" id="exampleFormControlSelect2" type='text' name="co1_1">
-                                </input>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    {{rno1}}:
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <input type="number" class="form-control" id="member1_1" placeholder="CO_1">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <input type="number" class="form-control" id="member1_1" placeholder="CO_2">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">{{grpno}} Leader CO 2 Score:</label>
-                                <input class="form-control" id="exampleFormControlSelect2" type='text' name="co2_1">
-                                </input>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    {{rno2}}:
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <input type="number" class="form-control" id="member1_1" placeholder="CO_1">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <input type="number" class="form-control" id="member1_1" placeholder="CO_2">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Member 1 CO 1 Score:</label>
-                                <input class="form-control" id="exampleFormControlSelect2" type='text' name="co1_2">
-                                </input>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Member 1 CO 2 Score:</label>
-                                <input class="form-control" id="exampleFormControlSelect2" type='text' name="co2_2">
-                                </input>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Member 2 CO 1 Score:</label>
-                                <input class="form-control" id="exampleFormControlSelect2" type='text' name="co1_3">
-                                </input>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Member 2 CO 1 Score:</label>
-                                <input class="form-control" id="exampleFormControlSelect2" type='text' name="co2_3">
-                                </input>
-                            </div>
-                            <!-- <div class="form-group">
-                                <label for="exampleFormControlInput1">Group Mentor</label>
-                                <input class="form-control" id="exampleFormControlInput1" type="text" name="mentor"
-                                    placeholder="Group mentor"/> 
-                            </div>-->
-                    </div>
-                    <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="ADD" />
+                        </form>
+
+                    </div>       
+                    {{!-- <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <input type="submit" class="btn btn-primary" value="ADD" />
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
