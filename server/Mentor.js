@@ -31,9 +31,9 @@ module.exports = function(app) {
         .get(appRoutes.getMentors)
         .post(appRoutes.updateGroups)
 
-    app.route('/:mentors/:grpno')
-        .get(appRoutes.getgrpno)
-        .post(appRoutes.updategrpno)
+    // app.route('/:mentors/:grpno')
+    //     .get(appRoutes.getgrpno)
+    //     .post(appRoutes.updategrpno)
 
     app.route('/:mentors/:grpno/7term')
         .get(appRoutes.get7term)

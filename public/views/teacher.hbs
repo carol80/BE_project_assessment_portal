@@ -23,6 +23,15 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+
+<div class="part1" style="padding-bottom: 5rem">
+<h1>
+  WELCOME {{teacher}}
+</h1>
+<p>
+  Be good to students and give them good grades!!
+</p>
+
     {{!-- <div class="container" style="text-align: center">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Group Title</button>
         <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -37,12 +46,12 @@
                     <div class="modal-body">
                         <form method="post" action="/{{teacher}}/">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Group Leader Roll Number</label>
+                                <label for="exampleFormControlSelect1" style="color:black">Group Leader Roll Number</label>
                                 <input class="form-control" id="exampleFormControlSelect1" type='text' name="leader_rno">
                                 </input>
                             </div>        
                             <div class="form-group">
-                                <label for="exampleFormControlSelect2">Project Title</label>
+                                <label for="exampleFormControlSelect2" style="color: black">Project Title</label>
                                 <input class="form-control" id="exampleFormControlSelect2" type='text' name="title">
                                 </input>
                             </div> 
@@ -57,13 +66,51 @@
         </div>
     </div> --}}
 
-<div class="part1" style="padding-bottom: 5rem">
-<h1>
-  WELCOME {{teacher}}
-</h1>
-<p>
-  Be good to students and give them good grades!!
-</p>
+    <div class="container" style="text-align: center">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Group</button>
+        <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Group</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="/">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1" style="color: black">Member-1</label>
+                            <input class="form-control" id="exampleFormControlSelect1" type='text' name="g_m_1">
+                            </input>
+                        </div>        
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2" style="color: black">Member-2</label>
+                            <input class="form-control" id="exampleFormControlSelect2" type='text' name="g_m_2">
+                            </input>
+                        </div> 
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect3" style="color: black">Member-3</label>
+                            <input class="form-control" id="exampleFormControlSelect3" type='text' name="g_m_3">
+                            </input>
+                        </div> 
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1" style="color: black">Project Title</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Project title" name="title"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1" style="color: black">Group Mentor</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" value="{{teacher}}" placeholder="Group mentor" name="gpmn"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="ADD" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <main>
   <div class="container">
     {{#if listExists}}
@@ -87,30 +134,25 @@
             <td data-title='Member-2'>{{this.rno1}}</td>
             <td data-title='Member-3'>{{this.rno2}}</td>
             <td class='select'>
-                <a class='button' href='/{{this.rno}}'>
+                <a class='button'>
                     Fill Forms
                 </a>
             </td>
-            <td><a class='button' href="#popup1">
+            <td><a class='button' href="">
                 Reports
             </a></td>
-        </tr>
-        {{/each}} 
-    </tbody>
-  </table>
-    {{/if}}
-</div>
 
-  <div class='detail'>
+
+            <div class='detail'>
     <div class='detail-container'>
       <dl>
-        <h1>Select Form!!</h1>
+        <h1>Select Form for group no.:{{this.grpno}}!!</h1>
         <dd></dd>
         <dt>
           <section class="col-lg-12 row cen">
             <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
             <div class="lnr lnr-laptop-phone"></div>
-            <button class="btn first" onclick="term_7(this.rno)">7th Sem Term Work</button>
+            <button class="btn first" onclick="term_7({{this.rno}})">7th Sem Term Work</button>
             </div>
 
             <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
@@ -153,15 +195,111 @@
         </dt>
       </dl>
     </div>
+          <style>  </style>
     <div class='detail-nav'>
-      <button class='closex'>
+      <button class='close' style="background: none;
+    padding: 18px;
+    color: #fff;
+    font-weight: 300;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    line-height: 1;
+    font-size: 1.8rem;
+    position: fixed;
+    right: 40px;
+    top: 20px;
+    -moz-transition: border 0.3s linear;
+    -o-transition: border 0.3s linear;
+    -webkit-transition: border 0.3s linear;
+    transition: border 0.3s linear;">
+        Close
+      </button>
+    </div>
+  </div>
+  <div class='report'>
+    <div class='report-container'>
+      <dl>
+        <h1>Select Form for group no.:{{this.grpno}}!!</h1>
+        <dd></dd>
+        <dt>
+          <section class="col-lg-12 row cen">
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-laptop-phone"></div>
+            <button class="btn first" onclick="term_7({{this.rno}})">7th Sem Term Work</button>
+            </div>
+
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-volume-medium"></div>
+            <button class="btn first" onclick="Oral_7(this.rno)">7th Sem Orals</button>
+            </div>
+          </section>  
+        </dt>
+        <dd>
+           
+        </dd>
+        <dt>
+          <section class="col-lg-12 row cen">
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-laptop-phone"></div>
+            <button class="btn first" onclick="term_8(this.rno)">8th Sem Term Work</button>
+            </div>
+
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-volume-medium"></div>
+            <button class="btn first" onclick="Oral_8(this.rno)">8th Sem Orals</button>
+            </div>
+          </section>
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt>
+          <section class="col-lg-12 row cen">
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-laptop-phone"></div>
+            <button class="btn first" onclick="term_final(this.rno)">Final Term Work</button>
+            </div>
+
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-volume-medium"></div>
+            <button class="btn first" onclick="Oral_final(this.rno)">Final Orals</button>
+            </div>
+          </section>
+        </dt>
+      </dl>
+    </div>
+    <div class='report-nav'>
+      <button class='close' style="background: none;
+    padding: 18px;
+    color: #fff;
+    font-weight: 300;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    line-height: 1;
+    font-size: 1.8rem;
+    position: fixed;
+    right: 40px;
+    top: 20px;
+    -moz-transition: border 0.3s linear;
+    -o-transition: border 0.3s linear;
+    -webkit-transition: border 0.3s linear;
+    transition: border 0.3s linear;">
         Close
       </button>
     </div>
   </div>
 </main>
 </div>
+        </tr>
+        {{/each}} 
+    </tbody>
+  </table>
+    {{/if}}
+</div>
 
+  
+
+  
 
 <div id="popup1" class="overlay">
   <div class="popup">
@@ -175,10 +313,11 @@
 </body>
 <script>
 
-  function term_7(rno){
+  
+  function table_row(rno){
       console.log('7th term was clicked....')
       try{
-          window.location.assign(rno+"/7term")
+          window.location.assign(rno)
       
           console.log('Page loaded....')
       }
@@ -191,6 +330,25 @@
           console.log("7th term action done!!!!")  ;  
       }
   }
+  
+  function term_7(rno){
+  console.log(" hi thhis");
+      console.log('7th term was clicked....')
+      try{
+          window.location.assign("{{teacher}}/"+rno+"/7term")
+      
+          console.log('Page loaded....')
+      }
+      catch (ex)
+      {
+          console.log(`Something wrong happend ${ex}`);
+      }
+      finally 
+      {
+          console.log("7th term action done!!!!")  ;  
+      }
+  }
+
   function formClick(rno){
       console.log('Fill form for '+rno+' was clicked....')
       try{

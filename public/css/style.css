@@ -387,7 +387,33 @@
     transition: transform 0.3s ease-out;
   }
 
+  .report {
+    background-color: blue;
+    width: 100%;
+    height: 100%;
+    padding: 40px 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    overflow: auto;
+    -moz-transform: translateX(+100%);
+    -ms-transform: translateX(+100%);
+    -webkit-transform: translateX(+100%);
+    transform: translateX(+100%);
+    -moz-transition: -moz-transform 0.3s ease-out;
+    -o-transition: -o-transform 0.3s ease-out;
+    -webkit-transition: -webkit-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+  }
+
   .detail.open {
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+
+  .report.open {
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
     -webkit-transform: translateX(0);
@@ -395,6 +421,12 @@
   }
   
   .detail-container {
+    margin: 0 auto;
+    padding: 40px;
+    width: 70%;
+  }
+
+  .report-container {
     margin: 0 auto;
     padding: 40px;
     width: 70%;
@@ -414,6 +446,8 @@
     -moz-osx-font-smoothing: grayscale;
     }
   
+
+
   dl {
     margin: auto;
     padding: 0;
@@ -432,7 +466,7 @@
     box-shadow: 0 1px 0 #c52c51;
   }
 
-  .closex {
+  .close {
     background: none;
     padding: 18px;
     color: #fff;
@@ -449,7 +483,7 @@
     -webkit-transition: border 0.3s linear;
     transition: border 0.3s linear;
   }
-  .closex:hover, .closex:focus {
+  .close:hover, .close:focus {
     background-color: #a82545;
     border: 1px solid #a82545;
   }

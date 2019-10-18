@@ -1,0 +1,120 @@
+<!-----Teacher Page----->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Landing page</title>
+    <!--Bootstrap libraries-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!--customised libraries-->
+    <link rel="stylesheet" type="text/css" style="css/responsive.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body style="background-color: #111">
+    <div class='detail-container'>
+      <dl>
+        <h1>Select Form!!</h1>
+        <dd></dd>
+        <script>rno = req.params.rno;</script>
+        <dt>
+          <section class="col-lg-12 row cen">
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-laptop-phone"></div>
+            <button class="btn first" onclick="term_7(rno)">7th Sem Term Work</button>
+            </div>
+
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-volume-medium"></div>
+            <button class="btn first" onclick="Oral_7(this.rno)">7th Sem Orals</button>
+            </div>
+          </section>  
+        </dt>
+        <dd>
+           
+        </dd>
+        <dt>
+          <section class="col-lg-12 row cen">
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-laptop-phone"></div>
+            <button class="btn first" onclick="term_8(this.rno)">8th Sem Term Work</button>
+            </div>
+
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-volume-medium"></div>
+            <button class="btn first" onclick="Oral_8(this.rno)">8th Sem Orals</button>
+            </div>
+          </section>
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt>
+          <section class="col-lg-12 row cen">
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-laptop-phone"></div>
+            <button class="btn first" onclick="term_final(this.rno)">Final Term Work</button>
+            </div>
+
+            <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
+            <div class="lnr lnr-volume-medium"></div>
+            <button class="btn first" onclick="Oral_final(this.rno)">Final Orals</button>
+            </div>
+          </section>
+        </dt>
+      </dl>
+    </div>
+    <div class='detail-nav'>
+      <button class='closex'>
+        Close
+      </button>
+    </div>
+  </div>
+</body>
+<script>
+
+  function table_row(rno){
+      console.log('7th term was clicked....')
+      try{
+          window.location.assign(rno)
+      
+          console.log('Page loaded....')
+      }
+      catch (ex)
+      {
+          console.log(`Something wrong happend ${ex}`);
+      }
+      finally 
+      {
+          console.log("7th term action done!!!!")  ;  
+      }
+  }
+  
+  function term_7(rno){
+      console.log('7th term was clicked....')
+      try{
+          window.location.assign(rno+"/7term")
+      
+          console.log('Page loaded....')
+      }
+      catch (ex)
+      {
+          console.log(`Something wrong happend ${ex}`);
+      }
+      finally 
+      {
+          console.log("7th term action done!!!!")  ;  
+      }
+  }
+    </script>
+</html>
