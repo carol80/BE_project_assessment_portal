@@ -273,7 +273,7 @@ module.exports = {
 	                    Pushing the marks to the Database 
     =================================================================*/
     //updating groups into the database......... done by *****PRINCETON*****
-        post7term : async (req, res) => {//WOrk to be done by JASON---add another part in this where it checks the status and then does the according posts
+        post7term : async (req, res) => {//Work to be done by JASON---add another part in this where it checks the status and then does the according posts
             var client = new Client({
                 connectionString: conString,
             })
@@ -286,31 +286,40 @@ module.exports = {
             str2 = "select rno1,rno2 from groups where rno=$1";
             values2 =[grpno];
 
+            str3 = "select exists(select 1 from t7form where rollno1=$1)";
+            values3 = [grpno]
+
             try{
                 await client.connect()
+                const status = await client.query(str3,values3)
+                console.log(status.rows[0].exists)
+                if(!status.rows[0].exists){//if row does not exist in table
 
-                console.log("Connected successfully for 1st Query.")
-                console.log("Executing 1st Query.......")
-                const rows2 = await client.query(str2,values2)
-                jsrollno2 = rows2.rows[0].rno1
-                jsrollno3 = rows2.rows[0].rno2
-                console.log(jsrollno2,jsrollno3)
-                console.log("Updation of 1st Query Done.......")
+                    console.log("Connected successfully for 1st Query.")
+                    console.log("Executing 1st Query.......")
+                    const rows2 = await client.query(str2,values2)
+                    jsrollno2 = rows2.rows[0].rno1
+                    jsrollno3 = rows2.rows[0].rno2
+                    console.log(jsrollno2,jsrollno3)
+                    console.log("Updation of 1st Query Done.......")
 
-                str = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22)";
-                values = [parseInt(grpno),parseInt(jsrollno2),parseInt(jsrollno3),
-                        parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co3_1),parseInt(req.body.co4_1),parseInt(req.body.co5_1),parseInt(req.body.co6_1),
-                        parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co3_2),parseInt(req.body.co4_2),parseInt(req.body.co5_2),parseInt(req.body.co6_2),
-                        parseInt(req.body.co1_3),parseInt(req.body.co2_3),parseInt(req.body.co3_3),parseInt(req.body.co4_3),parseInt(req.body.co5_3),parseInt(req.body.co6_3),
-                        teacher];
+                    str = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22)";
+                    values = [parseInt(grpno),parseInt(jsrollno2),parseInt(jsrollno3),
+                            parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co3_1),parseInt(req.body.co4_1),parseInt(req.body.co5_1),parseInt(req.body.co6_1),
+                            parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co3_2),parseInt(req.body.co4_2),parseInt(req.body.co5_2),parseInt(req.body.co6_2),
+                            parseInt(req.body.co1_3),parseInt(req.body.co2_3),parseInt(req.body.co3_3),parseInt(req.body.co4_3),parseInt(req.body.co5_3),parseInt(req.body.co6_3),
+                            teacher];
 
-
-                console.log("Executing 2nd Query.......")
-                const rows = await client.query(str,values)
-                console.log("Updation of 2nd Query Done.......")
-                
-
-                res.send("Done")//replace with needed route
+                    console.log("Executing 2nd Query.......")
+                    const rows = await client.query(str,values)
+                    console.log("Updation of 2nd Query Done.......")
+                    
+                    res.send("Done")//replace with needed route
+                }
+                else{//if rows exists in table
+                    //code for updation -----To be done by JASON
+                    res.send("Updation of Database Done!!")
+                }
             }
             catch (ex)
             {
