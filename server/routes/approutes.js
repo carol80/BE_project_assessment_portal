@@ -219,17 +219,27 @@ module.exports = {
         teacher = req.params.mentors
         grpno = req.params.grpno
         values = [teacher,parseInt(grpno)]
-        var str = "select * from t7form where mentor=$1 and grpno=$2";
+        var str = "select * from t7form where mentor=$1 and rollno1=$2";
+        str2 = "select rno1,rno2,title from groups where rno=$1";
+        values2 =[grpno];
         //------- callback method -------//
         try{
             await client.connect()
             console.log("Connected successfully.")
             const {rows} = await client.query(str,values)
             console.table(rows)
+
+            const rows2 = await client.query(str2,values2)
+            console.log(rows2.rows[0].rno1)
+
             res.render("7term",{
-                title: "7-term assessment Page",
+                title: rows2.rows[0].title,
                 grpno : grpno,
-                teacher : teacher
+                teacher : teacher,
+                rows : rows,
+                rno1 : rows2.rows[0].rno1,
+                rno2 : rows2.rows[0].rno2,
+                listExists : true
             })
         }
         catch (ex)
@@ -245,34 +255,140 @@ module.exports = {
 
 
     /*================================================================
-	                    Updating groupno by mentors 
+	                    Pushing the marks to the Database 
     =================================================================*/
     //updating groups into the database
-    update7term : async (req, res) => {
+        post7term : async (req, res) => {
+            var client = new Client({
+                connectionString: conString,
+            })
+        
+            jsrollno2 = null
+            jsrollno3 = null
+            teacher = req.params.mentors
+            grpno = req.params.grpno
+            
+
+            str2 = "select rno1,rno2 from groups where rno=$1";
+            values2 =[grpno];
+
+            try{
+                await client.connect()
+
+                console.log("Connected successfully for 1st Query.")
+                console.log("Executing 1st Query.......")
+                const rows2 = await client.query(str2,values2)
+                jsrollno2 = rows2.rows[0].rno1
+                jsrollno3 = rows2.rows[0].rno2
+                console.log(jsrollno2,jsrollno3)
+                console.log("Updation of 1st Query Done.......")
+
+                str = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22)";
+                values = [parseInt(grpno),parseInt(jsrollno2),parseInt(jsrollno3),
+                        parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co3_1),parseInt(req.body.co4_1),parseInt(req.body.co5_1),parseInt(req.body.co6_1),
+                        parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co3_2),parseInt(req.body.co4_2),parseInt(req.body.co5_2),parseInt(req.body.co6_2),
+                        parseInt(req.body.co1_3),parseInt(req.body.co2_3),parseInt(req.body.co3_3),parseInt(req.body.co4_3),parseInt(req.body.co5_3),parseInt(req.body.co6_3),
+                        teacher];
+
+                console.log("Executing 2nd Query.......")
+                console.log(values)
+                const rows = await client.query(str,values)
+                console.log("Updation of 2nd Query Done.......")
+                
+
+                res.send("Done")//replace with needed route
+            }
+            catch (ex)
+            {
+                console.log(`Something wrong happened ${ex}`)
+            }
+            finally 
+            {
+                await client.end();
+                console.log("Client disconnected successfully.")    ;
+            }
+        },
+
+
+    /*================================================================
+                    7term report assigned by group numbers 
+    =================================================================*/
+    get7termreport : async (req, res) => {
         var client = new Client({
             connectionString: conString,
         })
-
-        teacher = req.params.mentors
-        grpno = req.params.grpno
-        str = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10)";
-        values = [parseInt(req.body.rollno1),parseInt(req.body.rollno2),parseInt(req.body.rollno3),parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co1_3),parseInt(req.body.co2_3),teacher];
-
-        try{
-            await client.connect()
-            console.log("Connected successfully.")
-            const {rows} = await client.query(str,values)
-            console.log(rows)
-            res.redirect('/:mentors/:grpno/7term');
+            teacher = req.params.mentors
+            grpno = req.params.grpno
+        
+            str1 = "select title from groups where rno=$1"
+            values1 = [grpno]
+        
+            str2 = "select rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3 from t7form where rollno1=$1"
+            values2 = [grpno]
+        
+            str3 = "select co1_1,co2_1,co1_2,co2_2,co1_3,co2_3 from t7oral where rollno1=$1"
+            values3 = [grpno]
+        
+            execute(str1,values1,str2,values2,str3,values3);
+        
+            async function execute(str1,values1,str2,values2,str3,values3){
+                try {
+                    await client.connect()
+                    console.log("Connected successfully.")
+                    const rows1 = await client.query(str1,values1)
+                    console.log(rows1.rows[0].title)
+        
+                    const rows2 = await client.query(str2,values2)
+                    console.log(rows2.rows[0])
+        
+                    const rows3 = await client.query(str3,values3)
+                    console.log(rows3.rows[0])
+        
+                    var total1b = (rows3.rows[0].co1_1) + (rows3.rows[0].co2_1);
+                    var total2b = (rows3.rows[0].co1_2) + (rows3.rows[0].co2_2);
+                    var total3b = (rows3.rows[0].co1_3) + (rows3.rows[0].co2_3);
+        
+                    var total1 = (rows2.rows[0].co1_1) + (rows2.rows[0].co2_1);
+                    var total2 = (rows2.rows[0].co1_2) + (rows2.rows[0].co2_2);
+                    var total3 = (rows2.rows[0].co1_3) + (rows2.rows[0].co2_3);
+        
+                    var total1ab = total1 + total1b;
+                    var total2ab = total2 + total2b;
+                    var total3ab = total3 + total3b;
+        
+        
+                    res.render('7termReport',{
+                        teacher : teacher,
+                        rollno1 : grpno,
+                        title : rows1.rows[0].title,
+                        co1_1 : rows2.rows[0].co1_1,
+                        co2_1 : rows2.rows[0].co2_1,
+                        rollno2 : rows2.rows[0].rollno2,
+                        co1_2 : rows2.rows[0].co1_2,
+                        co2_2 : rows2.rows[0].co2_2,
+                        rollno3 : rows2.rows[0].rollno3,
+                        co1_3 : rows2.rows[0].co1_3,
+                        co2_3 : rows2.rows[0].co2_3,
+                        total1 : total1,
+                        total2 : total2,
+                        total3 : total3,
+                        total1b : total1b,
+                        total2b : total2b,
+                        total3b : total3b,
+                        total1ab : total1ab,
+                        total2ab : total2ab,
+                        total3ab : total3ab
+                    });
+                }
+                catch (ex)
+                {
+                    console.log(`Something wrong happened ${ex}`)
+                }
+                finally 
+                {
+                    await client.end()
+                    console.log("Client disconnected successfully.")    ;
+                }
+            }
         }
-        catch (ex)
-        {
-            console.log(`Something wrong happened ${ex}`)
-        }
-        finally 
-        {
-            await client.end()
-            console.log("Client disconnected successfully.")    ;
-        }
-    }
 }

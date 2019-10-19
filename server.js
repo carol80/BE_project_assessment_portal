@@ -149,9 +149,7 @@ app.route('/login')
                     });
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
-                    res.render('teacher',{
-                        teacher: username
-                    });
+                    window.location.assign("/"+username)
                     console.log("Inside Mentor")
                 }
             }
