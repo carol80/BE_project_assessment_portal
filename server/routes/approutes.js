@@ -211,36 +211,51 @@ module.exports = {
 	                Getting group number of Mentors
     =================================================================*/
     //Mentors and their groups into the database
-    get7term : async (req, res) => {
+    get7term : async (req, res) => {// Done by *****PRINCETON*****
         var client = new Client({
             connectionString: conString,
         })
 
         teacher = req.params.mentors
         grpno = req.params.grpno
-        values = [teacher,parseInt(grpno)]
         var str = "select * from t7form where mentor=$1 and rollno1=$2";
+        values = [teacher,parseInt(grpno)]
+
         str2 = "select rno1,rno2,title from groups where rno=$1";
         values2 =[grpno];
+
+        str3 = "select exists(select 1 from t7form where rollno1=$1)";
+        values3 = [grpno]
         //------- callback method -------//
         try{
             await client.connect()
             console.log("Connected successfully.")
-            const {rows} = await client.query(str,values)
-            console.table(rows)
+            console.log("hi")
+            const status = await client.query(str3,values3)
+            console.log(status.rows[0].exists)
 
-            const rows2 = await client.query(str2,values2)
-            console.log(rows2.rows[0].rno1)
-
-            res.render("7term",{
-                title: rows2.rows[0].title,
-                grpno : grpno,
-                teacher : teacher,
-                rows : rows,
-                rno1 : rows2.rows[0].rno1,
-                rno2 : rows2.rows[0].rno2,
-                listExists : true
-            })
+            if(!status.rows[0].exists){
+                const {rows} = await client.query(str,values)
+                console.table(rows)
+    
+                const rows2 = await client.query(str2,values2)
+                console.log(rows2.rows[0].rno1)
+    
+                res.render("7term",{
+                    title: rows2.rows[0].title,
+                    grpno : grpno,
+                    teacher : teacher,
+                    rows : rows,
+                    rno1 : rows2.rows[0].rno1,
+                    rno2 : rows2.rows[0].rno2,
+                    listExists : true
+                })
+            }
+            else{
+                res.send("Row Exists")// need to do updation by *****JASON*****------same form with prefilled values and submit btn will update the entries in the table
+            }
+            
+           
         }
         catch (ex)
         {
@@ -257,8 +272,8 @@ module.exports = {
     /*================================================================
 	                    Pushing the marks to the Database 
     =================================================================*/
-    //updating groups into the database
-        post7term : async (req, res) => {
+    //updating groups into the database......... done by *****PRINCETON*****
+        post7term : async (req, res) => {//WOrk to be done by JASON---add another part in this where it checks the status and then does the according posts
             var client = new Client({
                 connectionString: conString,
             })
@@ -268,7 +283,6 @@ module.exports = {
             teacher = req.params.mentors
             grpno = req.params.grpno
             
-
             str2 = "select rno1,rno2 from groups where rno=$1";
             values2 =[grpno];
 
@@ -290,8 +304,8 @@ module.exports = {
                         parseInt(req.body.co1_3),parseInt(req.body.co2_3),parseInt(req.body.co3_3),parseInt(req.body.co4_3),parseInt(req.body.co5_3),parseInt(req.body.co6_3),
                         teacher];
 
+
                 console.log("Executing 2nd Query.......")
-                console.log(values)
                 const rows = await client.query(str,values)
                 console.log("Updation of 2nd Query Done.......")
                 
@@ -308,12 +322,12 @@ module.exports = {
                 console.log("Client disconnected successfully.")    ;
             }
         },
-
+    //Make another route here regarding updation ......to be done by JASON 
 
     /*================================================================
                     7term report assigned by group numbers 
     =================================================================*/
-    get7termreport : async (req, res) => {
+    get7termreport : async (req, res) => { //.........Done by PRINCETON
         var client = new Client({
             connectionString: conString,
         })
