@@ -317,8 +317,19 @@ module.exports = {
                     res.send("Done")//replace with needed route
                 }
                 else{//if rows exists in table
-                    //code for updation -----To be done by JASON
-                    res.send("Updation of Database Done!!")
+                    //code for updation -----Done by PRINCETON
+
+                    str4 = "update t7form set co1_1 = $1,co2_1 = $2,co3_1 = $3,co4_1 = $4,co5_1 = $5,co6_1 = $6,co1_2 = $7,co2_2 = $8,co3_2 = $9,co4_2 = $10,co5_2 = $11,co6_2 = $12,co1_3 = $13,co2_3 = $14,co3_3 = $15,co4_3 = $16,co5_3 = $17,co6_3 = $18 where rollno1 = $19";
+                    values4 = [ parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co3_1),parseInt(req.body.co4_1),parseInt(req.body.co5_1),parseInt(req.body.co6_1),
+                                parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co3_2),parseInt(req.body.co4_2),parseInt(req.body.co5_2),parseInt(req.body.co6_2),
+                                parseInt(req.body.co1_3),parseInt(req.body.co2_3),parseInt(req.body.co3_3),parseInt(req.body.co4_3),parseInt(req.body.co5_3),parseInt(req.body.co6_3),
+                                parseInt(grpno)];
+
+                    console.log("Updations in Progress.....")
+                    const rows4 = await client.query(str4,values4)
+                    console.log("Updation of Database is Done!!!!")
+
+                    res.send("Updation of Database Done!!")//replace with needed route
                 }
             }
             catch (ex)
@@ -349,7 +360,7 @@ module.exports = {
             str2 = "select rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3 from t7form where rollno1=$1"
             values2 = [grpno]
         
-            str3 = "select co1_1,co2_1,co1_2,co2_2,co1_3,co2_3 from t7oral where rollno1=$1"
+            str3 = "select co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3 from t7oral where rollno1=$1"
             values3 = [grpno]
         
             execute(str1,values1,str2,values2,str3,values3);
@@ -367,13 +378,13 @@ module.exports = {
                     const rows3 = await client.query(str3,values3)
                     console.log(rows3.rows[0])
         
-                    var total1b = (rows3.rows[0].co1_1) + (rows3.rows[0].co2_1);
-                    var total2b = (rows3.rows[0].co1_2) + (rows3.rows[0].co2_2);
-                    var total3b = (rows3.rows[0].co1_3) + (rows3.rows[0].co2_3);
+                    var total1b = (rows3.rows[0].co1_1) + (rows3.rows[0].co2_1) + (rows3.rows[0].co3_1) + (rows3.rows[0].co4_1) + (rows3.rows[0].co5_1) + (rows3.rows[0].co6_1);
+                    var total2b = (rows3.rows[0].co1_2) + (rows3.rows[0].co2_2) + (rows3.rows[0].co3_2) + (rows3.rows[0].co4_2) + (rows3.rows[0].co5_2) + (rows3.rows[0].co6_2);
+                    var total3b = (rows3.rows[0].co1_3) + (rows3.rows[0].co2_3) + (rows3.rows[0].co3_3) + (rows3.rows[0].co4_3) + (rows3.rows[0].co5_3) + (rows3.rows[0].co6_3);
         
-                    var total1 = (rows2.rows[0].co1_1) + (rows2.rows[0].co2_1);
-                    var total2 = (rows2.rows[0].co1_2) + (rows2.rows[0].co2_2);
-                    var total3 = (rows2.rows[0].co1_3) + (rows2.rows[0].co2_3);
+                    var total1 = (rows2.rows[0].co1_1) + (rows2.rows[0].co2_1) + (rows2.rows[0].co3_1) + (rows2.rows[0].co4_1) + (rows2.rows[0].co5_1) + (rows2.rows[0].co6_1);
+                    var total2 = (rows2.rows[0].co1_2) + (rows2.rows[0].co2_2) + (rows2.rows[0].co3_2) + (rows2.rows[0].co4_2) + (rows2.rows[0].co5_2) + (rows2.rows[0].co6_2);
+                    var total3 = (rows2.rows[0].co1_3) + (rows2.rows[0].co2_3) + (rows2.rows[0].co3_3) + (rows2.rows[0].co4_3) + (rows2.rows[0].co5_3) + (rows2.rows[0].co6_3);
         
                     var total1ab = total1 + total1b;
                     var total2ab = total2 + total2b;
@@ -384,14 +395,17 @@ module.exports = {
                         teacher : teacher,
                         rollno1 : grpno,
                         title : rows1.rows[0].title,
-                        co1_1 : rows2.rows[0].co1_1,
-                        co2_1 : rows2.rows[0].co2_1,
+                        co1_1 : rows2.rows[0].co1_1,    co2_1 : rows2.rows[0].co2_1,
+                        co3_1 : rows2.rows[0].co3_1,    co4_1 : rows2.rows[0].co4_1,
+                        co5_1 : rows2.rows[0].co5_1,    co6_1 : rows2.rows[0].co6_1,
                         rollno2 : rows2.rows[0].rollno2,
-                        co1_2 : rows2.rows[0].co1_2,
-                        co2_2 : rows2.rows[0].co2_2,
+                        co1_2 : rows2.rows[0].co1_2,    co2_2 : rows2.rows[0].co2_2,
+                        co3_2 : rows2.rows[0].co3_2,    co4_2 : rows2.rows[0].co4_2,
+                        co5_2 : rows2.rows[0].co5_2,    co6_2 : rows2.rows[0].co6_2,
                         rollno3 : rows2.rows[0].rollno3,
-                        co1_3 : rows2.rows[0].co1_3,
-                        co2_3 : rows2.rows[0].co2_3,
+                        co1_3 : rows2.rows[0].co1_3,    co2_3 : rows2.rows[0].co2_3,
+                        co3_3 : rows2.rows[0].co3_3,    co4_3 : rows2.rows[0].co4_3,
+                        co5_3 : rows2.rows[0].co5_3,    co6_3 : rows2.rows[0].co6_3,
                         total1 : total1,
                         total2 : total2,
                         total3 : total3,
