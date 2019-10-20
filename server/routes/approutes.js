@@ -357,7 +357,7 @@ module.exports = {
             str1 = "select title from groups where rno=$1"
             values1 = [grpno]
         
-            str2 = "select rollno2,rollno3,co1_1,co2_1,co1_2,co2_2,co1_3,co2_3 from t7form where rollno1=$1"
+            str2 = "select rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3 from t7form where rollno1=$1"
             values2 = [grpno]
         
             str3 = "select co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3 from t7oral where rollno1=$1"
