@@ -154,7 +154,7 @@ module.exports = {
         teacher = req.params.mentors;
         //------- callback method -------//
         try{
-            res.render("group_details", {
+            res.render("forms", {
                 teacher : teacher,
                 grpno : grpno
             }); 

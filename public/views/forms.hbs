@@ -24,19 +24,18 @@
 <body style="background-color: #111">
     <div class='detail-container'>
       <dl>
-        <h1>Select Form!!</h1>
+        <h1>@{{teacher}} Select Form!!</h1>
         <dd></dd>
-        <script>rno = req.params.rno;</script>
         <dt>
           <section class="col-lg-12 row cen">
             <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
             <div class="lnr lnr-laptop-phone"></div>
-            <button class="btn first" onclick="term_7(rno)">7th Sem Term Work</button>
+            <button class="btn first" onclick="term_7({{grpno}})">7th Sem Term Work</button>
             </div>
 
             <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
             <div class="lnr lnr-volume-medium"></div>
-            <button class="btn first" onclick="Oral_7(this.rno)">7th Sem Orals</button>
+            <button class="btn first" onclick="Oral_7({{grpno}})">7th Sem Orals</button>
             </div>
           </section>  
         </dt>
@@ -47,12 +46,12 @@
           <section class="col-lg-12 row cen">
             <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
             <div class="lnr lnr-laptop-phone"></div>
-            <button class="btn first" onclick="term_8(this.rno)">8th Sem Term Work</button>
+            <button class="btn first" onclick="term_8({{grpno}})">8th Sem Term Work</button>
             </div>
 
             <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
             <div class="lnr lnr-volume-medium"></div>
-            <button class="btn first" onclick="Oral_8(this.rno)">8th Sem Orals</button>
+            <button class="btn first" onclick="Oral_8({{grpno}})">8th Sem Orals</button>
             </div>
           </section>
         </dt>
@@ -63,22 +62,35 @@
           <section class="col-lg-12 row cen">
             <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
             <div class="lnr lnr-laptop-phone"></div>
-            <button class="btn first" onclick="term_final(this.rno)">Final Term Work</button>
+            <button class="btn first" onclick="term_final({{grpno}})">Final Term Work</button>
             </div>
 
             <div class="col-lg-6 col-sm-6"  data-aos="fade-up">
             <div class="lnr lnr-volume-medium"></div>
-            <button class="btn first" onclick="Oral_final(this.rno)">Final Orals</button>
+            <button class="btn first" onclick="Oral_final({{grpno}})">Final Orals</button>
             </div>
           </section>
         </dt>
       </dl>
     </div>
-    <div class='detail-nav'>
-      <button class='closex'>
+    <div class='report-nav'>
+      <button href="{{teacher}}" style="background: none;
+    padding: 18px;
+    color: #fff;
+    font-weight: 300;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    line-height: 1;
+    font-size: 1.8rem;
+    position: fixed;
+    right: 40px;
+    top: 20px;
+    -moz-transition: border 0.3s linear;
+    -o-transition: border 0.3s linear;
+    -webkit-transition: border 0.3s linear;
+    transition: border 0.3s linear;">
         Close
       </button>
-    </div>
   </div>
 </body>
 <script>
