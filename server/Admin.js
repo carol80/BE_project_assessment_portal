@@ -27,9 +27,12 @@ module.exports = function(app) {
 	                            ROUTES
     =================================================================*/
 
-    app.route('/')
+    app.route('/admin')
         .get(appRoutes.showGroups)
         .post(appRoutes.insertGroups)
+
+    app.route('/admin/formcheck')
+        .get(appRoutes.formcheck)
 
 
 	// app.post('/', appRoutes.insertGroups);

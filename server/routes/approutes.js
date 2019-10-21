@@ -3,6 +3,7 @@ const path = require("path");
 const hbs = require("hbs");
 const express = require("express")
 const database = require('../config/database.js');
+// const User = require('./models/formcheck');      to be included while submitting the form
 var conString = database.conString;
 const app = express();
 
@@ -19,66 +20,7 @@ hbs.registerPartials(partialpath);
 
 module.exports = {
 
-	/*================================================================
-	                            SHOW GROUPS
-	=================================================================*/
-	//Get all the groups in the database
-	showGroups : async (req, res) => {
-        var client = new Client({
-            connectionString: conString,
-        })
-
-        try{
-            await client.connect()
-            console.log("Connected successfully.")
-            const {rows} = await client.query("select * from groups")
-            res.render("index", {
-                rows,
-                listExists: true
-            });
-        }
-        catch (ex)
-        {
-            console.log(`Something wrong happend ${ex}`);
-        }
-        finally 
-        {
-            await client.end();
-            console.log("Client disconnected successfully.")  ;  
-        }
-    },
-
-    
-	/*================================================================
-	                        INSERT 
-    =================================================================*/
-    //insert groups into the database
-    insertGroups : async (req, res) => {
-        var client = new Client({
-            connectionString: conString,
-        })
-
-        try{
-            await client.connect()
-            console.log("Connected successfully.")
-            const {rows} = await client.query("insert into groups (rno,rno1,rno2,title,mentor_name) values ($1, $2, $3, $4, $5)",[parseInt(req.body.g_m_1),parseInt(req.body.g_m_2),parseInt(req.body.g_m_3),req.body.title,req.body.gpmn])
-            res.render("index", {
-                rows,
-                listExists: true
-            });
-        }
-        catch (ex)
-        {
-            console.log(`Something wrong happend ${ex}`);
-        }
-        finally 
-        {
-            await client.end();
-            console.log("Client disconnected successfully.")  ;  
-        }
-    },
-
-
+	
     /*================================================================
 	                        Getting Mentors
     =================================================================*/
@@ -427,5 +369,103 @@ module.exports = {
                     console.log("Client disconnected successfully.")    ;
                 }
             }
+        },
+
+
+/*================================================================
+	                    Admin Area
+    =================================================================*/
+
+
+/*================================================================
+	                        SHOW GROUPS
+	=================================================================*/
+	//Get all the groups in the database
+	showGroups : async (req, res) => {
+        var client = new Client({
+            connectionString: conString,
+        })
+
+        try{
+            await client.connect()
+            console.log("Connected successfully.")
+            const {rows} = await client.query("select * from groups")
+            res.render("admin", {
+                rows,
+                listExists: true
+            });
         }
+        catch (ex)
+        {
+            console.log(`Something wrong happend ${ex}`);
+        }
+        finally 
+        {
+            await client.end();
+            console.log("Client disconnected successfully.")  ;  
+        }
+    },
+
+
+
+/*================================================================
+	                    Form Form check Updates
+    =================================================================*/
+    //updating groups into the database
+    formcheck : async (req, res) => {
+        var client = new Client({
+            connectionString: conString,
+        })
+
+        str = "select * from formcheck";
+        try{
+            await client.connect()
+            console.log("Connected successfully.")
+            const {rows} = await client.query(str)
+            console.log(rows)
+            res.render("formcheck", {
+                rows,
+                listExists: true
+            });
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happened ${ex}`)
+        }
+        finally 
+        {
+            await client.end()
+            console.log("Client disconnected successfully.")    ;
+        }
+    },
+
+
+    
+	/*================================================================
+	                        INSERT into groups
+    =================================================================*/
+    //insert groups into the database
+    insertGroups : async (req, res) => {
+        var client = new Client({
+            connectionString: conString,
+        })
+
+        try{
+            await client.connect()
+            console.log("Connected successfully.")
+            const {rows} = await client.query("insert into groups (rno,rno1,rno2,title,mentor_name) values ($1, $2, $3, $4, $5)",[parseInt(req.body.rno),parseInt(req.body.rno1),parseInt(req.body.rno2),req.body.title,req.body.mentor_name])
+            // res.render("admin");
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happend ${ex}`);
+        }
+        finally 
+        {
+            await client.end();
+            alert("Group added Successfully");
+            console.log("Client disconnected successfully.")  ;  
+        }
+    }
+
 }

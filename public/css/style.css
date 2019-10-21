@@ -78,22 +78,6 @@
     color: #fff;
     outline: 0;
   }
-
-  .overlay {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
-  }
-  .overlay:target {
-    visibility: visible;
-    opacity: 1;
-  }
   
   .popup {
     margin: 70px auto;
@@ -303,4 +287,25 @@
     .select {
       padding: 10px;
     }
+  }
+
+
+  /*================================================================
+	                    ANIMATIONS
+    =================================================================*/
+  .transition-fade {
+    opacity: 1;
+    transform: translateX(0);
+    transition: 500ms;
+    transform-origin: left;
+  }
+  
+  html.is-animating .transition-fade {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  html.is-leaving .transition-fade {
+    opacity: 0;
+    transform: translateX(0);
   }
