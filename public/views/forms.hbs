@@ -125,14 +125,15 @@
       }
       finally 
       {
-          console.log("7th term action done!!!!")  ;  
+          console.log("7th term action done!!!!") ;  
       }
+      
   }
 
   function goBack(){
     console.log("Back was CLicked!!!")
     try{
-      window.location.replace("/{{teacher}}")
+      window.location.assign("/{{teacher}}")
       console.log("Done")
     }
     catch(ex){
