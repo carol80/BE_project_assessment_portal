@@ -74,7 +74,7 @@
       </dl>
     </div>
     <div class='report-nav'>
-      <button href="{{teacher}}" style="background: none;
+      <button onclick="goBack()" style="background: none;
     padding: 18px;
     color: #fff;
     font-weight: 300;
@@ -127,6 +127,17 @@
       {
           console.log("7th term action done!!!!")  ;  
       }
+  }
+
+  function goBack(){
+    console.log("Back was CLicked!!!")
+    try{
+      window.location.replace("/{{teacher}}")
+      console.log("Done")
+    }
+    catch(ex){
+      console.log(`error : ${ex}`)
+    }
   }
     </script>
 </html>
