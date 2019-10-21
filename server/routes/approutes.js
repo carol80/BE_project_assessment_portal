@@ -144,7 +144,7 @@ module.exports = {
         finally 
         {
             await client.end()
-            console.log("Client disconnected successfully.")    ;
+            console.log("Client disconnected successfully.");
         }
     },
 
@@ -172,7 +172,7 @@ module.exports = {
         try{
             await client.connect()
             console.log("Connected successfully.")
-            console.log("hi")
+
             const status = await client.query(str3,values3)
             console.log(status.rows[0].exists)
 
@@ -304,6 +304,13 @@ module.exports = {
         
             str3 = "select co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3 from t7oral where rollno1=$1"
             values3 = [grpno]
+
+            //Write sql for 1st Midterm they have 8 co
+            // str4 = "select co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co8_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co8_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3,co8_3 from t7mid where rollno1=$1"
+            // values4 = [grpno]
+            //Write sql for 2nd Midterm they have 8 co
+            // str5 = "select co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co8_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co8_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3,co8_3 from t7mid where rollno1=$1"
+            // values5 = [grpno] 
         
             execute(str1,values1,str2,values2,str3,values3);
         
@@ -315,10 +322,16 @@ module.exports = {
                     console.log(rows1.rows[0].title)
         
                     const rows2 = await client.query(str2,values2)
-                    console.log(rows2.rows[0])
+                    //console.log(rows2.rows[0])
         
                     const rows3 = await client.query(str3,values3)
-                    console.log(rows3.rows[0])
+                    //console.log(rows3.rows[0])
+
+                    // const rows4 = await client.query(str4,values4)
+                    // console.log(rows4.rows[0])
+        
+                    // const rows5 = await client.query(str5,values5)
+                    // console.log(rows5.rows[0])
         
                     var total1b = (rows3.rows[0].co1_1) + (rows3.rows[0].co2_1) + (rows3.rows[0].co3_1) + (rows3.rows[0].co4_1) + (rows3.rows[0].co5_1) + (rows3.rows[0].co6_1);
                     var total2b = (rows3.rows[0].co1_2) + (rows3.rows[0].co2_2) + (rows3.rows[0].co3_2) + (rows3.rows[0].co4_2) + (rows3.rows[0].co5_2) + (rows3.rows[0].co6_2);
@@ -331,8 +344,27 @@ module.exports = {
                     var total1ab = total1 + total1b;
                     var total2ab = total2 + total2b;
                     var total3ab = total3 + total3b;
-        
-        
+                    
+                    //Calculation of C
+                    var total1c = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1) + (rows4.rows[0].co8_1);
+                    var total2c = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2) + (rows4.rows[0].co8_2);
+                    var total3c = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows3.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
+
+                    //Calculation of D
+                    var total1d = (rows5.rows[0].co1_1) + (rows5.rows[0].co2_1) + (rows5.rows[0].co3_1) + (rows5.rows[0].co4_1) + (rows5.rows[0].co5_1) + (rows5.rows[0].co6_1) + (rows5.rows[0].co7_1) + (rows5.rows[0].co8_1);
+                    var total2d = (rows5.rows[0].co1_2) + (rows5.rows[0].co2_2) + (rows5.rows[0].co3_2) + (rows5.rows[0].co4_2) + (rows5.rows[0].co5_2) + (rows5.rows[0].co6_2) + (rows5.rows[0].co7_2) + (rows5.rows[0].co8_2);
+                    var total3d = (rows5.rows[0].co1_3) + (rows5.rows[0].co2_3) + (rows5.rows[0].co3_3) + (rows5.rows[0].co4_3) + (rows5.rows[0].co5_3) + (rows5.rows[0].co6_3) + (rows5.rows[0].co7_3) + (rows5.rows[0].co8_3);
+
+                    //Calculation of Avg of C and D
+                    var total1e = (total1c + total1d)/2;
+                    var total2e = (total2c + total2d)/2;
+                    var total3e = (total3c + total3d)/2;
+
+                    //Calculating Final Total
+                    var total1Final = 0.4*(total1ab)+0.6*(total1e);
+                    var total2Final = 0.4*(total2ab)+0.6*(total2e);
+                    var total3Final = 0.4*(total3ab)+0.6*(total3e);
+
                     res.render('7termReport',{
                         teacher : teacher,
                         rollno1 : grpno,
@@ -348,15 +380,13 @@ module.exports = {
                         co1_3 : rows2.rows[0].co1_3,    co2_3 : rows2.rows[0].co2_3,
                         co3_3 : rows2.rows[0].co3_3,    co4_3 : rows2.rows[0].co4_3,
                         co5_3 : rows2.rows[0].co5_3,    co6_3 : rows2.rows[0].co6_3,
-                        total1 : total1,
-                        total2 : total2,
-                        total3 : total3,
-                        total1b : total1b,
-                        total2b : total2b,
-                        total3b : total3b,
-                        total1ab : total1ab,
-                        total2ab : total2ab,
-                        total3ab : total3ab
+                        total1 : total1,    total2 : total2,    total3 : total3,
+                        total1b : total1b,  total2b : total2b,  total3b : total3b,
+                        total1ab : total1ab,    total2ab : total2ab,    total3ab : total3ab,
+                        total1c : total1c,  total2c : total2c,  total3c : total3c,
+                        total1d : total1d,  total2d : total2d,  total3d : total3d,
+                        total1e : total1e,  total2e : total2e,  total3e : total3e,
+                        total1Final : total1Final,  total2Final : total2Final,  total3Final : total3Final
                     });
                 }
                 catch (ex)
