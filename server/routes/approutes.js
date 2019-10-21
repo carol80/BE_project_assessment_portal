@@ -202,7 +202,7 @@ module.exports = {
         finally 
         {
             await client.end()
-            console.log("Client disconnected successfully.")    ;
+            console.log("Client disconnected successfully.");
         }
     },
 
@@ -230,7 +230,7 @@ module.exports = {
         try{
             await client.connect()
             console.log("Connected successfully.")
-            console.log("hi")
+
             const status = await client.query(str3,values3)
             console.log(status.rows[0].exists)
 
