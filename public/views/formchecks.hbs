@@ -54,7 +54,7 @@
         {{#each rows}}
         <tr>
             <td data-title='rno'>{{this.rno}}</td>
-            {{#if this.term7}}
+            {{#if_eq this.term7 'true'}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
