@@ -341,11 +341,16 @@
     <script type="text/javascript">
     
     $(function(){
-        $("#co1_1").val("5").attr("selected","selected");
+        $("#co1_1").val({{co1_1}}).attr("selected","selected");
     });
+    </script>
+
+    <script type="text/javascript">
     $(function(){
         $("#co2_1").val("{{co2_1}}").attr("selected","selected");
     });
+    </script>
+    <!--
     $(function(){
         $("#co3_1").val("{{co3_1}}").attr("selected","selected");
     });
@@ -399,7 +404,7 @@
         $("#co6_3").val({{co6_3}}").attr("selected","selected");
     });
 
-    </script>
+    </script> -->
 
 </body>
 </html>
