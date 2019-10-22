@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Landing page</title>
+    <title>Teacher page</title>
     <!--Bootstrap libraries-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -18,13 +18,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!--customised libraries-->
-    {{!-- <link rel="stylesheet" type="text/css" style="css/style.css"> --}}
     <link rel="stylesheet" type="text/css" style="css/responsive.css">
     <link rel="stylesheet" href="../css/style.css">
+
+    <!--animation libraries-->
+  <script defer src="/node_modules/swup/dist/swup.min.js"></script>
+  <script defer src="../js/scripts.js"></script>
 </head>
 <body>
 
-<div class="part1" style="padding-bottom: 5rem">
+<div>
 <h1>
   WELCOME {{teacher}}
 </h1>
@@ -32,52 +35,54 @@
   Be good to students and give them good grades!!
 </p>
 
-    <div class="container" style="text-align: center">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Group</button>
-        <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Group</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post" action="/">
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1" style="color: black">Member-1</label>
-                            <input class="form-control" id="exampleFormControlSelect1" type='text' name="g_m_1">
-                            </input>
-                        </div>        
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect2" style="color: black">Member-2</label>
-                            <input class="form-control" id="exampleFormControlSelect2" type='text' name="g_m_2">
-                            </input>
-                        </div> 
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect3" style="color: black">Member-3</label>
-                            <input class="form-control" id="exampleFormControlSelect3" type='text' name="g_m_3">
-                            </input>
-                        </div> 
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1" style="color: black">Project Title</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Project title" name="title"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1" style="color: black">Group Mentor</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" value="{{teacher}}" placeholder="Group mentor" name="gpmn"/>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="ADD" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-<main>
+  <div class="container" style="text-align: center">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Group</button>
+      <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Group</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <form method="post" action="/">
+                      <div class="form-group">
+                          <label for="exampleFormControlSelect1" style="color: black">Member-1</label>
+                          <input class="form-control" id="exampleFormControlSelect1" type='text' name="g_m_1">
+                          </input>
+                      </div>        
+                      <div class="form-group">
+                          <label for="exampleFormControlSelect2" style="color: black">Member-2</label>
+                          <input class="form-control" id="exampleFormControlSelect2" type='text' name="g_m_2">
+                          </input>
+                      </div> 
+                      <div class="form-group">
+                          <label for="exampleFormControlSelect3" style="color: black">Member-3</label>
+                          <input class="form-control" id="exampleFormControlSelect3" type='text' name="g_m_3">
+                          </input>
+                      </div> 
+                      <div class="form-group">
+                          <label for="exampleFormControlInput1" style="color: black">Project Title</label>
+                          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Project title" name="title"/>
+                      </div>
+                      <div class="form-group">
+                          <label for="exampleFormControlInput1" style="color: black">Group Mentor</label>
+                          <input type="text" class="form-control" id="exampleFormControlInput1" value="{{teacher}}" placeholder="Group mentor" name="gpmn"/>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <input type="submit" class="btn btn-primary" value="ADD" />
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+<main id="swup">
   <div class="container">
     {{#if listExists}}
   <table id="table">
@@ -99,7 +104,7 @@
             <td data-title='Member-1'>{{this.rno}}</td>
             <td data-title='Member-2'>{{this.rno1}}</td>
             <td data-title='Member-3'>{{this.rno2}}</td>
-            <td><a class='button' href="{{this.mentor_name}}/{{this.rno}}">Fill Forms</a></td>
+            <td><a class='button transition-fade' href="{{this.mentor_name}}/{{this.rno}}">Fill Forms</a></td>
             <td><a class='button' href="#">Reports</a></td>
         </tr>
         {{/each}} 
@@ -107,5 +112,6 @@
   </table>
     {{/if}}
 </div>
+</main>
 </body>
 </html>

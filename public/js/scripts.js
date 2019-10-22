@@ -1,2 +1,1 @@
-/* basic javascript codes */
-console.log("Client side server!!")
+const swup = new Swup();
