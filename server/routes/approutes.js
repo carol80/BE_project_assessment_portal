@@ -259,21 +259,21 @@ module.exports = {
                     values5 = [parseInt(1),parseInt(grpno)]
 
                     console.log("Executing Status Update for 1st.......")
-                    const rows = await client.query(str5,values5)
+                    const rows5 = await client.query(str5,values5)
                     console.log("Updated Status of 1st Student.......")
 
                     str6 = "update formcheck SET term7 = $1 WHERE rno=$2"
                     values6 = [parseInt(1),parseInt(jsrollno2)]
 
                     console.log("Executing Status Update for 2nd.......")
-                    const rows = await client.query(str6,values6)
+                    const rows6 = await client.query(str6,values6)
                     console.log("Updated Status of 2nd Student.......")
 
                     str7 = "update formcheck SET term7 = $1 WHERE rno=$2"
                     values7 = [parseInt(1),parseInt(jsrollno3)]
 
                     console.log("Executing Status Update for 3rd.......")
-                    const rows = await client.query(str7,values7)
+                    const rows7 = await client.query(str7,values7)
                     console.log("Updated Status of 3rd Student.......")
 
                     console.log("*********Updation of status done for all....**********")
