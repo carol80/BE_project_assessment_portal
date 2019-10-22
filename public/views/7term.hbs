@@ -316,7 +316,7 @@
             </select>
         </td>
         <td width="8%">
-            <select name="co6_3" id="co6_3">
+            <select id="co6_3" name="co6_3" id="co6_3" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -336,6 +336,14 @@
             <button class="btn btn-primary" style="align-content: center;" type="submit">Submit</button>
         </div>
     </form>
+
+    <!-- To be tested -->
+    <script type="text/javascript">
+    $(function(){
+        $("#co6_3").val("3").attr("selected","selected");
+    });
+    </script>
+
 </body>
 </html>
 
