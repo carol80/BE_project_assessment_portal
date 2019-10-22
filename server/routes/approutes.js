@@ -3,7 +3,7 @@ const path = require("path");
 const hbs = require("hbs");
 const express = require("express")
 const database = require('../config/database.js');
-// const User = require('./models/formcheck');      to be included while submitting the form
+const formcheck = require('../../models/formcheck.js');      //to be included while submitting the form
 var conString = database.conString;
 const app = express();
 
@@ -484,7 +484,21 @@ module.exports = {
             await client.connect()
             console.log("Connected successfully.")
             const {rows} = await client.query("insert into groups (rno,rno1,rno2,title,mentor_name) values ($1, $2, $3, $4, $5)",[parseInt(req.body.rno),parseInt(req.body.rno1),parseInt(req.body.rno2),req.body.title,req.body.mentor_name])
-            // res.render("admin");
+            formcheck.create({
+                rno: req.body.rno,
+                term7: false,
+                oral7: false,
+                term8: false,
+                oral8:false,
+                oral7: false,
+                finalterm: false,
+                finaloral: false,
+                mentor_name: req.body.mentor_name
+            })
+            res.render("admin", {
+                rows,
+                listExists: true
+            });
         }
         catch (ex)
         {
