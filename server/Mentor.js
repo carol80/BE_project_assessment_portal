@@ -35,10 +35,21 @@ module.exports = function(app) {
         .get(appRoutes.getgrpno)
         .post(appRoutes.updategrpno)
 
+    app.route('/:mentors/:grpno/7mid1term')
+        .get(appRoutes.get7mid1term)
+        .post(appRoutes.post7mid1term)
+
+    app.route('/:mentors/:grpno/7mid2term')
+        .get(appRoutes.get7mid2term)
+        .post(appRoutes.post7mid2term)
+
+    app.route('/:mentors/:grpno/7oral')
+        .get(appRoutes.get7oral)
+        .post(appRoutes.post7oral)
+
     app.route('/:mentors/:grpno/7term')
         .get(appRoutes.get7term)
         .post(appRoutes.post7term)
-        //.put(appRoutes.put7termChanges)
 
     app.route('/:mentors/:grpno/7termreport')
         .get(appRoutes.get7termreport)
