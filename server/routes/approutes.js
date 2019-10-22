@@ -182,7 +182,7 @@ module.exports = {
     
                 const rows2 = await client.query(str2,values2)
                 //console.log(rows2.rows[0].rno1)
-    
+                console.log("Rendering New Page......")
                 res.render("7term",{
                     title: rows2.rows[0].title,
                     grpno : grpno,
@@ -201,6 +201,7 @@ module.exports = {
                 //console.log(rows2.rows[0].rno1)
                 
                 //res.send("Row Exists")// need to do updation by *****JASON*****------same form with prefilled values and submit btn will update the entries in the table
+                console.log("Rendering Updation Page......")
                 res.render("7term",{
                     title: rows2.rows[0].title,
                     grpno : grpno,
