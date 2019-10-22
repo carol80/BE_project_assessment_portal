@@ -255,22 +255,37 @@ module.exports = {
                     const rows = await client.query(str,values)
                     console.log("Updation of 2nd Query Done.......")
 
+<<<<<<< HEAD
                     str5 = "update formchecks SET term7 = $1 WHERE rno=$2"
                     values5 = [parseInt(1),parseInt(grpno)]
+=======
+                    str5 = "update formcheck SET term7 = $1 WHERE rno=$2"
+                    values5 = ['true',parseInt(grpno)]
+>>>>>>> 3f6936a49b172ab13243d2d1b005d120ebb60425
 
                     console.log("Executing Status Update for 1st.......")
                     const rows5 = await client.query(str5,values5)
                     console.log("Updated Status of 1st Student.......")
 
+<<<<<<< HEAD
                     str6 = "update formchecks SET term7 = $1 WHERE rno=$2"
                     values6 = [parseInt(1),parseInt(jsrollno2)]
+=======
+                    str6 = "update formcheck SET term7 = $1 WHERE rno=$2"
+                    values6 = ['true',parseInt(jsrollno2)]
+>>>>>>> 3f6936a49b172ab13243d2d1b005d120ebb60425
 
                     console.log("Executing Status Update for 2nd.......")
                     const rows6 = await client.query(str6,values6)
                     console.log("Updated Status of 2nd Student.......")
 
+<<<<<<< HEAD
                     str7 = "update formchecks SET term7 = $1 WHERE rno=$2"
                     values7 = [parseInt(1),parseInt(jsrollno3)]
+=======
+                    str7 = "update formcheck SET term7 = $1 WHERE rno=$2"
+                    values7 = ['true',parseInt(jsrollno3)]
+>>>>>>> 3f6936a49b172ab13243d2d1b005d120ebb60425
 
                     console.log("Executing Status Update for 3rd.......")
                     const rows7 = await client.query(str7,values7)
