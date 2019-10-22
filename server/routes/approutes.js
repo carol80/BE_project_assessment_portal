@@ -196,6 +196,11 @@ module.exports = {
                 })
             }
             else{
+                const rows = await client.query(str,values)
+                //console.table(rows)
+                const rows2 = await client.query(str2,values2)
+                //console.log(rows2.rows[0].rno1)
+                
                 //res.send("Row Exists")// need to do updation by *****JASON*****------same form with prefilled values and submit btn will update the entries in the table
                 res.render("7term",{
                     title: rows2.rows[0].title,
@@ -234,7 +239,7 @@ module.exports = {
         }
         catch (ex)
         {
-            console.log(`Something wrong happend ${ex}`);
+            console.log(`Something wrong happend here ${ex}`);
         }
         finally 
         {
