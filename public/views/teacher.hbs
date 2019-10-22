@@ -50,17 +50,17 @@
                       <form method="post" action="/">
                       <div class="form-group">
                           <label for="exampleFormControlSelect1" style="color: black">Member-1</label>
-                          <input class="form-control" id="exampleFormControlSelect1" type='text' name="g_m_1">
+                          <input class="form-control" id="exampleFormControlSelect1" type='text' name="rno">
                           </input>
                       </div>        
                       <div class="form-group">
                           <label for="exampleFormControlSelect2" style="color: black">Member-2</label>
-                          <input class="form-control" id="exampleFormControlSelect2" type='text' name="g_m_2">
+                          <input class="form-control" id="exampleFormControlSelect2" type='text' name="rno1">
                           </input>
                       </div> 
                       <div class="form-group">
                           <label for="exampleFormControlSelect3" style="color: black">Member-3</label>
-                          <input class="form-control" id="exampleFormControlSelect3" type='text' name="g_m_3">
+                          <input class="form-control" id="exampleFormControlSelect3" type='text' name="rno2">
                           </input>
                       </div> 
                       <div class="form-group">
@@ -69,7 +69,7 @@
                       </div>
                       <div class="form-group">
                           <label for="exampleFormControlInput1" style="color: black">Group Mentor</label>
-                          <input type="text" class="form-control" id="exampleFormControlInput1" value="{{teacher}}" placeholder="Group mentor" name="gpmn"/>
+                          <input type="text" class="form-control" id="exampleFormControlInput1" value="{{teacher}}" placeholder="Group mentor" name="mentor_name"/>
                       </div>
                   </div>
                   <div class="modal-footer">
@@ -105,7 +105,7 @@
             <td data-title='Member-2'>{{this.rno1}}</td>
             <td data-title='Member-3'>{{this.rno2}}</td>
             <td><a class='button transition-fade' href="{{this.mentor_name}}/{{this.rno}}">Fill Forms</a></td>
-            <td><a class='button' href="#">Reports</a></td>
+            <td><a class='button' href="{{this.mentor_name}}/{{this.rno}}/7termReport">Reports</a></td>
         </tr>
         {{/each}} 
     </tbody>

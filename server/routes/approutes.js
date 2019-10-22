@@ -547,13 +547,14 @@ module.exports = {
             const {rows} = await client.query("insert into groups (rno,rno1,rno2,title,mentor_name) values ($1, $2, $3, $4, $5)",[parseInt(req.body.rno),parseInt(req.body.rno1),parseInt(req.body.rno2),req.body.title,req.body.mentor_name])
             formchecks.create({
                 rno: req.body.rno,
-                term7: false,
-                oral7: false,
-                term8: false,
-                oral8:false,
-                oral7: false,
-                finalterm: false,
-                finaloral: false,
+                mentor_name: req.body.mentor_name
+            })
+            formchecks.create({
+                rno: req.body.rno1,
+                mentor_name: req.body.mentor_name
+            })
+            formchecks.create({
+                rno: req.body.rno2,
                 mentor_name: req.body.mentor_name
             })
             res.render("admin", {
