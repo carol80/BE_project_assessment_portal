@@ -174,14 +174,14 @@ module.exports = {
             console.log("Connected successfully.")
 
             const status = await client.query(str3,values3)
-            console.log(status.rows[0].exists)
+            //console.log(status.rows[0].exists)
 
             if(!status.rows[0].exists){
                 const {rows} = await client.query(str,values)
-                console.table(rows)
+                //console.table(rows)
     
                 const rows2 = await client.query(str2,values2)
-                console.log(rows2.rows[0].rno1)
+                //console.log(rows2.rows[0].rno1)
     
                 res.render("7term",{
                     title: rows2.rows[0].title,
@@ -197,7 +197,6 @@ module.exports = {
                 res.send("Row Exists")// need to do updation by *****JASON*****------same form with prefilled values and submit btn will update the entries in the table
             }
             
-           
         }
         catch (ex)
         {
@@ -234,7 +233,7 @@ module.exports = {
             try{
                 await client.connect()
                 const status = await client.query(str3,values3)
-                console.log(status.rows[0].exists)
+                //console.log(status.rows[0].exists)
                 if(!status.rows[0].exists){//if row does not exist in table
 
                     console.log("Connected successfully for 1st Query.")
@@ -242,7 +241,7 @@ module.exports = {
                     const rows2 = await client.query(str2,values2)
                     jsrollno2 = rows2.rows[0].rno1
                     jsrollno3 = rows2.rows[0].rno2
-                    console.log(jsrollno2,jsrollno3)
+                    //console.log(jsrollno2,jsrollno3)
                     console.log("Updation of 1st Query Done.......")
 
                     str = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22)";
@@ -255,6 +254,29 @@ module.exports = {
                     console.log("Executing 2nd Query.......")
                     const rows = await client.query(str,values)
                     console.log("Updation of 2nd Query Done.......")
+
+                    str5 = "update formcheck SET term7 = $1 WHERE rno=$2"
+                    values5 = [parseInt(1),parseInt(grpno)]
+
+                    console.log("Executing Status Update for 1st.......")
+                    const rows5 = await client.query(str5,values5)
+                    console.log("Updated Status of 1st Student.......")
+
+                    str6 = "update formcheck SET term7 = $1 WHERE rno=$2"
+                    values6 = [parseInt(1),parseInt(jsrollno2)]
+
+                    console.log("Executing Status Update for 2nd.......")
+                    const rows6 = await client.query(str6,values6)
+                    console.log("Updated Status of 2nd Student.......")
+
+                    str7 = "update formcheck SET term7 = $1 WHERE rno=$2"
+                    values7 = [parseInt(1),parseInt(jsrollno3)]
+
+                    console.log("Executing Status Update for 3rd.......")
+                    const rows7 = await client.query(str7,values7)
+                    console.log("Updated Status of 3rd Student.......")
+
+                    console.log("*********Updation of status done for all....**********")
                     
                     res.send("Done")//replace with needed route
                 }
@@ -319,7 +341,7 @@ module.exports = {
                     await client.connect()
                     console.log("Connected successfully.")
                     const rows1 = await client.query(str1,values1)
-                    console.log(rows1.rows[0].title)
+                    //console.log(rows1.rows[0].title)
         
                     const rows2 = await client.query(str2,values2)
                     //console.log(rows2.rows[0])
