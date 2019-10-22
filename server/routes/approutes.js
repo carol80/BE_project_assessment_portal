@@ -173,7 +173,7 @@ module.exports = {
             await client.connect()
             console.log("Connected successfully.")
 
-            const status = await client.query(str3,values3)
+            const status = await client.query(str3,values3)//gives the status
             //console.log(status.rows[0].exists)
 
             if(!status.rows[0].exists){
@@ -190,11 +190,44 @@ module.exports = {
                     rows : rows,
                     rno1 : rows2.rows[0].rno1,
                     rno2 : rows2.rows[0].rno2,
-                    listExists : true
+                    listExists : true,
+                    status: false
                 })
             }
             else{
-                res.send("Row Exists")// need to do updation by *****JASON*****------same form with prefilled values and submit btn will update the entries in the table
+                //res.send("Row Exists")// need to do updation by *****JASON*****------same form with prefilled values and submit btn will update the entries in the table
+                res.render("7term",{
+                    title: rows2.rows[0].title,
+                    grpno : grpno,
+                    teacher : teacher,
+                    //rows : rows,
+                    rno1 : rows2.rows[0].rno1,
+                    rno2 : rows2.rows[0].rno2,
+
+                    co1_1 : rows.rows[0].co1_1,
+                    co2_1 : rows.rows[0].co2_1,
+                    co3_1 : rows.rows[0].co3_1,
+                    co4_1 : rows.rows[0].co4_1,
+                    co5_1 : rows.rows[0].co5_1,
+                    co6_1 : rows.rows[0].co6_1,
+
+                    co1_2 : rows.rows[0].co1_2,
+                    co2_2 : rows.rows[0].co2_2,
+                    co3_2 : rows.rows[0].co3_2,
+                    co4_2 : rows.rows[0].co4_2,
+                    co5_2 : rows.rows[0].co5_2,
+                    co6_2 : rows.rows[0].co6_2,
+
+                    co1_3 : rows.rows[0].co1_3,
+                    co2_3 : rows.rows[0].co2_3,
+                    co3_3 : rows.rows[0].co3_3,
+                    co4_3 : rows.rows[0].co4_3,
+                    co5_3 : rows.rows[0].co5_3,
+                    co6_3 : rows.rows[0].co6_3,
+
+                    listExists : true,
+                    status: true
+                })
             }
             
         }

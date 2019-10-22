@@ -182,7 +182,7 @@
         <td width="5%">&nbsp;</td>
         <td width="13%">{{rno1}}</td>
         <td width="9%">
-            <select name="co1_2" id="co1_2">
+            <select id="co1_2" name="co1_2" id="co1_2" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -193,7 +193,7 @@
             </select>
         </td><!-- CO1_2 -->
         <td width="8%">
-            <select name="co2_2" id="co2_2">
+            <select id="co2_2" name="co2_2" id="co2_2" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -205,7 +205,7 @@
             </select>
         </td>
         <td width="8%">
-            <select name="co3_2" id="co3_2">
+            <select id="co3_2" name="co3_2" id="co3_2" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -218,7 +218,7 @@
             </select>
         </td>
         <td width="6%">
-            <select name="co4_2" id="co4_2">
+            <select id="co4_2" name="co4_2" id="co4_2" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -231,7 +231,7 @@
             </select>
         </td>
         <td colspan="3" width="9%">
-            <select name="co5_2" id="co5_2">
+            <select id="co5_2"name="co5_2" id="co5_2" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -241,7 +241,7 @@
             </select>
         </td>
         <td width="8%">
-            <select name="co6_2" id="co6_2">
+            <select id="co6_2" name="co6_2" id="co6_2" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -257,7 +257,7 @@
         <td width="5%">&nbsp;</td>
         <td width="13%">{{rno2}}</td>
         <td width="9%">
-            <select name="co1_3" id="co1_3">
+            <select id="co1_3" name="co1_3" id="co1_3" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -268,7 +268,7 @@
             </select>
         </td><!-- CO1_2 -->
         <td width="8%">
-            <select name="co2_3" id="co2_3">
+            <select id="co2_3" name="co2_3" id="co2_3" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -280,7 +280,7 @@
             </select>
         </td>
         <td width="8%">
-            <select name="co3_3" id="co3_3">
+            <select id="co3_3" name="co3_3" id="co3_3" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -293,7 +293,7 @@
             </select>
         </td>
         <td width="6%">
-            <select name="co4_3" id="co4_3">
+            <select id="co4_3" name="co4_3" id="co4_3" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -306,7 +306,7 @@
             </select>
         </td>
         <td colspan="3" width="9%">
-            <select name="co5_3" id="co5_3">
+            <select id="co5_3" name="co5_3" id="co5_3" selected="selected">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -339,9 +339,66 @@
 
     <!-- To be tested -->
     <script type="text/javascript">
+    
     $(function(){
-        $("#co6_3").val({{r}}").attr("selected","selected");
+        $("#co1_1").val({{co1_1}}").attr("selected","selected");
     });
+    $(function(){
+        $("#co2_1").val({{co2_1}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co3_1").val({{co3_1}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co4_1").val({{co4_1}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co5_1").val({{co5_1}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co6_1").val({{co6_1}}").attr("selected","selected");
+    });
+
+
+    $(function(){
+        $("#co1_2").val({{co1_2}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co2_2").val({{co2_2}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co3_2").val({{co3_2}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co4_2").val({{co4_2}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co5_2").val({{co5_2}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co6_2").val({{co6_2}}").attr("selected","selected");
+    });
+
+
+    $(function(){
+        $("#co1_3").val({{co1_3}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co2_3").val({{co2_3}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co3_3").val({{co3_3}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co4_3").val({{co4_3}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co5_3").val({{co5_3}}").attr("selected","selected");
+    });
+    $(function(){
+        $("#co6_3").val({{co6_3}}").attr("selected","selected");
+    });
+
     </script>
 
 </body>
