@@ -18,32 +18,32 @@ var formchecks = sequelize.define('formchecks', {
     },
     term7: {
         type: Sequelize.STRING,
-        defaultValue: 0,
+        defaultValue: 'false',
         allowNull: false
     },
     oral7: {
         type: Sequelize.STRING,
-        defaultValue: 0,
+        defaultValue: 'false',
         allowNull: false
     },
     term8: {
         type: Sequelize.STRING,
-        defaultValue: 0,
+        defaultValue: 'false',
         allowNull: false
     },
     oral8: {
         type: Sequelize.STRING,
-        defaultValue: 0,
+        defaultValue: 'false',
         allowNull: false
     },
     finalterm: {
         type: Sequelize.STRING,
-        defaultValue: 0,
+        defaultValue: 'false',
         allowNull: false
     },
     finaloral: {
         type: Sequelize.STRING,
-        defaultValue: 0,
+        defaultValue: 'false',
         allowNull: false
     },
     mentor_name: {

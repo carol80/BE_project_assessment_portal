@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "fs": "0.0.1-security",
+    "handlebars-helper-equal": "^1.0.0",
     "hbs": "^4.0.4",
     "http": "0.0.0",
     "morgan": "^1.9.1",
