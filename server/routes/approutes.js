@@ -3,7 +3,7 @@ const path = require("path");
 const hbs = require("hbs");
 const express = require("express")
 const database = require('../config/database.js');
-const formcheck = require('../../models/formcheck.js');      //to be included while submitting the form
+const formchecks = require('../../models/formchecks.js');      //to be included while submitting the form
 var conString = database.conString;
 const app = express();
 
@@ -255,21 +255,21 @@ module.exports = {
                     const rows = await client.query(str,values)
                     console.log("Updation of 2nd Query Done.......")
 
-                    str5 = "update formcheck SET term7 = $1 WHERE rno=$2"
+                    str5 = "update formchecks SET term7 = $1 WHERE rno=$2"
                     values5 = [parseInt(1),parseInt(grpno)]
 
                     console.log("Executing Status Update for 1st.......")
                     const rows5 = await client.query(str5,values5)
                     console.log("Updated Status of 1st Student.......")
 
-                    str6 = "update formcheck SET term7 = $1 WHERE rno=$2"
+                    str6 = "update formchecks SET term7 = $1 WHERE rno=$2"
                     values6 = [parseInt(1),parseInt(jsrollno2)]
 
                     console.log("Executing Status Update for 2nd.......")
                     const rows6 = await client.query(str6,values6)
                     console.log("Updated Status of 2nd Student.......")
 
-                    str7 = "update formcheck SET term7 = $1 WHERE rno=$2"
+                    str7 = "update formchecks SET term7 = $1 WHERE rno=$2"
                     values7 = [parseInt(1),parseInt(jsrollno3)]
 
                     console.log("Executing Status Update for 3rd.......")
@@ -464,18 +464,18 @@ module.exports = {
 	                    Form Form check Updates
     =================================================================*/
     //updating groups into the database
-    formcheck : async (req, res) => {
+    formchecks : async (req, res) => {
         var client = new Client({
             connectionString: conString,
         })
 
-        str = "select * from formcheck";
+        str = "select * from formchecks";
         try{
             await client.connect()
             console.log("Connected successfully.")
             const {rows} = await client.query(str)
             console.log(rows)
-            res.render("formcheck", {
+            res.render("formchecks", {
                 rows,
                 listExists: true
             });
@@ -506,7 +506,7 @@ module.exports = {
             await client.connect()
             console.log("Connected successfully.")
             const {rows} = await client.query("insert into groups (rno,rno1,rno2,title,mentor_name) values ($1, $2, $3, $4, $5)",[parseInt(req.body.rno),parseInt(req.body.rno1),parseInt(req.body.rno2),req.body.title,req.body.mentor_name])
-            formcheck.create({
+            formchecks.create({
                 rno: req.body.rno,
                 term7: false,
                 oral7: false,
