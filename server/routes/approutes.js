@@ -256,9 +256,6 @@ module.exports = {
                     console.log("Updation of 2nd Query Done.......")
 
                     str5 = "update formchecks SET term7 = $1 WHERE rno=$2"
-                    values5 = [parseInt(1),parseInt(grpno)]
-
-                    str5 = "update formcheck SET term7 = $1 WHERE rno=$2"
                     values5 = ['true',parseInt(grpno)]
 
                     console.log("Executing Status Update for 1st.......")
@@ -267,21 +264,13 @@ module.exports = {
 
 
                     str6 = "update formchecks SET term7 = $1 WHERE rno=$2"
-                    values6 = [parseInt(1),parseInt(jsrollno2)]
-
-                    str6 = "update formcheck SET term7 = $1 WHERE rno=$2"
                     values6 = ['true',parseInt(jsrollno2)]
-
 
                     console.log("Executing Status Update for 2nd.......")
                     const rows6 = await client.query(str6,values6)
                     console.log("Updated Status of 2nd Student.......")
 
-
                     str7 = "update formchecks SET term7 = $1 WHERE rno=$2"
-                    values7 = [parseInt(1),parseInt(jsrollno3)]
-
-                    str7 = "update formcheck SET term7 = $1 WHERE rno=$2"
                     values7 = ['true',parseInt(jsrollno3)]
 
                     console.log("Executing Status Update for 3rd.......")
