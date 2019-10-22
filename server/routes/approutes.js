@@ -555,6 +555,14 @@ module.exports = {
                 rno: req.body.rno,
                 mentor_name: req.body.mentor_name
             })
+            formchecks.create({
+                rno: req.body.rno1,
+                mentor_name: req.body.mentor_name
+            })
+            formchecks.create({
+                rno: req.body.rno2,
+                mentor_name: req.body.mentor_name
+            })
             res.render("admin", {
                 rows,
                 listExists: true
