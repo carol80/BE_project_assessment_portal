@@ -16,6 +16,7 @@ const partialpath = path.join(__dirname, "../../public/views/partials");
 app.set("view engine", "hbs");
 app.set("views", viewpath);
 hbs.registerPartials(partialpath);
+hbs.registerHelper("equal", require("handlebars-helper-equal"))
 
 
 module.exports = {

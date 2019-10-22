@@ -54,36 +54,37 @@
         {{#each rows}}
         <tr>
             <td data-title='rno'>{{this.rno}}</td>
-            {{#if isthis.term7}}
+            <script>console.log(listExists)</script>
+            {{#equal this.term7 'true'}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
-            {{/if}}
-            {{#if isthis.oral7}}
+            {{/equal}}
+            {{#equal this.oral7 'true'}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
-            {{/if}}
-            {{#if isthis.term8}}
+            {{/equal}}
+            {{#equal this.term8 'true'}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
-            {{/if}}
-            {{#if isthis.oral8}}
+            {{/equal}}
+            {{#equal this.oral7 'true'}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
-            {{/if}}
-            {{#if isthis.finalterm}}
+            {{/equal}}
+            {{#equal this.finalterm 'true'}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
-            {{/if}}
-            {{#if isthis.finaloral}}
+            {{/equal}}
+            {{#equal this.finaloral 'true'}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
-            {{/if}}
+            {{/equal}}
             <td data-title='mentor_name'>{{this.mentor_name}}</td>
         </tr>
         {{/each}} 
@@ -93,9 +94,18 @@
 </div>
 </main>
 <script>
-  $.extend(data, {isSampleString: function() {
-    return this.sampleString ==  'true';}
-});
+  function status(arg1) {
+    if (arg1 === 'true'){
+      return 'true';
+     }else{
+      return 'false';
+     }
+}
 </script>
+{{!-- <script>
+  $.extend(data, {isSampleString: function() {
+    return this.sampleString == 'true';}
+});
+</script> --}}
 </body>
 </html>
