@@ -55,6 +55,9 @@
         <td width="6%">
         <p><strong>Total (A)</strong></p>
         </td>
+        <td width="6%">
+        <p><strong>Presentation</strong></p>
+        </td>
         <td width="13%">
         <p><strong>Name and sign </strong></p>
         </td>
@@ -81,6 +84,9 @@
         <td width="6%">
         <p><strong>40M</strong></p>
         </td>
+        <td width="6%">
+        <p><strong>10M</strong></p>
+        </td>
         <td width="7%">
         &nbsp;
         </td>
@@ -95,7 +101,7 @@
         <td class="title1" colspan="10" rowspan="2" width="67%">{{title}}</td><!--{{title}}-->
         </tr>
         <tr>
-        <td width="5%">
+        <td width="5%"></td>
         <p></p>
         </td>
         <td width="13%">
@@ -176,6 +182,21 @@
             </select>
         </td>
         <td width="6%">{{total1}}</td>
+        <td width="8%">
+            <select name="co7_1" id="co7_1" selected="selected">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </td>
         <td rowspan="3" width="13%">&nbsp;</td>
         </tr>
         <tr>
@@ -252,6 +273,21 @@
             </select>
         </td>
         <td width="6%">{{total2}}</td>
+        <td width="8%">
+            <select name="co7_2" id="co7_2" selected="selected">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </td>
         </tr>
         <tr>
         <td width="5%">&nbsp;</td>
@@ -327,6 +363,21 @@
             </select>
         </td>
         <td width="6%">{{total3}}</td>
+        <td width="8%">
+            <select name="co7_3" id="co7_3" selected="selected">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </td>
         </tr>
         
         </tbody>
@@ -371,6 +422,11 @@
         $("#co6_1").val({{co6_1}}).attr("selected","selected");
     });
     </script>
+    <script>
+        $(function(){
+            $("#co7_1").val({{co7_1}}).attr("selected","selected");
+        });
+    </script>
 
     <script>
     $(function(){
@@ -403,6 +459,11 @@
             $("#co6_2").val({{co6_2}}).attr("selected","selected");
         });
     </script>
+    <script>
+        $(function(){
+            $("#co7_2").val({{co7_2}}).attr("selected","selected");
+        });
+    </script>
 
 
    <script>
@@ -433,6 +494,11 @@
     <script>
         $(function(){
             $("#co6_3").val({{co6_3}}).attr("selected","selected");
+        });
+    </script>
+    <script>
+        $(function(){
+            $("#co7_3").val({{co7_3}}).attr("selected","selected");
         });
     </script>
 
