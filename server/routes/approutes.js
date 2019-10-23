@@ -809,6 +809,7 @@ module.exports = {
                     co4_1 : rows.rows[0].co4_1,
                     co5_1 : rows.rows[0].co5_1,
                     co6_1 : rows.rows[0].co6_1,
+                    co7_1 : rows.rows[0].co7_1,
 
                     co1_2 : rows.rows[0].co1_2,
                     co2_2 : rows.rows[0].co2_2,
@@ -816,6 +817,7 @@ module.exports = {
                     co4_2 : rows.rows[0].co4_2,
                     co5_2 : rows.rows[0].co5_2,
                     co6_2 : rows.rows[0].co6_2,
+                    co7_2 : rows.rows[0].co7_2,
 
                     co1_3 : rows.rows[0].co1_3,
                     co2_3 : rows.rows[0].co2_3,
@@ -823,6 +825,7 @@ module.exports = {
                     co4_3 : rows.rows[0].co4_3,
                     co5_3 : rows.rows[0].co5_3,
                     co6_3 : rows.rows[0].co6_3,
+                    co7_3 : rows.rows[0].co7_3,
 
                     listExists : true,
                     status: true
@@ -876,11 +879,11 @@ module.exports = {
                     //console.log(jsrollno2,jsrollno3)
                     console.log("Updation of 1st Query Done.......")
 
-                    str = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22)";
+                    str = "insert into t7form (rollno1,rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3,mentor) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25)";
                     values = [parseInt(grpno),parseInt(jsrollno2),parseInt(jsrollno3),
-                            parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co3_1),parseInt(req.body.co4_1),parseInt(req.body.co5_1),parseInt(req.body.co6_1),
-                            parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co3_2),parseInt(req.body.co4_2),parseInt(req.body.co5_2),parseInt(req.body.co6_2),
-                            parseInt(req.body.co1_3),parseInt(req.body.co2_3),parseInt(req.body.co3_3),parseInt(req.body.co4_3),parseInt(req.body.co5_3),parseInt(req.body.co6_3),
+                            parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co3_1),parseInt(req.body.co4_1),parseInt(req.body.co5_1),parseInt(req.body.co6_1),parseInt(req.body.co7_1),
+                            parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co3_2),parseInt(req.body.co4_2),parseInt(req.body.co5_2),parseInt(req.body.co6_2),parseInt(req.body.co7_2),
+                            parseInt(req.body.co1_3),parseInt(req.body.co2_3),parseInt(req.body.co3_3),parseInt(req.body.co4_3),parseInt(req.body.co5_3),parseInt(req.body.co6_3),parseInt(req.body.co7_3),
                             teacher];
 
                     console.log("Executing 2nd Query.......")
@@ -917,10 +920,10 @@ module.exports = {
                 else{//if rows exists in table
                     //code for updation -----Done by PRINCETON
 
-                    str4 = "update t7form set co1_1 = $1,co2_1 = $2,co3_1 = $3,co4_1 = $4,co5_1 = $5,co6_1 = $6,co1_2 = $7,co2_2 = $8,co3_2 = $9,co4_2 = $10,co5_2 = $11,co6_2 = $12,co1_3 = $13,co2_3 = $14,co3_3 = $15,co4_3 = $16,co5_3 = $17,co6_3 = $18 where rollno1 = $19";
-                    values4 = [ parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co3_1),parseInt(req.body.co4_1),parseInt(req.body.co5_1),parseInt(req.body.co6_1),
-                                parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co3_2),parseInt(req.body.co4_2),parseInt(req.body.co5_2),parseInt(req.body.co6_2),
-                                parseInt(req.body.co1_3),parseInt(req.body.co2_3),parseInt(req.body.co3_3),parseInt(req.body.co4_3),parseInt(req.body.co5_3),parseInt(req.body.co6_3),
+                    str4 = "update t7form set co1_1 = $1,co2_1 = $2,co3_1 = $3,co4_1 = $4,co5_1 = $5,co6_1 = $6,co7_1 = $7,co1_2 = $8,co2_2 = $9,co3_2 = $10,co4_2 = $11,co5_2 = $12,co6_2 = $13,co7_2 = $14,co1_3 = $15,co2_3 = $16,co3_3 = $17,co4_3 = $18,co5_3 = $19,co6_3 = $20,co7_3 = $21 where rollno1 = $22";
+                    values4 = [ parseInt(req.body.co1_1),parseInt(req.body.co2_1),parseInt(req.body.co3_1),parseInt(req.body.co4_1),parseInt(req.body.co5_1),parseInt(req.body.co6_1),parseInt(req.body.co7_1),
+                                parseInt(req.body.co1_2),parseInt(req.body.co2_2),parseInt(req.body.co3_2),parseInt(req.body.co4_2),parseInt(req.body.co5_2),parseInt(req.body.co6_2),parseInt(req.body.co7_2),
+                                parseInt(req.body.co1_3),parseInt(req.body.co2_3),parseInt(req.body.co3_3),parseInt(req.body.co4_3),parseInt(req.body.co5_3),parseInt(req.body.co6_3),parseInt(req.body.co7_3),
                                 parseInt(grpno)];
 
                     console.log("Updations in Progress.....")
@@ -955,11 +958,11 @@ module.exports = {
             str1 = "select title from groups where rno=$1"
             values1 = [grpno]
         
-            str2 = "select rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3 from t7form where rollno1=$1"
+            str2 = "select rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3 from t7form where rollno1=$1"
             values2 = [grpno]
         
-            str3 = "select co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3 from t7oral where rollno1=$1"
-            values3 = [grpno]
+            // str3 = "select co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3 from t7oral where rollno1=$1"
+            // values3 = [grpno] // this is wrong
 
             //Write sql for 1st Midterm they have 8 co
             str4 = "select co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co8_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co8_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3,co8_3 from t7mid1form where rollno1=$1"
@@ -968,9 +971,9 @@ module.exports = {
             str5 = "select co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co8_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co8_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3,co8_3 from t7mid2form where rollno1=$1"
             values5 = [grpno] 
         
-            execute(str1,values1,str2,values2,str3,values3);
+            execute(str1,values1,str2,values2);
         
-            async function execute(str1,values1,str2,values2,str3,values3){
+            async function execute(str1,values1,str2,values2){
                 try {
                     await client.connect()
                     console.log("Connected successfully.")
@@ -980,8 +983,8 @@ module.exports = {
                     const rows2 = await client.query(str2,values2)
                     //console.log(rows2.rows[0])
         
-                    const rows3 = await client.query(str3,values3)
-                    //console.log(rows3.rows[0])
+                    // const rows3 = await client.query(str3,values3)
+                    // console.log(rows3.rows[0])
 
                     const rows4 = await client.query(str4,values4)
                     console.log(rows4.rows[0])
@@ -989,13 +992,17 @@ module.exports = {
                     const rows5 = await client.query(str5,values5)
                     console.log(rows5.rows[0])
         
-                    var total1b = (rows3.rows[0].co1_1) + (rows3.rows[0].co2_1) + (rows3.rows[0].co3_1) + (rows3.rows[0].co4_1) + (rows3.rows[0].co5_1) + (rows3.rows[0].co6_1);
-                    var total2b = (rows3.rows[0].co1_2) + (rows3.rows[0].co2_2) + (rows3.rows[0].co3_2) + (rows3.rows[0].co4_2) + (rows3.rows[0].co5_2) + (rows3.rows[0].co6_2);
-                    var total3b = (rows3.rows[0].co1_3) + (rows3.rows[0].co2_3) + (rows3.rows[0].co3_3) + (rows3.rows[0].co4_3) + (rows3.rows[0].co5_3) + (rows3.rows[0].co6_3);
+                    // var total1b = (rows3.rows[0].co1_1) + (rows3.rows[0].co2_1) + (rows3.rows[0].co3_1) + (rows3.rows[0].co4_1) + (rows3.rows[0].co5_1) + (rows3.rows[0].co6_1);
+                    // var total2b = (rows3.rows[0].co1_2) + (rows3.rows[0].co2_2) + (rows3.rows[0].co3_2) + (rows3.rows[0].co4_2) + (rows3.rows[0].co5_2) + (rows3.rows[0].co6_2);
+                    // var total3b = (rows3.rows[0].co1_3) + (rows3.rows[0].co2_3) + (rows3.rows[0].co3_3) + (rows3.rows[0].co4_3) + (rows3.rows[0].co5_3) + (rows3.rows[0].co6_3);
         
                     var total1 = (rows2.rows[0].co1_1) + (rows2.rows[0].co2_1) + (rows2.rows[0].co3_1) + (rows2.rows[0].co4_1) + (rows2.rows[0].co5_1) + (rows2.rows[0].co6_1);
                     var total2 = (rows2.rows[0].co1_2) + (rows2.rows[0].co2_2) + (rows2.rows[0].co3_2) + (rows2.rows[0].co4_2) + (rows2.rows[0].co5_2) + (rows2.rows[0].co6_2);
                     var total3 = (rows2.rows[0].co1_3) + (rows2.rows[0].co2_3) + (rows2.rows[0].co3_3) + (rows2.rows[0].co4_3) + (rows2.rows[0].co5_3) + (rows2.rows[0].co6_3);
+
+                    var total1b = rows2.rows[0].co7_1;
+                    var total2b = rows2.rows[0].co7_2;
+                    var total3b = rows2.rows[0].co7_3;
         
                     var total1ab = total1 + total1b;
                     var total2ab = total2 + total2b;
@@ -1004,7 +1011,7 @@ module.exports = {
                     //Calculation of C
                     var total1c = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1) + (rows4.rows[0].co8_1);
                     var total2c = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2) + (rows4.rows[0].co8_2);
-                    var total3c = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows3.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
+                    var total3c = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
 
                     //Calculation of D
                     var total1d = (rows5.rows[0].co1_1) + (rows5.rows[0].co2_1) + (rows5.rows[0].co3_1) + (rows5.rows[0].co4_1) + (rows5.rows[0].co5_1) + (rows5.rows[0].co6_1) + (rows5.rows[0].co7_1) + (rows5.rows[0].co8_1);
