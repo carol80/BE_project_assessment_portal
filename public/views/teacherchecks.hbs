@@ -27,13 +27,115 @@
 </head>
 <body>
 
+
+
+{{!-- NAVIGATION BAR --}}
+
+<div class="navbar">
+<div class="scene">
+	<div class="box">
+		<div class="front face">
+			<i class="lnr lnr-home"></i>
+		</div>
+		<a href="/{{teacher}}"><div class="right face">
+			<p>HOME</p>
+		</div></a>
+	</div>
+</div>
+<div class="scene">
+	<div class="box">
+		<div class="front face">
+			<i class="lnr lnr-spell-check"></i>
+		</div>
+		<a href="#"><div class="right face">
+			<p>FORM	UPDATES</p>
+		</div></a>
+	</div>
+</div>
+<div class="scene">
+	<div class="box">
+		<div class="front face">
+			<i class="lnr lnr-exit"></i>
+		</div>
+		<a href="/logout"><div class="right face">
+			<p>LOGOUT</p>
+		</div></a>
+	</div>
+</div>
+</div>
+
+
+<style>
+	p{
+		font-size: 12px;
+		color: #111;
+		text-align: center;
+	}
+
+	a:hover{
+		color: #111;
+	}
+
+	.lnr{
+		font-size: 35px;
+		padding-left: 17px;
+	}
+
+	.navbar{
+		position: fixed;
+		right: 0;
+		width: 90px;
+		height: 100px;
+	}
+
+	.scene{
+		width: 90px;
+		height: 100px;
+	}
+
+	.box{
+		width: 100%;
+		height: 100%;
+		transform-style: preserve-3d;
+		transition: all 0.5s ease-out;
+		transform-origin: 0 0;
+	}
+
+	.scene:hover .box{
+		transform: rotateY(-90deg);
+		cursor: pointer;
+	}
+
+	.face{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		transform-origin: 0 0;
+	}
+
+	.front{
+		transform: rotateY(0deg);
+		background-color: #111;
+	}
+
+	.right{
+		transform: rotateY(90deg);
+		left: 70px;
+		background-color: #fcda05;
+		color: #111;
+		font-size: 0.8rem;
+	}
+</style>
+
+
+
 <div>
 <h1>
-  WELCOME {{Admin}}
+  WELCOME {{teacher}}
 </h1>
-<p>
-  Admin the controller!!
-</p>
+<h4 style="text-align: center;">
+  check Form Updates here!!
+</h4>
 
 
 <main id="swup">
@@ -41,7 +143,7 @@
     {{#if listExists}}
   <table id="table">
     <thead>
-        <tr><th>Roll No.</th><th>7th term Work</th><th>7th Oral</th><th>8th term Work</th><th>8th Oral</th><th>Final term Work</th><th>Final Oral</th><th>Fill Forms</th></tr>
+        <tr><th>Roll No.</th><th>7th term Work</th><th>7th Oral</th><th>8th term Work</th><th>8th Oral</th><th>Final term Work</th><th>Final Oral</th></tr>
     </thead>
     <tfoot>
       <tr>
@@ -85,7 +187,6 @@
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
             {{/equal}}
-            <td><a class='button transition-fade' href="{{this.rno}}">Fill Forms</a></td>
         </tr>
         {{/each}} 
     </tbody>

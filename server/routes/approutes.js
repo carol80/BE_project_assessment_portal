@@ -1083,6 +1083,7 @@ module.exports = {
             const {rows} = await client.query(str,values)
             console.log(rows)
             res.render("teacherchecks", {
+                teacher,
                 rows,
                 listExists: true
             });

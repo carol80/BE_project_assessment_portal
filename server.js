@@ -73,14 +73,10 @@ app.use((req, res, next) => {
 var sessionChecker = (req, res, next) => {
     if (req.session.user && req.cookies.user_sid) {
         if (this.role === "Admin") {
-            res.redirect('/index', {
-                Admin: this.username
-            })
+            res.redirect('admin', Admi(app));
             console.log("inside Admin");
         } else if (this.role === "Mentor"){
-            res.redirect('/teacher',{
-                teacher: this.username
-            })
+            res.redirect('/'+this.username , Mentor(app));
             console.log("Inside Mentor")
         }
     } else {
@@ -110,14 +106,10 @@ app.route('/signup')
         .then(async (user) => {
             req.session.user = user.dataValues;
                 if (await user.roles() === "Admin") {
-                    res.render('index', {
-                        Admin: username
-                    });
+                    res.render('admin', Admin(app));
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
-                    res.render('teacher',{
-                        teacher: username
-                    });
+                    res.redirect('/'+ username , Mentor(app));
                     console.log("Inside Mentor")
                 }
         })
@@ -145,12 +137,14 @@ app.route('/login')
                 // var role = await client.query("select role from users where username= $1",[username])
                 // console.log("dashboard")
                 if (await user.roles() === "Admin") {
-                    res.render('admin', {
-                        Admin: username
-                    });
+                    res.render('admin', Admin(app));
+                    Admin(app);
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
-                    window.location.assign(username)
+                    res.render("mentor", {
+                        teacher : username
+                    });
+                    Mentor(app);
                     console.log("Inside Mentor")
                 }
             }
@@ -195,38 +189,10 @@ app.get('/logout', (req, res) => {
     }
 });
 
-
 // route for handling 404 requests(unavailable routes)
 app.use(function (req, res, next) {
   res.status(404).send("Sorry can't find that!")
 });
-
-
-
-
-
-
-/* ========================================================== 
-                    Other Stupid Pages
-============================================================ */
-app.get('/7term' ,(req, res) => {
-    res.render("7term",{
-        title: "7-sem assessment Page"
-    })
-})
-
-app.get('/8-sem' ,(req, res) => {
-    res.render("8-sem",{
-        title: "8-sem assessment Page!"
-    })
-})
-
-app.get('final', (req ,res) => {
-    res.render("final",{
-        title: "Final assessment Page"
-    })
-})
-
 
 
 /* ========================================================== 
