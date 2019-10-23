@@ -145,12 +145,12 @@ app.route('/login')
                 // var role = await client.query("select role from users where username= $1",[username])
                 // console.log("dashboard")
                 if (await user.roles() === "Admin") {
-                    res.render('index', {
+                    res.render('admin', {
                         Admin: username
                     });
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
-                    window.location.assign("/"+username)
+                    window.location.assign(username)
                     console.log("Inside Mentor")
                 }
             }

@@ -41,7 +41,7 @@
     {{#if listExists}}
   <table id="table">
     <thead>
-        <tr><th>Roll No.</th><th>7th term Work</th><th>7th Oral</th><th>8th term Work</th><th>8th Oral</th><th>Final term Work</th><th>Final Oral</th><th>Mentor</th></tr>
+        <tr><th>Roll No.</th><th>7th term Work</th><th>7th Oral</th><th>8th term Work</th><th>8th Oral</th><th>Final term Work</th><th>Final Oral</th><th>Fill Forms</th></tr>
     </thead>
     <tfoot>
       <tr>
@@ -85,8 +85,7 @@
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
             {{/equal}}
-            <td data-title='mentor_name'>{{this.mentor_name}}</td>
-            {{!-- <td data-title='mentor_name'>{{this.updatedAt}}</td> --}}
+            <td><a class='button transition-fade' href="{{this.rno}}">Fill Forms</a></td>
         </tr>
         {{/each}} 
     </tbody>
@@ -94,19 +93,5 @@
     {{/if}}
 </div>
 </main>
-<script>
-  function status(arg1) {
-    if (arg1 === 'true'){
-      return 'true';
-     }else{
-      return 'false';
-     }
-}
-</script>
-{{!-- <script>
-  $.extend(data, {isSampleString: function() {
-    return this.sampleString == 'true';}
-});
-</script> --}}
 </body>
 </html>
