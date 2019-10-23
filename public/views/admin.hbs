@@ -17,17 +17,145 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
     <!--customised libraries-->
     <link rel="stylesheet" type="text/css" style="css/responsive.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body style="background-color: #111">
+
+
+{{!-- NAVIGATION BAR --}}
+
+<div class="navbar" >
+    <div class="scene">
+        <div class="box">
+            <div class="front face">
+                <i class="lnr lnr-home"></i>
+            </div>
+            <a href="#1"><div class="right face">
+                <p>HOME</p>
+            </div></a>
+        </div>
+    </div>
+    <div class="scene">
+        <div class="box">
+            <div class="front face">
+                <i class="lnr lnr-plus-circle"></i>
+            </div>
+            <a href="#2" class="smoothscroll"><div class="right face">
+                <p>ADD GROUP</p>
+            </div></a>
+        </div>
+    </div>
+    <div class="scene">
+        <div class="box">
+            <div class="front face">
+                <i class="lnr lnr-users"></i>
+            </div>
+            <a href="#foo" class="smoothscroll"><div class="right face">
+                <p>GROUPS</p>
+            </div></a>
+        </div>
+    </div>
+    <div class="scene">
+        <div class="box">
+            <div class="front face">
+                <i class="lnr lnr-spell-check"></i>
+            </div>
+            <a href="admin/formchecks"><div class="right face">
+                <p>FORM	UPDATES</p>
+            </div></a>
+        </div>
+    </div>
+    <div class="scene">
+        <div class="box">
+            <div class="front face">
+                <i class="lnr lnr-exit"></i>
+            </div>
+            <a href="/logout"><div class="right face">
+                <p>LOGOUT</p>
+            </div></a>
+        </div>
+    </div>
+</div>
+
+
+<style>
+	p{
+		font-size: 12px;
+		color: #111;
+		text-align: center;
+	}
+
+	a:hover{
+		color: #111;
+	}
+
+	.lnr{
+		font-size: 35px;
+		padding-left: 17px;
+    color: #fcda05;
+	}
+
+	.navbar{
+		position: fixed;
+		right: 0;
+		width: 90px;
+		height: 100px;
+	}
+
+	.scene{
+		width: 90px;
+		height: 100px;
+	}
+
+	.box{
+		width: 100%;
+		height: 100%;
+		transform-style: preserve-3d;
+		transition: all 0.5s ease-out;
+		transform-origin: 0 0;
+	}
+
+	.scene:hover .box{
+		transform: rotateY(-90deg);
+		cursor: pointer;
+	}
+
+	.face{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		transform-origin: 0 0;
+	}
+
+	.front{
+		transform: rotateY(0deg);
+		background-color: #2a363b;
+	}
+
+	.right{
+		transform: rotateY(90deg);
+		left: 70px;
+		background-color: #fcda05;
+		color: #111;
+		font-size: 0.8rem;
+	}
+</style>
+
+
+
     <div class='detail-container'>
       <dl>
-        <h1>Welcome @{{Admin}}</h1>
+        <h1>Welcome Admin!!</h1>
         <dd></dd>
         <dt>
-          <section class="col-lg-12 row cen">
+          {{!-- <section class="col-lg-12 row cen">
             <div class="col-lg-6 col-sm-4"  data-aos="fade-up">
             <div class="lnr lnr-spell-check"></div>
             <button class="btn first" onclick="status()">Check Form status</button>
@@ -88,15 +216,16 @@
                 </div>
             </div>
             </div>
-          </section>
+          </section> --}}
         </dt>
       </dl>
     </div>
 
+<section id="foo">
     <main>
-        <div class="container" id="foo">
+        <div class="container">
             {{#if listExists}}
-        <table id="table">
+        <table>
             <thead>
                 <tr><th>GRP NO</th><th>TITLE</th><th>Member-1</th><th>Member-2</th><th>Member-3</th><th>Mentor</th></tr>
             </thead>
@@ -107,9 +236,28 @@
                 </th>
             </tr>
             </tfoot>
+            <script>
+                function display(rno) {
+                    $("#dialog").dialog();
+                }
+            </script>
+            {{!-- <div  id="dialog" tabindex="-1" aria-hidden="true"> --}}
+            {{!-- <div id="dialog">
+                <section class="col-lg-12 row cen">
+                <div class="col-lg-6 col-sm-4"  data-aos="fade-up">
+                <div class="lnr lnr-spell-check"></div>
+                <button class="btn first" onclick="status()">Check Form status</button>
+                </div>
+
+                <div class="col-lg-6 col-sm-4"  data-aos="fade-up">
+                <div class="lnr lnr-users"></div>
+                <button class="btn first" onclick="showgroups('foo')">Show groups</button>
+                </div>
+            </section>  
+            </div>   --}}
             <tbody>
                 {{#each rows}}
-                <tr>
+                <tr onclick="display({{this.rno}});">
                     <td data-title='GRP NO'>{{this.grpno}}</td>
                     <td data-title='TITLE'>{{this.title}}</td>
                     <td data-title='Member-1'>{{this.rno}}</td>
@@ -123,10 +271,249 @@
             {{/if}}
         </div>
     </main>
+</section>
+
+<section id="2"></section>
+<form action="/admin" method="POST">
+<section id="container1" class="add" style="height: 100%; width:100%;" >
+    <H1 class="col-lg-12">ADD GROUPS HERE!!</H1>
+
+<span class="input col-sm-4">
+    <input type="text" class="input__field" id="input-1" name="rno" required />
+    <label for="input-1" class="input__label">
+    <span class="input__label-content">MEMBER-1</span>
+</label>
+</span>
+
+<span class="input col-sm-4">
+    <input type="text" class="input__field" id="input-2" name="rno1" required />
+    <label for="input-2" class="input__label">
+    <span class="input__label-content">MEMBER-2</span>
+    </label>
+</span>
+
+<span class="input col-sm-4">
+    <input type="text" class="input__field" id="input-3" name="rno2" required />
+    <label for="input-3" class="input__label">
+    <span class="input__label-content">MEMBER-3</span>
+    </label>
+</span>
+
+<span class="input col-sm-4">
+    <input type="text" class="input__field" id="input-4" name="mentor_name" required/>
+    <label for="input-4" class="input__label">
+    <span class="input__label-content">MENTOR NAME</span>
+    </label>
+</span>
+
+<span class="input message col-sm-6">
+    <input type="text" class="input__field" id="input-5" name="title" required></input>
+    <label for="input-5" class="input__label">
+    <span class="input__label-content">TITLE</span>
+    </label>
+</span>
+
+<span class="col-lg-6" style="padding-left: 220px;">
+<button id="send-button" type="submit" value="ADD">ADD GROUP</button></span>
+
+</section>
+</form>
+
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Raleway:200,500,700,800);
+
+.add {
+  background: #111;
+  font-weight: 500;
+  font-size: 1.05em;
+  height: 100%;
+  font-family: 'Raleway', Arial, sans-serif;
+}
+
+#container1 {
+  position: absolute;
+  width: 100%;
+  height: 5em;
+  margin-left: -60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.input {
+  position: relative;
+  margin: 1em;
+  width: calc(50% - 2em);
+  height: 80px;
+}
+
+.message {
+  width: calc(100% - 2em);
+  height: 100px;
+}
+
+textarea {
+  border: none;
+  resize: none;
+}
+
+.input__field {
+  position: absolute;
+  margin: 0.8em 0;
+  padding: 0.4em;
+  width: 100%;
+  height: calc(100% - 1.6em);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #ffcc00;
+  font-size: 1.55em;
+  font-weight: bold;
+  -webkit-appearance: none;/* for box shadows to show on iOS */
+}
+
+.input__field:focus {
+  outline: none;
+}
+
+.input__label {
+  position: absolute;
+  padding: 0 1em;
+  margin: 1.2em 0;
+  width: 100%;
+  height: calc(100% - 2.4em);
+  color: #6a7989;
+  font-weight: bold;
+  font-size: 70.25%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.input__label-content {
+  position: relative;
+  display: block;
+  padding: 1.5em 0;
+  width: 100%;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+.input__label::before,
+.input__label:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #6a7989;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+.input__label::before {
+  top: 0;
+}
+
+.input__label::after {
+  bottom: 0;
+}
+
+.input__field:focus + .input__label .input__label-content,
+.input--filled .input__label-content {
+  -webkit-transform: translate3d(0, -90%, 0);
+  transform: translate3d(0, -90%, 0);
+}
+
+.input__field:focus + .input__label::before,
+.input--filled .input__label::before {
+  -webkit-transform: translate3d(0, -0.5em, 0);
+  transform: translate3d(0, -0.5em, 0);
+}
+
+.input__field:focus + .input__label::after,
+.input--filled .input__label::after {
+  -webkit-transform: translate3d(0, 0.5em, 0);
+  transform: translate3d(0, 0.5em, 0);
+}
+
+#send-button {
+  width: 200px;
+  height: 60px;
+  background-color: #6a7989;
+  color: #000;
+  border: 0;
+  font-weight: bold;
+  font-size: 70.25%;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+#send-button:hover,
+#send-button:focus {
+  outline: 0;
+  background-color: #ffcc00;
+  color: #000;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+</style>
+<script>
+    var $input;
+
+function onInputFocus(event) {
+  var $target = $(event.target);
+  var $parent = $target.parent();
+  $parent.addClass('input--filled');
+};
+
+function onInputBlur(event) {
+  var $target = $(event.target);
+  var $parent = $target.parent();
+
+  if (event.target.value.trim() === '') {
+    $parent.removeClass('input--filled');
+  }
+};
+
+$(document).ready(function() {
+  $input = $('.input__field');
+  
+  // in case there is any value already
+  $input.each(function(){
+    if ($input.val().trim() !== '') {
+      var $parent = $input.parent();
+      $parent.addClass('input--filled');
+    }
+  });
+  
+  $input.on('focus', onInputFocus);
+  $input.on('blur', onInputBlur);
+});
+</script>
+
+
+
+
+
 </body>
 <script>
+    $(document).ready(function(){
+        $(".scrollspy").scrollspy();
+    });
+</script>
+<script>
 
-  function status(){
+    function status(){
       console.log('checking status!!')
       try{
           window.location.assign('admin/formchecks')

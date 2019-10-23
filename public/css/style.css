@@ -15,7 +15,8 @@
   
   body {
     padding: 20px;
-    background-color: rgba(20, 26, 25, 0.836) ;
+    /* background-color: rgba(20, 26, 25, 0.836) ; */
+    background-color: #111;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     color: #fff;

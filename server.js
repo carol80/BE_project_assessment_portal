@@ -58,7 +58,7 @@ app.use(session({
     }
 }));
 
-
+var cum;
 // This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
 // This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
 app.use((req, res, next) => {
@@ -136,15 +136,14 @@ app.route('/login')
                 req.session.user = user.dataValues;
                 // var role = await client.query("select role from users where username= $1",[username])
                 // console.log("dashboard")
+                cum = user.roles();
                 if (await user.roles() === "Admin") {
-                    res.render('admin', Admin(app));
-                    Admin(app);
+                    res.render('admin',Admin(app));
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
                     res.render("mentor", {
                         teacher : username
                     });
-                    Mentor(app);
                     console.log("Inside Mentor")
                 }
             }
@@ -177,6 +176,12 @@ Mentor(app);
 //         res.redirect('/login');
 //     }
 // });
+
+// if(cum === "Admin"){
+//     Admin(app);
+// }else if(cum === "Mentor"){
+//     Mentor(app);
+// }
 
 
 // route for user logout
