@@ -350,6 +350,73 @@ module.exports = {
     },
 
 
+    getmid1termreport : async (req, res) => { //.........Done by PRINCETON
+        var client = new Client({
+            connectionString: conString,
+        })
+            teacher = req.params.mentors
+            grpno = req.params.grpno
+        
+            str1 = "select title from groups where rno=$1"
+            values1 = [grpno]
+
+            //Write sql for 1st Midterm they have 8 co
+            str4 = "select rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co8_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co8_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3,co8_3 from t7mid1form where rollno1=$1"
+            values4 = [grpno]
+        
+            execute(str1,values1,str4,values4);
+        
+            async function execute(str1,values1,str4,values4){
+                try {
+                    await client.connect()
+                    console.log("Connected successfully.")
+                    const rows1 = await client.query(str1,values1)
+                    //console.log(rows1.rows[0].title)
+
+                    const rows4 = await client.query(str4,values4)
+                    console.log(rows4.rows[0])
+                    
+                    //Calculation of C
+                    var total1 = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1) + (rows4.rows[0].co8_1);
+                    var total2 = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2) + (rows4.rows[0].co8_2);
+                    var total3 = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
+
+                    res.render('7mid1formReport',{
+                        teacher : teacher,
+                        rollno1 : grpno,
+                        title : rows1.rows[0].title,
+                        co1_1 : rows4.rows[0].co1_1,    co2_1 : rows4.rows[0].co2_1,
+                        co3_1 : rows4.rows[0].co3_1,    co4_1 : rows4.rows[0].co4_1,
+                        co5_1 : rows4.rows[0].co5_1,    co6_1 : rows4.rows[0].co6_1,
+                        co7_1 : rows4.rows[0].co7_1,    co8_1 : rows4.rows[0].co8_1,
+                        rollno2 : rows4.rows[0].rollno2,
+                        co1_2 : rows4.rows[0].co1_2,    co2_2 : rows4.rows[0].co2_2,
+                        co3_2 : rows4.rows[0].co3_2,    co4_2 : rows4.rows[0].co4_2,
+                        co5_2 : rows4.rows[0].co5_2,    co6_2 : rows4.rows[0].co6_2,
+                        co7_2 : rows4.rows[0].co7_2,    co8_2 : rows4.rows[0].co8_2,
+                        rollno3 : rows4.rows[0].rollno3,
+                        co1_3 : rows4.rows[0].co1_3,    co2_3 : rows4.rows[0].co2_3,
+                        co3_3 : rows4.rows[0].co3_3,    co4_3 : rows4.rows[0].co4_3,
+                        co5_3 : rows4.rows[0].co5_3,    co6_3 : rows4.rows[0].co6_3,
+                        co7_3 : rows4.rows[0].co7_3,    co8_3 : rows4.rows[0].co8_3,
+                        total1 : total1,    total2 : total2,    total3 : total3,
+                    });
+                }
+                catch (ex)
+                {
+                    console.log(`Something wrong happened ${ex}`)
+                }
+                finally 
+                {
+                    await client.end()
+                    console.log("Client disconnected successfully.")    ;
+                }
+            }
+        },
+
+
+
+
     get7mid2term : async (req, res) => {// Done by *****PRINCETON*****
         var client = new Client({
             connectionString: conString,
@@ -550,6 +617,70 @@ module.exports = {
     },
 
 
+    getmid2termreport : async (req, res) => { //.........Done by PRINCETON
+        var client = new Client({
+            connectionString: conString,
+        })
+            teacher = req.params.mentors
+            grpno = req.params.grpno
+        
+            str1 = "select title from groups where rno=$1"
+            values1 = [grpno]
+
+            //Write sql for 1st Midterm they have 8 co
+            str4 = "select rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co8_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co8_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3,co8_3 from t7mid2form where rollno1=$1"
+            values4 = [grpno]
+        
+            execute(str1,values1,str4,values4);
+        
+            async function execute(str1,values1,str4,values4){
+                try {
+                    await client.connect()
+                    console.log("Connected successfully.")
+                    const rows1 = await client.query(str1,values1)
+                    //console.log(rows1.rows[0].title)
+
+                    const rows4 = await client.query(str4,values4)
+                    console.log(rows4.rows[0])
+                    
+                    //Calculation of C
+                    var total1 = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1) + (rows4.rows[0].co8_1);
+                    var total2 = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2) + (rows4.rows[0].co8_2);
+                    var total3 = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
+
+                    res.render('7mid2formReport',{
+                        teacher : teacher,
+                        rollno1 : grpno,
+                        title : rows1.rows[0].title,
+                        co1_1 : rows4.rows[0].co1_1,    co2_1 : rows4.rows[0].co2_1,
+                        co3_1 : rows4.rows[0].co3_1,    co4_1 : rows4.rows[0].co4_1,
+                        co5_1 : rows4.rows[0].co5_1,    co6_1 : rows4.rows[0].co6_1,
+                        co7_1 : rows4.rows[0].co7_1,    co8_1 : rows4.rows[0].co8_1,
+                        rollno2 : rows4.rows[0].rollno2,
+                        co1_2 : rows4.rows[0].co1_2,    co2_2 : rows4.rows[0].co2_2,
+                        co3_2 : rows4.rows[0].co3_2,    co4_2 : rows4.rows[0].co4_2,
+                        co5_2 : rows4.rows[0].co5_2,    co6_2 : rows4.rows[0].co6_2,
+                        co7_2 : rows4.rows[0].co7_2,    co8_2 : rows4.rows[0].co8_2,
+                        rollno3 : rows4.rows[0].rollno3,
+                        co1_3 : rows4.rows[0].co1_3,    co2_3 : rows4.rows[0].co2_3,
+                        co3_3 : rows4.rows[0].co3_3,    co4_3 : rows4.rows[0].co4_3,
+                        co5_3 : rows4.rows[0].co5_3,    co6_3 : rows4.rows[0].co6_3,
+                        co7_3 : rows4.rows[0].co7_3,    co8_3 : rows4.rows[0].co8_3,
+                        total1 : total1,    total2 : total2,    total3 : total3,
+                    });
+                }
+                catch (ex)
+                {
+                    console.log(`Something wrong happened ${ex}`)
+                }
+                finally 
+                {
+                    await client.end()
+                    console.log("Client disconnected successfully.")    ;
+                }
+            }
+        },
+
     get7oral : async (req, res) => {// Done by *****PRINCETON*****
         var client = new Client({
             connectionString: conString,
@@ -745,6 +876,71 @@ module.exports = {
             console.log("Client disconnected successfully.")    ;
         }
     },
+
+    get7oralreport : async (req, res) => { //.........Done by PRINCETON
+        var client = new Client({
+            connectionString: conString,
+        })
+            teacher = req.params.mentors
+            grpno = req.params.grpno
+        
+            str1 = "select title from groups where rno=$1"
+            values1 = [grpno]
+
+            //Write sql for 1st Midterm they have 8 co
+            str4 = "select rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3 from t7oral where rollno1=$1"
+            values4 = [grpno]
+        
+            execute(str1,values1,str4,values4);
+        
+            async function execute(str1,values1,str4,values4){
+                try {
+                    await client.connect()
+                    console.log("Connected successfully.")
+                    const rows1 = await client.query(str1,values1)
+                    //console.log(rows1.rows[0].title)
+
+                    const rows4 = await client.query(str4,values4)
+                    console.log(rows4.rows[0])
+                    
+                    //Calculation of C
+                    var total1 = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1);
+                    var total2 = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2);
+                    var total3 = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3);
+
+                    res.render('7oralReport',{
+                        teacher : teacher,
+                        rollno1 : grpno,
+                        title : rows1.rows[0].title,
+                        co1_1 : rows4.rows[0].co1_1,    co2_1 : rows4.rows[0].co2_1,
+                        co3_1 : rows4.rows[0].co3_1,    co4_1 : rows4.rows[0].co4_1,
+                        co5_1 : rows4.rows[0].co5_1,    co6_1 : rows4.rows[0].co6_1,
+                        co7_1 : rows4.rows[0].co7_1,
+                        rollno2 : rows4.rows[0].rollno2,
+                        co1_2 : rows4.rows[0].co1_2,    co2_2 : rows4.rows[0].co2_2,
+                        co3_2 : rows4.rows[0].co3_2,    co4_2 : rows4.rows[0].co4_2,
+                        co5_2 : rows4.rows[0].co5_2,    co6_2 : rows4.rows[0].co6_2,
+                        co7_2 : rows4.rows[0].co7_2, 
+                        rollno3 : rows4.rows[0].rollno3,
+                        co1_3 : rows4.rows[0].co1_3,    co2_3 : rows4.rows[0].co2_3,
+                        co3_3 : rows4.rows[0].co3_3,    co4_3 : rows4.rows[0].co4_3,
+                        co5_3 : rows4.rows[0].co5_3,    co6_3 : rows4.rows[0].co6_3,
+                        co7_3 : rows4.rows[0].co7_3,  
+                        total1 : total1,    total2 : total2,    total3 : total3,
+                    });
+                }
+                catch (ex)
+                {
+                    console.log(`Something wrong happened ${ex}`)
+                }
+                finally 
+                {
+                    await client.end()
+                    console.log("Client disconnected successfully.")    ;
+                }
+            }
+        },
+
 
     get7term : async (req, res) => {// Done by *****PRINCETON*****
         var client = new Client({
