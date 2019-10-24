@@ -58,7 +58,7 @@ app.use(session({
     }
 }));
 
-
+var cum;
 // This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
 // This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
 app.use((req, res, next) => {
@@ -73,14 +73,10 @@ app.use((req, res, next) => {
 var sessionChecker = (req, res, next) => {
     if (req.session.user && req.cookies.user_sid) {
         if (this.role === "Admin") {
-            res.redirect('/index', {
-                Admin: this.username
-            })
+            res.redirect('admin', Admi(app));
             console.log("inside Admin");
         } else if (this.role === "Mentor"){
-            res.redirect('/teacher',{
-                teacher: this.username
-            })
+            res.redirect('/'+this.username , Mentor(app));
             console.log("Inside Mentor")
         }
     } else {
@@ -110,14 +106,10 @@ app.route('/signup')
         .then(async (user) => {
             req.session.user = user.dataValues;
                 if (await user.roles() === "Admin") {
-                    res.render('index', {
-                        Admin: username
-                    });
+                    res.render('admin', Admin(app));
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
-                    res.render('teacher',{
-                        teacher: username
-                    });
+                    res.redirect('/'+ username , Mentor(app));
                     console.log("Inside Mentor")
                 }
         })
@@ -144,13 +136,14 @@ app.route('/login')
                 req.session.user = user.dataValues;
                 // var role = await client.query("select role from users where username= $1",[username])
                 // console.log("dashboard")
+                cum = user.roles();
                 if (await user.roles() === "Admin") {
-                    res.render('index', {
-                        Admin: username
-                    });
+                    res.render('admin',Admin(app));
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
-                    window.location.assign("/"+username)
+                    res.render("mentor", {
+                        teacher : username
+                    });
                     console.log("Inside Mentor")
                 }
             }
@@ -184,6 +177,12 @@ Mentor(app);
 //     }
 // });
 
+// if(cum === "Admin"){
+//     Admin(app);
+// }else if(cum === "Mentor"){
+//     Mentor(app);
+// }
+
 
 // route for user logout
 app.get('/logout', (req, res) => {
@@ -195,38 +194,10 @@ app.get('/logout', (req, res) => {
     }
 });
 
-
 // route for handling 404 requests(unavailable routes)
 app.use(function (req, res, next) {
   res.status(404).send("Sorry can't find that!")
 });
-
-
-
-
-
-
-/* ========================================================== 
-                    Other Stupid Pages
-============================================================ */
-app.get('/7term' ,(req, res) => {
-    res.render("7term",{
-        title: "7-sem assessment Page"
-    })
-})
-
-app.get('/8-sem' ,(req, res) => {
-    res.render("8-sem",{
-        title: "8-sem assessment Page!"
-    })
-})
-
-app.get('final', (req ,res) => {
-    res.render("final",{
-        title: "Final assessment Page"
-    })
-})
-
 
 
 /* ========================================================== 

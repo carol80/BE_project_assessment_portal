@@ -1262,6 +1262,41 @@ module.exports = {
 
 
 /*================================================================
+	                    Form Form check Updates
+    =================================================================*/
+    //updating groups into the database
+    teacherchecks : async (req, res) => {
+        var client = new Client({
+            connectionString: conString,
+        })
+
+        teacher = req.params.mentors
+        str = "select * from formchecks where mentor_name in ($1)";
+        values=[teacher]
+        try{
+            await client.connect()
+            console.log("Connected successfully.")
+            const {rows} = await client.query(str,values)
+            console.log(rows)
+            res.render("teacherchecks", {
+                teacher,
+                rows,
+                listExists: true
+            });
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happened ${ex}`)
+        }
+        finally 
+        {
+            await client.end()
+            console.log("Client disconnected successfully.")    ;
+        }
+    },
+
+
+/*================================================================
 	                    Admin Area
     =================================================================*/
 

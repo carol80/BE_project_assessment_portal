@@ -18,7 +18,7 @@ var formchecks = sequelize.define('formchecks', {
     },
     term7: {
         type: Sequelize.STRING,
-        defaultValue: 'false',
+        defaultValue: 'true',
         allowNull: false
     },
     oral7: {

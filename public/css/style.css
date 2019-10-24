@@ -15,7 +15,8 @@
   
   body {
     padding: 20px;
-    background-color: rgba(20, 26, 25, 0.836) ;
+    /* background-color: rgba(20, 26, 25, 0.836) ; */
+    background-color: #111;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     color: #fff;
@@ -289,23 +290,3 @@
     }
   }
 
-
-  /*================================================================
-	                    ANIMATIONS
-    =================================================================*/
-  .transition-fade {
-    opacity: 1;
-    transform: translateX(0);
-    transition: 500ms;
-    transform-origin: left;
-  }
-  
-  html.is-animating .transition-fade {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-
-  html.is-leaving .transition-fade {
-    opacity: 0;
-    transform: translateX(0);
-  }
