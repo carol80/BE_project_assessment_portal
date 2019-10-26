@@ -39,31 +39,34 @@ module.exports = function(app) {
         .get(appRoutes.getgrpno)
         .post(appRoutes.updategrpno)
 
+    app.route('/:mentors/:grpno/reports')
+        .get(appRoutes.getreports)
+
     app.route('/:mentors/:grpno/7mid1term')
         .get(appRoutes.get7mid1term)
         .post(appRoutes.post7mid1term)
 
-    app.route('/:mentors/:grpno/7mid1termreport')
+    app.route('/:mentors/:grpno/reports/7mid1termreport')
         .get(appRoutes.getmid1termreport)
 
     app.route('/:mentors/:grpno/7mid2term')
         .get(appRoutes.get7mid2term)
         .post(appRoutes.post7mid2term)
 
-    app.route('/:mentors/:grpno/7mid2termreport')
+    app.route('/:mentors/:grpno/reports/7mid2termreport')
         .get(appRoutes.getmid2termreport)
 
     app.route('/:mentors/:grpno/7oral')
         .get(appRoutes.get7oral)
         .post(appRoutes.post7oral)
 
-    app.route('/:mentors/:grpno/7oralreport')
+    app.route('/:mentors/:grpno/reports/7oralreport')
         .get(appRoutes.get7oralreport)
 
     app.route('/:mentors/:grpno/7term')
         .get(appRoutes.get7term)
         .post(appRoutes.post7term)
 
-    app.route('/:mentors/:grpno/7termreport')
+    app.route('/:mentors/:grpno/reports/7termreport')
         .get(appRoutes.get7termreport)
 };
