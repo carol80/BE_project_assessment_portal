@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!--customised libraries-->
     <link rel="stylesheet" type="text/css" style="css/responsive.css">
@@ -35,7 +36,7 @@
 		<div class="front face">
 			<i class="lnr lnr-home"></i>
 		</div>
-		<a href="#"><div class="right face">
+		<a href="#home"><div class="right face">
 			<p>HOME</p>
 		</div></a>
 	</div>
@@ -45,7 +46,7 @@
 		<div class="front face">
 			<i class="lnr lnr-users"></i>
 		</div>
-		<a href="#showgroups"></a><div class="right face">
+		<a href="#groups"><div class="right face">
 			<p>GROUPS</p>
 		</div></a>
 	</div>
@@ -137,65 +138,18 @@
 </style>
 
 
-
-
-
-
-<div class="grps">
-<h1>
-  WELCOME {{teacher}}
-</h1>
-<h4 style="text-align: center;">
+<section id="home" style="background-image: url(../images/bkg.jpg); background-repeat: no-repeat; background-size: 1280px 650px; width:110.5%; height:650px; margin-left: -5.5%; margin-top:-5.2%">
+  <h1 ata-aos="zoom-out-up" style="font-size: 80px; padding-top: 230px; font-weight: 700; color: white;" data-aos="zoom-out-up">WELCOME {{teacher}}</h1>
+  <h2 style="color: white; text-align:center;">
   Be good to students and give them good grades!!
-</h4>
-
-  {{!-- <div class="container" style="text-align: center">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Group</button>
-      <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Add Group</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <div class="modal-body">
-                      <form method="post" action="/">
-                      <div class="form-group">
-                          <label for="exampleFormControlSelect1" style="color: black">Member-1</label>
-                          <input class="form-control" id="exampleFormControlSelect1" type='text' name="rno">
-                          </input>
-                      </div>        
-                      <div class="form-group">
-                          <label for="exampleFormControlSelect2" style="color: black">Member-2</label>
-                          <input class="form-control" id="exampleFormControlSelect2" type='text' name="rno1">
-                          </input>
-                      </div> 
-                      <div class="form-group">
-                          <label for="exampleFormControlSelect3" style="color: black">Member-3</label>
-                          <input class="form-control" id="exampleFormControlSelect3" type='text' name="rno2">
-                          </input>
-                      </div> 
-                      <div class="form-group">
-                          <label for="exampleFormControlInput1" style="color: black">Project Title</label>
-                          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Project title" name="title"/>
-                      </div>
-                      <div class="form-group">
-                          <label for="exampleFormControlInput1" style="color: black">Group Mentor</label>
-                          <input type="text" class="form-control" id="exampleFormControlInput1" value="{{teacher}}" placeholder="Group mentor" name="mentor_name"/>
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <input type="submit" class="btn btn-primary" value="ADD" />
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div> --}}
+</h2>
+</section>
 
 
+<section id='groups' style="padding-top: 100px; padding-bottom: 10px;">
+  <h1>GROUPS</h1>
+  <dd></dd>
+</section>
 <main id="swup">
   <div class="container">
     {{#if listExists}}
@@ -229,4 +183,8 @@
 </main>
 </div>
 </body>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
 </html>

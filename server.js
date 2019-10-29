@@ -87,8 +87,17 @@ var sessionChecker = (req, res, next) => {
 
 // route for Home-Page
 app.get('/', sessionChecker, (req, res) => {
-    res.redirect('/login');
+    res.redirect('/index');
 });
+
+app.get('/index',(req,res) => {
+    fname = 'BE ASSESSMENT';
+    lname= 'PORTAL';
+    res.render('index',{
+        fname,
+        lname
+    })
+})
 
 
 // route for user signup
@@ -138,12 +147,10 @@ app.route('/login')
                 // console.log("dashboard")
                 cum = user.roles();
                 if (await user.roles() === "Admin") {
-                    res.render('admin',Admin(app));
+                    res.redirect('admin');
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
-                    res.render("mentor", {
-                        teacher : username
-                    });
+                    res.redirect("/"+ username);
                     console.log("Inside Mentor")
                 }
             }
@@ -158,24 +165,11 @@ app.route('/login')
 
 // route for Admin's dashboard
 Admin(app);
-// app.get('/index', (req, res) => {
-//     if (req.session.user && req.cookies.user_sid) {
-//         // res.sendFile(__dirname + '/public/dashboard.html');
-//         res.render("index");
-//     } else {
-//         res.redirect('/login');
-//     }
-// });
 
-// route for Mentor's dashboard
+
+// // route for Mentor's dashboard
 Mentor(app);
-// app.get('/teacher', (req, res) => {
-//     if (req.session.user && req.cookies.user_sid) {
-//         res.render("teacher");
-//     } else {
-//         res.redirect('/login');
-//     }
-// });
+
 
 // if(cum === "Admin"){
 //     Admin(app);
@@ -190,7 +184,7 @@ app.get('/logout', (req, res) => {
         res.clearCookie('user_sid');
         res.redirect('/');
     } else {
-        res.redirect('/login');
+        res.redirect('/index');
     }
 });
 

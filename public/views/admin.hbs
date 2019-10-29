@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -37,18 +38,8 @@
             <div class="front face">
                 <i class="lnr lnr-home"></i>
             </div>
-            <a href="#1"><div class="right face">
+            <a href="#home"><div class="right face">
                 <p>HOME</p>
-            </div></a>
-        </div>
-    </div>
-    <div class="scene">
-        <div class="box">
-            <div class="front face">
-                <i class="lnr lnr-plus-circle"></i>
-            </div>
-            <a href="#2" class="smoothscroll"><div class="right face">
-                <p>ADD GROUP</p>
             </div></a>
         </div>
     </div>
@@ -59,6 +50,16 @@
             </div>
             <a href="#foo" class="smoothscroll"><div class="right face">
                 <p>GROUPS</p>
+            </div></a>
+        </div>
+    </div>
+    <div class="scene">
+        <div class="box">
+            <div class="front face">
+                <i class="lnr lnr-plus-circle"></i>
+            </div>
+            <a href="#2" class="smoothscroll"><div class="right face">
+                <p>ADD GROUP</p>
             </div></a>
         </div>
     </div>
@@ -149,86 +150,24 @@
 </style>
 
 
+<section id="home" style="background-image: url(../images/bkg2.jpg); background-repeat: no-repeat; background-size: 1280px 650px; width:110.5%; height:650px; margin-left: -5.5%; margin-top:-5.2%">
+  <h1 style="font-size: 80px; padding-top: 230px; font-weight: 700; color: white;" data-aos="zoom-out-up">WELCOME ADMIN</h1>
+</section>
 
-    <div class='detail-container'>
-      <dl>
-        <h1>Welcome Admin!!</h1>
-        <dd></dd>
-        <dt>
-          {{!-- <section class="col-lg-12 row cen">
-            <div class="col-lg-6 col-sm-4"  data-aos="fade-up">
-            <div class="lnr lnr-spell-check"></div>
-            <button class="btn first" onclick="status()">Check Form status</button>
-            </div>
-
-            <div class="col-lg-6 col-sm-4"  data-aos="fade-up">
-            <div class="lnr lnr-users"></div>
-            <button class="btn first" onclick="showgroups('foo')">Show groups</button>
-            </div>
-          </section>  
-        </dt>
-        <dt>
-          <section class="col-lg-12 row cen">
-            <div class="col-lg-6 col-sm-4"  data-aos="fade-up">
-            <div class="lnr lnr-plus-circle"></div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Group</button>
-                <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add Group</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post">
-                                <div class="form-group">
-                                    <label for="exampleFormControlSelect1" style="color: black">Member-1</label>
-                                    <input class="form-control" id="exampleFormControlSelect1" type='text' name="rno" required>
-                                    </input>
-                                </div>        
-                                <div class="form-group">
-                                    <label for="exampleFormControlSelect2" style="color: black">Member-2</label>
-                                    <input class="form-control" id="exampleFormControlSelect2" type='text' name="rno1" required>
-                                    </input>
-                                </div> 
-                                <div class="form-group">
-                                    <label for="exampleFormControlSelect3" style="color: black">Member-3</label>
-                                    <input class="form-control" id="exampleFormControlSelect3" type='text' name="rno2" required>
-                                    </input>
-                                </div> 
-                                <div class="form-group">
-                                    <label for="exampleFormControlInput1" style="color: black">Project Title</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Project title" name="title" required/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleFormControlInput1" style="color: black">Group Mentor</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" value="{{teacher}}" placeholder="Group mentor" name="mentor_name" required/>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <input type="submit" class="btn btn-primary" value="ADD" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-          </section> --}}
-        </dt>
-      </dl>
-    </div>
-
-<section id="foo">
+<section id="foo" style="background-color: red; width:100%; height:100%;">
     <main>
         <div class="container">
-            {{#if listExists}}
-        <table>
+            <table>
             <thead>
                 <tr><th>GRP NO</th><th>TITLE</th><th>Member-1</th><th>Member-2</th><th>Member-3</th><th>Mentor</th></tr>
             </thead>
+        </table>
+        </div>
+        <div class="container" style="overflow-y:scroll;
+   height:600px;
+   display:block;">
+            {{#if listExists}}
+        <table>
             <tfoot>
             <tr>
                 <th colspan='3'>
@@ -241,20 +180,6 @@
                     $("#dialog").dialog();
                 }
             </script>
-            {{!-- <div  id="dialog" tabindex="-1" aria-hidden="true"> --}}
-            {{!-- <div id="dialog">
-                <section class="col-lg-12 row cen">
-                <div class="col-lg-6 col-sm-4"  data-aos="fade-up">
-                <div class="lnr lnr-spell-check"></div>
-                <button class="btn first" onclick="status()">Check Form status</button>
-                </div>
-
-                <div class="col-lg-6 col-sm-4"  data-aos="fade-up">
-                <div class="lnr lnr-users"></div>
-                <button class="btn first" onclick="showgroups('foo')">Show groups</button>
-                </div>
-            </section>  
-            </div>   --}}
             <tbody>
                 {{#each rows}}
                 <tr onclick="display({{this.rno}});">
@@ -272,6 +197,7 @@
         </div>
     </main>
 </section>
+
 
 <section id="2"></section>
 <form action="/admin" method="POST">
@@ -539,4 +465,8 @@ $(document).ready(function() {
   }
 
     </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+  AOS.init();
+</script>
 </html>
