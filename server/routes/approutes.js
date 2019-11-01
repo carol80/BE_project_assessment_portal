@@ -391,6 +391,9 @@ module.exports = {
             //Write sql for 1st Midterm they have 8 co
             str4 = "select rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co8_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co8_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3,co8_3 from t7mid1form where rollno1=$1"
             values4 = [grpno]
+
+            str3 = "select exists(select 1 from t7mid1form where rollno1=$1)";
+            values3 = [grpno]
         
             execute(str1,values1,str4,values4);
         
@@ -398,37 +401,46 @@ module.exports = {
                 try {
                     await client.connect()
                     console.log("Connected successfully.")
-                    const rows1 = await client.query(str1,values1)
-                    //console.log(rows1.rows[0].title)
 
-                    const rows4 = await client.query(str4,values4)
-                    console.log(rows4.rows[0])
-                    
-                    //Calculation of C
-                    var total1 = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1) + (rows4.rows[0].co8_1);
-                    var total2 = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2) + (rows4.rows[0].co8_2);
-                    var total3 = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
+                    const status = await client.query(str3,values3)
 
-                    res.render('7mid1formReport',{
-                        teacher : teacher,
-                        rollno1 : grpno,
-                        title : rows1.rows[0].title,
-                        co1_1 : rows4.rows[0].co1_1,    co2_1 : rows4.rows[0].co2_1,
-                        co3_1 : rows4.rows[0].co3_1,    co4_1 : rows4.rows[0].co4_1,
-                        co5_1 : rows4.rows[0].co5_1,    co6_1 : rows4.rows[0].co6_1,
-                        co7_1 : rows4.rows[0].co7_1,    co8_1 : rows4.rows[0].co8_1,
-                        rollno2 : rows4.rows[0].rollno2,
-                        co1_2 : rows4.rows[0].co1_2,    co2_2 : rows4.rows[0].co2_2,
-                        co3_2 : rows4.rows[0].co3_2,    co4_2 : rows4.rows[0].co4_2,
-                        co5_2 : rows4.rows[0].co5_2,    co6_2 : rows4.rows[0].co6_2,
-                        co7_2 : rows4.rows[0].co7_2,    co8_2 : rows4.rows[0].co8_2,
-                        rollno3 : rows4.rows[0].rollno3,
-                        co1_3 : rows4.rows[0].co1_3,    co2_3 : rows4.rows[0].co2_3,
-                        co3_3 : rows4.rows[0].co3_3,    co4_3 : rows4.rows[0].co4_3,
-                        co5_3 : rows4.rows[0].co5_3,    co6_3 : rows4.rows[0].co6_3,
-                        co7_3 : rows4.rows[0].co7_3,    co8_3 : rows4.rows[0].co8_3,
-                        total1 : total1,    total2 : total2,    total3 : total3,
-                    });
+                    if(status.rows[0].exists){//if row does not exist in table
+
+                        const rows1 = await client.query(str1,values1)
+                        //console.log(rows1.rows[0].title)
+
+                        const rows4 = await client.query(str4,values4)
+                        console.log(rows4.rows[0])
+                        
+                        //Calculation of C
+                        var total1 = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1) + (rows4.rows[0].co8_1);
+                        var total2 = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2) + (rows4.rows[0].co8_2);
+                        var total3 = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
+
+                        res.render('7mid1formReport',{
+                            teacher : teacher,
+                            grpno : grpno,
+                            title : rows1.rows[0].title,
+                            co1_1 : rows4.rows[0].co1_1,    co2_1 : rows4.rows[0].co2_1,
+                            co3_1 : rows4.rows[0].co3_1,    co4_1 : rows4.rows[0].co4_1,
+                            co5_1 : rows4.rows[0].co5_1,    co6_1 : rows4.rows[0].co6_1,
+                            co7_1 : rows4.rows[0].co7_1,    co8_1 : rows4.rows[0].co8_1,
+                            rno1 : rows4.rows[0].rollno2,
+                            co1_2 : rows4.rows[0].co1_2,    co2_2 : rows4.rows[0].co2_2,
+                            co3_2 : rows4.rows[0].co3_2,    co4_2 : rows4.rows[0].co4_2,
+                            co5_2 : rows4.rows[0].co5_2,    co6_2 : rows4.rows[0].co6_2,
+                            co7_2 : rows4.rows[0].co7_2,    co8_2 : rows4.rows[0].co8_2,
+                            rno2 : rows4.rows[0].rollno3,
+                            co1_3 : rows4.rows[0].co1_3,    co2_3 : rows4.rows[0].co2_3,
+                            co3_3 : rows4.rows[0].co3_3,    co4_3 : rows4.rows[0].co4_3,
+                            co5_3 : rows4.rows[0].co5_3,    co6_3 : rows4.rows[0].co6_3,
+                            co7_3 : rows4.rows[0].co7_3,    co8_3 : rows4.rows[0].co8_3,
+                            total1 : total1,    total2 : total2,    total3 : total3,
+                        });
+                    }
+                    else{
+                        res.send("Please fill the Form First........")
+                    }
                 }
                 catch (ex)
                 {
@@ -658,6 +670,9 @@ module.exports = {
             //Write sql for 1st Midterm they have 8 co
             str4 = "select rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co8_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co8_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3,co8_3 from t7mid2form where rollno1=$1"
             values4 = [grpno]
+
+            str3 = "select exists(select 1 from t7mid2form where rollno1=$1)";
+            values3 = [grpno]
         
             execute(str1,values1,str4,values4);
         
@@ -665,37 +680,46 @@ module.exports = {
                 try {
                     await client.connect()
                     console.log("Connected successfully.")
-                    const rows1 = await client.query(str1,values1)
-                    //console.log(rows1.rows[0].title)
 
-                    const rows4 = await client.query(str4,values4)
-                    console.log(rows4.rows[0])
-                    
-                    //Calculation of C
-                    var total1 = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1) + (rows4.rows[0].co8_1);
-                    var total2 = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2) + (rows4.rows[0].co8_2);
-                    var total3 = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
+                    const status = await client.query(str3,values3)
+                    //console.log(status.rows[0].exists)
+                    if(status.rows[0].exists){//if row does not exist in table
+                        
+                        const rows1 = await client.query(str1,values1)
+                        //console.log(rows1.rows[0].title)
 
-                    res.render('7mid2formReport',{
-                        teacher : teacher,
-                        rollno1 : grpno,
-                        title : rows1.rows[0].title,
-                        co1_1 : rows4.rows[0].co1_1,    co2_1 : rows4.rows[0].co2_1,
-                        co3_1 : rows4.rows[0].co3_1,    co4_1 : rows4.rows[0].co4_1,
-                        co5_1 : rows4.rows[0].co5_1,    co6_1 : rows4.rows[0].co6_1,
-                        co7_1 : rows4.rows[0].co7_1,    co8_1 : rows4.rows[0].co8_1,
-                        rollno2 : rows4.rows[0].rollno2,
-                        co1_2 : rows4.rows[0].co1_2,    co2_2 : rows4.rows[0].co2_2,
-                        co3_2 : rows4.rows[0].co3_2,    co4_2 : rows4.rows[0].co4_2,
-                        co5_2 : rows4.rows[0].co5_2,    co6_2 : rows4.rows[0].co6_2,
-                        co7_2 : rows4.rows[0].co7_2,    co8_2 : rows4.rows[0].co8_2,
-                        rollno3 : rows4.rows[0].rollno3,
-                        co1_3 : rows4.rows[0].co1_3,    co2_3 : rows4.rows[0].co2_3,
-                        co3_3 : rows4.rows[0].co3_3,    co4_3 : rows4.rows[0].co4_3,
-                        co5_3 : rows4.rows[0].co5_3,    co6_3 : rows4.rows[0].co6_3,
-                        co7_3 : rows4.rows[0].co7_3,    co8_3 : rows4.rows[0].co8_3,
-                        total1 : total1,    total2 : total2,    total3 : total3,
-                    });
+                        const rows4 = await client.query(str4,values4)
+                        console.log(rows4.rows[0])
+                        
+                        //Calculation of C
+                        var total1 = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1) + (rows4.rows[0].co8_1);
+                        var total2 = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2) + (rows4.rows[0].co8_2);
+                        var total3 = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
+
+                        res.render('7mid2formReport',{
+                            teacher : teacher,
+                            grpno : grpno,
+                            title : rows1.rows[0].title,
+                            co1_1 : rows4.rows[0].co1_1,    co2_1 : rows4.rows[0].co2_1,
+                            co3_1 : rows4.rows[0].co3_1,    co4_1 : rows4.rows[0].co4_1,
+                            co5_1 : rows4.rows[0].co5_1,    co6_1 : rows4.rows[0].co6_1,
+                            co7_1 : rows4.rows[0].co7_1,    co8_1 : rows4.rows[0].co8_1,
+                            rno1 : rows4.rows[0].rollno2,
+                            co1_2 : rows4.rows[0].co1_2,    co2_2 : rows4.rows[0].co2_2,
+                            co3_2 : rows4.rows[0].co3_2,    co4_2 : rows4.rows[0].co4_2,
+                            co5_2 : rows4.rows[0].co5_2,    co6_2 : rows4.rows[0].co6_2,
+                            co7_2 : rows4.rows[0].co7_2,    co8_2 : rows4.rows[0].co8_2,
+                            rno2 : rows4.rows[0].rollno3,
+                            co1_3 : rows4.rows[0].co1_3,    co2_3 : rows4.rows[0].co2_3,
+                            co3_3 : rows4.rows[0].co3_3,    co4_3 : rows4.rows[0].co4_3,
+                            co5_3 : rows4.rows[0].co5_3,    co6_3 : rows4.rows[0].co6_3,
+                            co7_3 : rows4.rows[0].co7_3,    co8_3 : rows4.rows[0].co8_3,
+                            total1 : total1,    total2 : total2,    total3 : total3,
+                        });
+                    }
+                    else{
+                        res.send("Please Fill the Forms First......")
+                    }
                 }
                 catch (ex)
                 {
@@ -918,6 +942,9 @@ module.exports = {
             //Write sql for 1st Midterm they have 8 co
             str4 = "select rollno2,rollno3,co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3 from t7oral where rollno1=$1"
             values4 = [grpno]
+
+            str3 = "select exists(select 1 from t7oral where rollno1=$1)";
+            values3 = [grpno]
         
             execute(str1,values1,str4,values4);
         
@@ -925,37 +952,46 @@ module.exports = {
                 try {
                     await client.connect()
                     console.log("Connected successfully.")
-                    const rows1 = await client.query(str1,values1)
-                    //console.log(rows1.rows[0].title)
 
-                    const rows4 = await client.query(str4,values4)
-                    console.log(rows4.rows[0])
-                    
-                    //Calculation of C
-                    var total1 = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1);
-                    var total2 = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2);
-                    var total3 = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3);
+                    const status = await client.query(str3,values3)
+                    //console.log(status.rows[0].exists)
+                    if(status.rows[0].exists){//if row does not exist in table
 
-                    res.render('7oralReport',{
-                        teacher : teacher,
-                        rollno1 : grpno,
-                        title : rows1.rows[0].title,
-                        co1_1 : rows4.rows[0].co1_1,    co2_1 : rows4.rows[0].co2_1,
-                        co3_1 : rows4.rows[0].co3_1,    co4_1 : rows4.rows[0].co4_1,
-                        co5_1 : rows4.rows[0].co5_1,    co6_1 : rows4.rows[0].co6_1,
-                        co7_1 : rows4.rows[0].co7_1,
-                        rollno2 : rows4.rows[0].rollno2,
-                        co1_2 : rows4.rows[0].co1_2,    co2_2 : rows4.rows[0].co2_2,
-                        co3_2 : rows4.rows[0].co3_2,    co4_2 : rows4.rows[0].co4_2,
-                        co5_2 : rows4.rows[0].co5_2,    co6_2 : rows4.rows[0].co6_2,
-                        co7_2 : rows4.rows[0].co7_2, 
-                        rollno3 : rows4.rows[0].rollno3,
-                        co1_3 : rows4.rows[0].co1_3,    co2_3 : rows4.rows[0].co2_3,
-                        co3_3 : rows4.rows[0].co3_3,    co4_3 : rows4.rows[0].co4_3,
-                        co5_3 : rows4.rows[0].co5_3,    co6_3 : rows4.rows[0].co6_3,
-                        co7_3 : rows4.rows[0].co7_3,  
-                        total1 : total1,    total2 : total2,    total3 : total3,
-                    });
+                        const rows1 = await client.query(str1,values1)
+                        //console.log(rows1.rows[0].title)
+
+                        const rows4 = await client.query(str4,values4)
+                        console.log(rows4.rows[0])
+                        
+                        //Calculation of C
+                        var total1 = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1);
+                        var total2 = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2);
+                        var total3 = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3);
+
+                        res.render('7oralReport',{
+                            teacher : teacher,
+                            grpno : grpno,
+                            title : rows1.rows[0].title,
+                            co1_1 : rows4.rows[0].co1_1,    co2_1 : rows4.rows[0].co2_1,
+                            co3_1 : rows4.rows[0].co3_1,    co4_1 : rows4.rows[0].co4_1,
+                            co5_1 : rows4.rows[0].co5_1,    co6_1 : rows4.rows[0].co6_1,
+                            co7_1 : rows4.rows[0].co7_1,
+                            rno1 : rows4.rows[0].rollno2,
+                            co1_2 : rows4.rows[0].co1_2,    co2_2 : rows4.rows[0].co2_2,
+                            co3_2 : rows4.rows[0].co3_2,    co4_2 : rows4.rows[0].co4_2,
+                            co5_2 : rows4.rows[0].co5_2,    co6_2 : rows4.rows[0].co6_2,
+                            co7_2 : rows4.rows[0].co7_2, 
+                            rno2 : rows4.rows[0].rollno3,
+                            co1_3 : rows4.rows[0].co1_3,    co2_3 : rows4.rows[0].co2_3,
+                            co3_3 : rows4.rows[0].co3_3,    co4_3 : rows4.rows[0].co4_3,
+                            co5_3 : rows4.rows[0].co5_3,    co6_3 : rows4.rows[0].co6_3,
+                            co7_3 : rows4.rows[0].co7_3,  
+                            total1 : total1,    total2 : total2,    total3 : total3,
+                        });
+                    }
+                    else{
+                        res.send("Please fill the Forms First......")
+                    }
                 }
                 catch (ex)
                 {
@@ -1194,6 +1230,9 @@ module.exports = {
             //Write sql for 2nd Midterm they have 8 co
             str5 = "select co1_1,co2_1,co3_1,co4_1,co5_1,co6_1,co7_1,co8_1,co1_2,co2_2,co3_2,co4_2,co5_2,co6_2,co7_2,co8_2,co1_3,co2_3,co3_3,co4_3,co5_3,co6_3,co7_3,co8_3 from t7mid2form where rollno1=$1"
             values5 = [grpno] 
+
+            str3 = "select exists(select 1 from t7form where rollno1=$1)";
+            values3 = [grpno]
         
             execute(str1,values1,str2,values2);
         
@@ -1201,80 +1240,89 @@ module.exports = {
                 try {
                     await client.connect()
                     console.log("Connected successfully.")
-                    const rows1 = await client.query(str1,values1)
-                    //console.log(rows1.rows[0].title)
-        
-                    const rows2 = await client.query(str2,values2)
-                    //console.log(rows2.rows[0])
-        
-                    // const rows3 = await client.query(str3,values3)
-                    // console.log(rows3.rows[0])
 
-                    const rows4 = await client.query(str4,values4)
-                    console.log(rows4.rows[0])
-        
-                    const rows5 = await client.query(str5,values5)
-                    console.log(rows5.rows[0])
-        
-                    // var total1b = (rows3.rows[0].co1_1) + (rows3.rows[0].co2_1) + (rows3.rows[0].co3_1) + (rows3.rows[0].co4_1) + (rows3.rows[0].co5_1) + (rows3.rows[0].co6_1);
-                    // var total2b = (rows3.rows[0].co1_2) + (rows3.rows[0].co2_2) + (rows3.rows[0].co3_2) + (rows3.rows[0].co4_2) + (rows3.rows[0].co5_2) + (rows3.rows[0].co6_2);
-                    // var total3b = (rows3.rows[0].co1_3) + (rows3.rows[0].co2_3) + (rows3.rows[0].co3_3) + (rows3.rows[0].co4_3) + (rows3.rows[0].co5_3) + (rows3.rows[0].co6_3);
-        
-                    var total1 = (rows2.rows[0].co1_1) + (rows2.rows[0].co2_1) + (rows2.rows[0].co3_1) + (rows2.rows[0].co4_1) + (rows2.rows[0].co5_1) + (rows2.rows[0].co6_1);
-                    var total2 = (rows2.rows[0].co1_2) + (rows2.rows[0].co2_2) + (rows2.rows[0].co3_2) + (rows2.rows[0].co4_2) + (rows2.rows[0].co5_2) + (rows2.rows[0].co6_2);
-                    var total3 = (rows2.rows[0].co1_3) + (rows2.rows[0].co2_3) + (rows2.rows[0].co3_3) + (rows2.rows[0].co4_3) + (rows2.rows[0].co5_3) + (rows2.rows[0].co6_3);
+                    const status = await client.query(str3,values3)
+                    //console.log(status.rows[0].exists)
+                    if(status.rows[0].exists){//if row does not exist in table
 
-                    var total1b = rows2.rows[0].co7_1;
-                    var total2b = rows2.rows[0].co7_2;
-                    var total3b = rows2.rows[0].co7_3;
-        
-                    var total1ab = total1 + total1b;
-                    var total2ab = total2 + total2b;
-                    var total3ab = total3 + total3b;
-                    
-                    //Calculation of C
-                    var total1c = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1) + (rows4.rows[0].co8_1);
-                    var total2c = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2) + (rows4.rows[0].co8_2);
-                    var total3c = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
+                        const rows1 = await client.query(str1,values1)
+                        //console.log(rows1.rows[0].title)
+            
+                        const rows2 = await client.query(str2,values2)
+                        //console.log(rows2.rows[0])
+            
+                        // const rows3 = await client.query(str3,values3)
+                        // console.log(rows3.rows[0])
 
-                    //Calculation of D
-                    var total1d = (rows5.rows[0].co1_1) + (rows5.rows[0].co2_1) + (rows5.rows[0].co3_1) + (rows5.rows[0].co4_1) + (rows5.rows[0].co5_1) + (rows5.rows[0].co6_1) + (rows5.rows[0].co7_1) + (rows5.rows[0].co8_1);
-                    var total2d = (rows5.rows[0].co1_2) + (rows5.rows[0].co2_2) + (rows5.rows[0].co3_2) + (rows5.rows[0].co4_2) + (rows5.rows[0].co5_2) + (rows5.rows[0].co6_2) + (rows5.rows[0].co7_2) + (rows5.rows[0].co8_2);
-                    var total3d = (rows5.rows[0].co1_3) + (rows5.rows[0].co2_3) + (rows5.rows[0].co3_3) + (rows5.rows[0].co4_3) + (rows5.rows[0].co5_3) + (rows5.rows[0].co6_3) + (rows5.rows[0].co7_3) + (rows5.rows[0].co8_3);
+                        const rows4 = await client.query(str4,values4)
+                        console.log(rows4.rows[0])
+            
+                        const rows5 = await client.query(str5,values5)
+                        console.log(rows5.rows[0])
+            
+                        // var total1b = (rows3.rows[0].co1_1) + (rows3.rows[0].co2_1) + (rows3.rows[0].co3_1) + (rows3.rows[0].co4_1) + (rows3.rows[0].co5_1) + (rows3.rows[0].co6_1);
+                        // var total2b = (rows3.rows[0].co1_2) + (rows3.rows[0].co2_2) + (rows3.rows[0].co3_2) + (rows3.rows[0].co4_2) + (rows3.rows[0].co5_2) + (rows3.rows[0].co6_2);
+                        // var total3b = (rows3.rows[0].co1_3) + (rows3.rows[0].co2_3) + (rows3.rows[0].co3_3) + (rows3.rows[0].co4_3) + (rows3.rows[0].co5_3) + (rows3.rows[0].co6_3);
+            
+                        var total1 = (rows2.rows[0].co1_1) + (rows2.rows[0].co2_1) + (rows2.rows[0].co3_1) + (rows2.rows[0].co4_1) + (rows2.rows[0].co5_1) + (rows2.rows[0].co6_1);
+                        var total2 = (rows2.rows[0].co1_2) + (rows2.rows[0].co2_2) + (rows2.rows[0].co3_2) + (rows2.rows[0].co4_2) + (rows2.rows[0].co5_2) + (rows2.rows[0].co6_2);
+                        var total3 = (rows2.rows[0].co1_3) + (rows2.rows[0].co2_3) + (rows2.rows[0].co3_3) + (rows2.rows[0].co4_3) + (rows2.rows[0].co5_3) + (rows2.rows[0].co6_3);
 
-                    //Calculation of Avg of C and D
-                    var total1e = (total1c + total1d)/2;
-                    var total2e = (total2c + total2d)/2;
-                    var total3e = (total3c + total3d)/2;
+                        var total1b = rows2.rows[0].co7_1;
+                        var total2b = rows2.rows[0].co7_2;
+                        var total3b = rows2.rows[0].co7_3;
+            
+                        var total1ab = total1 + total1b;
+                        var total2ab = total2 + total2b;
+                        var total3ab = total3 + total3b;
+                        
+                        //Calculation of C
+                        var total1c = (rows4.rows[0].co1_1) + (rows4.rows[0].co2_1) + (rows4.rows[0].co3_1) + (rows4.rows[0].co4_1) + (rows4.rows[0].co5_1) + (rows4.rows[0].co6_1) + (rows4.rows[0].co7_1) + (rows4.rows[0].co8_1);
+                        var total2c = (rows4.rows[0].co1_2) + (rows4.rows[0].co2_2) + (rows4.rows[0].co3_2) + (rows4.rows[0].co4_2) + (rows4.rows[0].co5_2) + (rows4.rows[0].co6_2) + (rows4.rows[0].co7_2) + (rows4.rows[0].co8_2);
+                        var total3c = (rows4.rows[0].co1_3) + (rows4.rows[0].co2_3) + (rows4.rows[0].co3_3) + (rows4.rows[0].co4_3) + (rows4.rows[0].co5_3) + (rows4.rows[0].co6_3) + (rows4.rows[0].co7_3) + (rows4.rows[0].co8_3);
 
-                    //Calculating Final Total
-                    var total1Final = 0.4*(total1ab)+0.6*(total1e);
-                    var total2Final = 0.4*(total2ab)+0.6*(total2e);
-                    var total3Final = 0.4*(total3ab)+0.6*(total3e);
+                        //Calculation of D
+                        var total1d = (rows5.rows[0].co1_1) + (rows5.rows[0].co2_1) + (rows5.rows[0].co3_1) + (rows5.rows[0].co4_1) + (rows5.rows[0].co5_1) + (rows5.rows[0].co6_1) + (rows5.rows[0].co7_1) + (rows5.rows[0].co8_1);
+                        var total2d = (rows5.rows[0].co1_2) + (rows5.rows[0].co2_2) + (rows5.rows[0].co3_2) + (rows5.rows[0].co4_2) + (rows5.rows[0].co5_2) + (rows5.rows[0].co6_2) + (rows5.rows[0].co7_2) + (rows5.rows[0].co8_2);
+                        var total3d = (rows5.rows[0].co1_3) + (rows5.rows[0].co2_3) + (rows5.rows[0].co3_3) + (rows5.rows[0].co4_3) + (rows5.rows[0].co5_3) + (rows5.rows[0].co6_3) + (rows5.rows[0].co7_3) + (rows5.rows[0].co8_3);
 
-                    res.render('7termReport',{
-                        teacher : teacher,
-                        rollno1 : grpno,
-                        title : rows1.rows[0].title,
-                        co1_1 : rows2.rows[0].co1_1,    co2_1 : rows2.rows[0].co2_1,
-                        co3_1 : rows2.rows[0].co3_1,    co4_1 : rows2.rows[0].co4_1,
-                        co5_1 : rows2.rows[0].co5_1,    co6_1 : rows2.rows[0].co6_1,
-                        rollno2 : rows2.rows[0].rollno2,
-                        co1_2 : rows2.rows[0].co1_2,    co2_2 : rows2.rows[0].co2_2,
-                        co3_2 : rows2.rows[0].co3_2,    co4_2 : rows2.rows[0].co4_2,
-                        co5_2 : rows2.rows[0].co5_2,    co6_2 : rows2.rows[0].co6_2,
-                        rollno3 : rows2.rows[0].rollno3,
-                        co1_3 : rows2.rows[0].co1_3,    co2_3 : rows2.rows[0].co2_3,
-                        co3_3 : rows2.rows[0].co3_3,    co4_3 : rows2.rows[0].co4_3,
-                        co5_3 : rows2.rows[0].co5_3,    co6_3 : rows2.rows[0].co6_3,
-                        total1 : total1,    total2 : total2,    total3 : total3,
-                        total1b : total1b,  total2b : total2b,  total3b : total3b,
-                        total1ab : total1ab,    total2ab : total2ab,    total3ab : total3ab,
-                        total1c : total1c,  total2c : total2c,  total3c : total3c,
-                        total1d : total1d,  total2d : total2d,  total3d : total3d,
-                        total1e : total1e,  total2e : total2e,  total3e : total3e,
-                        total1Final : total1Final,  total2Final : total2Final,  total3Final : total3Final
-                    });
+                        //Calculation of Avg of C and D
+                        var total1e = (total1c + total1d)/2;
+                        var total2e = (total2c + total2d)/2;
+                        var total3e = (total3c + total3d)/2;
+
+                        //Calculating Final Total
+                        var total1Final = 0.4*(total1ab)+0.6*(total1e);
+                        var total2Final = 0.4*(total2ab)+0.6*(total2e);
+                        var total3Final = 0.4*(total3ab)+0.6*(total3e);
+
+                        res.render('7termReport',{
+                            teacher : teacher,
+                            rollno1 : grpno,
+                            title : rows1.rows[0].title,
+                            co1_1 : rows2.rows[0].co1_1,    co2_1 : rows2.rows[0].co2_1,
+                            co3_1 : rows2.rows[0].co3_1,    co4_1 : rows2.rows[0].co4_1,
+                            co5_1 : rows2.rows[0].co5_1,    co6_1 : rows2.rows[0].co6_1,
+                            rollno2 : rows2.rows[0].rollno2,
+                            co1_2 : rows2.rows[0].co1_2,    co2_2 : rows2.rows[0].co2_2,
+                            co3_2 : rows2.rows[0].co3_2,    co4_2 : rows2.rows[0].co4_2,
+                            co5_2 : rows2.rows[0].co5_2,    co6_2 : rows2.rows[0].co6_2,
+                            rollno3 : rows2.rows[0].rollno3,
+                            co1_3 : rows2.rows[0].co1_3,    co2_3 : rows2.rows[0].co2_3,
+                            co3_3 : rows2.rows[0].co3_3,    co4_3 : rows2.rows[0].co4_3,
+                            co5_3 : rows2.rows[0].co5_3,    co6_3 : rows2.rows[0].co6_3,
+                            total1 : total1,    total2 : total2,    total3 : total3,
+                            total1b : total1b,  total2b : total2b,  total3b : total3b,
+                            total1ab : total1ab,    total2ab : total2ab,    total3ab : total3ab,
+                            total1c : total1c,  total2c : total2c,  total3c : total3c,
+                            total1d : total1d,  total2d : total2d,  total3d : total3d,
+                            total1e : total1e,  total2e : total2e,  total3e : total3e,
+                            total1Final : total1Final,  total2Final : total2Final,  total3Final : total3Final
+                        });
+                    }
+                    else{
+                        res.send("Please Fill all the forms of 7th Semester.......")
+                    }
                 }
                 catch (ex)
                 {
