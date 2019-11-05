@@ -20,6 +20,7 @@
     <!--customised libraries-->
     <link rel="stylesheet" type="text/css" style="css/responsive.css">
     <link rel="stylesheet" href="../css/style.css">
+    
 </head>
 <body style="background-color: #111">
     <div class='detail-container'>
@@ -196,3 +197,124 @@
   }
     </script>
 </html>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  
+  html.open, body.open {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  html {
+    padding: 40px;
+    font-size: 62.5%;
+  }
+  
+  body {
+    padding: 20px;
+    /* background-color: rgba(20, 26, 25, 0.836) ; */
+    background-color: #111;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    font-size: 1.6rem;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .part2 {
+    background-color: #BD2A4E;
+    padding: 8rem;
+  }
+  
+  p {
+    text-align: center;
+    margin: 20px 0 60px;
+  }
+  
+  main {
+    background-color: #2C3845;
+  }
+  
+  h1 {
+    color: #f1c40f;
+    font-size: 4rem;
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  @media screen and (max-width: 600px) {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  .btn {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    background-color: transparent;
+    border: 2px solid #e74c3c;
+    border-radius: 0.6em;
+    color: #e74c3c;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+  .btn:hover, .btn:focus {
+    color: #fff;
+    outline: 0;
+  }
+
+  .first {
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    text-align: center;
+  }
+  .first:hover {
+    box-shadow: 0 0 40px 40px #e74c3c inset;
+  }
+
+  .button {
+    line-height: 1;
+    display: inline-block;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 8px;
+    background-color: #4b908f;
+  }
+  
+  .detail-container {
+    margin: 0 auto;
+    padding: 40px;
+    width: 70%;
+  }
+
+  .lnr {
+    font-family: 'Linearicons-Free';
+    /* speak: none; */
+    color: #FF0000;
+    font-size: 130px;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    }
+</style>
