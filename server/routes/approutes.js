@@ -7,7 +7,6 @@ const formchecks = require('../../models/formchecks.js');      //to be included 
 var conString = database.conString;
 const app = express();
 
-
 /*================================================================
                     Path Declarations
 =================================================================*/
@@ -1439,6 +1438,37 @@ module.exports = {
         }
     },
 
+    /*================================================================
+	                        DELETE groups
+    =================================================================*/
+
+    deleteGroups : async (req,res) => {
+        var client = new Client({
+            connectionString: conString,
+        })
+        grpno = req.params.grpno
+
+        str = "DELETE FROM groups WHERE rno=$1"
+        values = [grpno]
+        try{
+            await client.connect()
+            console.log("Connected successfully.")
+            const rows = await client.query(str,values)
+            console.log(rows.rowCount)
+            console.log("Deleted..........")
+            res.redirect("/admin");
+        }
+        catch (ex)
+        {
+            console.log(`Something wrong happend ${ex}`);
+        }
+        finally 
+        {
+            await client.end();
+            alert("Group added Successfully");
+            console.log("Client disconnected successfully.")  ;  
+        }
+    },
 
     
 	/*================================================================
@@ -1466,10 +1496,7 @@ module.exports = {
                 rno: req.body.rno2,
                 mentor_name: req.body.mentor_name
             })
-            res.render("admin", {
-                rows,
-                listExists: true
-            });
+            res.redirect("/admin");
         }
         catch (ex)
         {
@@ -1484,3 +1511,5 @@ module.exports = {
     }
 
 }
+
+

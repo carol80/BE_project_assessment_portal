@@ -180,18 +180,19 @@
                     $("#dialog").dialog();
                 }
             </script>
-            <tbody>
-                {{#each rows}}
-                <tr onclick="display({{this.rno}});">
-                    <td data-title='GRP NO'>{{this.grpno}}</td>
-                    <td data-title='TITLE'>{{this.title}}</td>
-                    <td data-title='Member-1'>{{this.rno}}</td>
-                    <td data-title='Member-2'>{{this.rno1}}</td>
-                    <td data-title='Member-3'>{{this.rno2}}</td>
-                    <td data-title='Member-3'>{{this.mentor_name}}</td>
-                </tr>
-                {{/each}} 
-            </tbody>
+              <tbody>
+                  {{#each rows}}
+                  <tr onclick="display({{this.rno}});">
+                      <td data-title='GRP NO'>{{this.grpno}}</td>
+                      <td data-title='TITLE'>{{this.title}}</td>
+                      <td data-title='Member-1'>{{this.rno}}</td>
+                      <td data-title='Member-2'>{{this.rno1}}</td>
+                      <td data-title='Member-3'>{{this.rno2}}</td>
+                      <td data-title='Member-3'>{{this.mentor_name}}</td>
+                      <td><a class='button' href="admin/{{this.rno}}/delete">Delete</a></td>
+                  </tr>
+                  {{/each}} 
+              </tbody>
         </table>
             {{/if}}
         </div>

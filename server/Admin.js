@@ -33,7 +33,9 @@ module.exports = function(app) {
 
     app.route('/admin/formchecks')
         .get(appRoutes.formchecks)
-
+        
+    app.route('/admin/:grpno/delete')
+        .get(appRoutes.deleteGroups)
 
 	// app.post('/', appRoutes.insertGroups);
     // app.get('/', appRoutes.showGroups);
