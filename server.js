@@ -115,10 +115,10 @@ app.route('/signup')
         .then(async (user) => {
             req.session.user = user.dataValues;
                 if (await user.roles() === "Admin") {
-                    res.render('admin', Admin(app));
+                    res.redirect('admin');
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
-                    res.redirect('/'+ username , Mentor(app));
+                    res.redirect("/"+ username);
                     console.log("Inside Mentor")
                 }
         })

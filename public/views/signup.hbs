@@ -1,57 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/style.css">
-  <title>Sign Up</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Signup Page</title>
+    <!--Bootstrap libraries-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!--customised libraries-->
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-    <form class="form" action="/signup" method="post">
-      <h1>SIGN UP</h1>
-      <div class="form-group">
-        <input type="text" placeholder=" " id="name" name="username" required>
-        <label for="name">Username</label>
-        <div class="error">
-          <i class="fas fa-exclamation-circle"></i>
-          Error encountered!
-        </div>
-      </div>
-      <div class="form-group">
-        <input type="role" placeholder=" " id="role" name="role" required>
-        <label for="role">Role</label>
-        <div class="error">
-          <i class="fas fa-exclamation-circle"></i>
-        </div>
-      </div>
-        {{!-- <select class="form-control" placeholder=" " id="role" name="role" required>
-          <option>Admin</option>
-          <option>Mentor</option>
-        </select>
-        <div class="error">
-          <i class="fas fa-exclamation-circle"></i>
-        </div>
-      </div> --}}
-      <div class="form-group">
-        <input type="email" placeholder=" " id="email" name="email" required>
-        <label for="email">Email-Id</label>
-        <div class="error">
-          <i class="fas fa-exclamation-circle"></i>
-        </div>
-      </div>
-      <div class="form-group">
-        <input type="password" placeholder=" " id="password" name="password" required>
-        <label for="password">Password</label>
-        <div class="error">
-          <i class="fas fa-exclamation-circle"></i>
-        </div>
-      </div>
-      <input class="btn btn-primary" type="submit" value="Sign Up"/>
-      <div class="form-bottom">
-        <a href="login">Already have an account?</a>
-      </div>
+<body style="background-image: url(../images/bkg1.jpg); background-repeat: no-repeat; background-size: 1280px 650px; background-blend-mode: overlay;">
+
+    {{!-- NAVIGATION BAR --}}
+
+<div class="navbar">
+<div class="scene">
+	<div class="box">
+		<div class="front face">
+			<i class="lnr lnr-file-add"></i>
+		</div>
+		<a href="#"><div class="right face">
+			<p>SIGN-UP</p>
+		</div></a>
+	</div>
+</div>
+<div class="scene">
+	<div class="box">
+		<div class="front face">
+			<i class="lnr lnr-enter"></i>
+		</div>
+		<a href="/login"><div class="right face">
+			<p>LOGIN</p>
+		</div></a>
+	</div>
+</div>
+</div>
+
+
+<style>
+	p{
+		font-size: 12px;
+		color: #111;
+		text-align: center;
+	}
+
+	a:hover{
+		color: #111;
+	}
+
+	.lnr{
+		font-size: 35px;
+		padding-left: 17px;
+    color: #fcda05;
+	}
+
+	.navbar{
+        position: fixed;
+        top:200px;
+		right: 0;
+		width: 90px;
+		height: 100px;
+	}
+
+	.scene{
+		width: 90px;
+		height: 100px;
+	}
+
+	.box{
+		width: 100%;
+		height: 100%;
+		transform-style: preserve-3d;
+		transition: all 0.5s ease-out;
+		transform-origin: 0 0;
+	}
+
+	.scene:hover .box{
+		transform: rotateY(-90deg);
+		cursor: pointer;
+	}
+
+	.face{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		transform-origin: 0 0;
+	}
+
+	.front{
+		transform: rotateY(0deg);
+		background-color: #2a363b;
+	}
+
+	.right{
+		transform: rotateY(90deg);
+		left: 70px;
+		background-color: #fcda05;
+		color: #111;
+		font-size: 0.8rem;
+	}
+
+.login {
+  width: 400px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+/* Reset top and bottom margins from certain elements */
+.login-header,
+.login p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* The triangle form is achieved by a CSS hack */
+.login-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: #2a363b;
+}
+
+.login-header {
+  background: #2a363b;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.login-container {
+  background: #ebebeb;
+  padding: 12px;
+}
+
+/* Every row inside .login-container is defined with p tags */
+.login p {
+  padding: 12px;
+}
+
+.login input,select {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+.login input[type="text"],
+.login input[type="password"],
+.login input[type="email"] {
+  background: #fff;
+  border-color: #bbb;
+  font-size: small;
+  color: #555;
+}
+
+/* Text fields' focus effect */
+.login input[type="text"]:focus,
+.login input[type="password"]:focus,
+.login input[type="email"]:focus {
+  border-color: #888;
+}
+
+.login input[type="submit"],option {
+  background: #2a363b;
+  border-color: transparent;
+  color: #fff;
+  font-size: large;
+  cursor: pointer;
+}
+
+.login input[type="submit"]:hover {
+  background: #111;
+}
+
+/* Buttons' focus effect */
+.login input[type="submit"]:focus {
+  border-color: #111;
+}
+</style>
+
+    <div class="login">
+    <div class="login-triangle"></div>
+    
+    <h2 class="login-header">Sign up</h2>
+
+    <form class="login-container" action="/signup" method="post">
+        <p><input type="text" placeholder="Username" name="username"></p>
+        <p><select name="role">
+          <option value="Admin">Admin</option>
+          <option value="Mentor">Mentor</option>
+        </select></p>
+        <p><input type="email" placeholder="E-mail" name="email"></p>
+        <p><input type="password" placeholder="Password" name="password"></p>
+        <p><input type="submit" value="Signup"></p>
     </form>
+    </div>
 </body>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
 </html>
