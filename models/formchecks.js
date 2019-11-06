@@ -12,13 +12,13 @@ const sequelize = new Sequelize(conString, {
 // setup formchecks table and its fields.
 var formchecks = sequelize.define('formchecks', {
     rno: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         unique: true,
         allowNull: false
     },
     term7mid1: {
         type: Sequelize.STRING,
-        defaultValue: 'true',
+        defaultValue: 'false',
         allowNull: false
     },
     term7mid2: {

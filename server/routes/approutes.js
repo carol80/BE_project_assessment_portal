@@ -323,7 +323,7 @@ module.exports = {
                 const rows = await client.query(str,values)
                 console.log("Updation of 2nd Query Done.......")
 
-                str5 = "update formchecks SET mid2term7 = $1 WHERE rno=$2"
+                str5 = "update formchecks SET term7mid1 = $1 WHERE rno=$2"
                 values5 = ['true',parseInt(grpno)]
 
                 console.log("Executing Status Update for 1st.......")
@@ -331,14 +331,14 @@ module.exports = {
                 console.log("Updated Status of 1st Student.......")
 
 
-                str6 = "update formchecks SET mid2term7 = $1 WHERE rno=$2"
+                str6 = "update formchecks SET term7mid1 = $1 WHERE rno=$2"
                 values6 = ['true',parseInt(jsrollno2)]
 
                 console.log("Executing Status Update for 2nd.......")
                 const rows6 = await client.query(str6,values6)
                 console.log("Updated Status of 2nd Student.......")
 
-                str7 = "update formchecks SET mid2term7 = $1 WHERE rno=$2"
+                str7 = "update formchecks SET term7mid1 = $1 WHERE rno=$2"
                 values7 = ['true',parseInt(jsrollno3)]
 
                 console.log("Executing Status Update for 3rd.......")
@@ -602,7 +602,7 @@ module.exports = {
                 const rows = await client.query(str,values)
                 console.log("Updation of 2nd Query Done.......")
 
-                str5 = "update formchecks SET mid2term7 = $1 WHERE rno=$2"
+                str5 = "update formchecks SET term7mid2 = $1 WHERE rno=$2"
                 values5 = ['true',parseInt(grpno)]
 
                 console.log("Executing Status Update for 1st.......")
@@ -610,14 +610,14 @@ module.exports = {
                 console.log("Updated Status of 1st Student.......")
 
 
-                str6 = "update formchecks SET mid2term7 = $1 WHERE rno=$2"
+                str6 = "update formchecks SET term7mid2 = $1 WHERE rno=$2"
                 values6 = ['true',parseInt(jsrollno2)]
 
                 console.log("Executing Status Update for 2nd.......")
                 const rows6 = await client.query(str6,values6)
                 console.log("Updated Status of 2nd Student.......")
 
-                str7 = "update formchecks SET mid2term7 = $1 WHERE rno=$2"
+                str7 = "update formchecks SET term7mid2 = $1 WHERE rno=$2"
                 values7 = ['true',parseInt(jsrollno3)]
 
                 console.log("Executing Status Update for 3rd.......")
