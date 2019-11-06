@@ -36,6 +36,106 @@
 </p>
 
 
+{{!-- NAVIGATION BAR --}}
+
+<div class="navbar" >
+    <div class="scene">
+        <div class="box">
+            <div class="front face">
+                <i class="lnr lnr-home"></i>
+            </div>
+            <a href="/admin"><div class="right face">
+                <p>HOME</p>
+            </div></a>
+        </div>
+    </div>
+    <div class="scene">
+        <div class="box">
+            <div class="front face">
+                <i class="lnr lnr-spell-check"></i>
+            </div>
+            <a href="#"><div class="right face">
+                <p>FORM	UPDATES</p>
+            </div></a>
+        </div>
+    </div>
+    <div class="scene">
+        <div class="box">
+            <div class="front face">
+                <i class="lnr lnr-exit"></i>
+            </div>
+            <a href="/index"><div class="right face">
+                <p>LOGOUT</p>
+            </div></a>
+        </div>
+    </div>
+</div>
+
+
+<style>
+	p{
+		font-size: 12px;
+		color: #111;
+		text-align: center;
+	}
+
+	a:hover{
+		color: #111;
+	}
+
+	.lnr{
+		font-size: 35px;
+		padding-left: 17px;
+    color: #fcda05;
+	}
+
+	.navbar{
+		position: fixed;
+		right: 0;
+		width: 90px;
+		height: 100px;
+	}
+
+	.scene{
+		width: 90px;
+		height: 100px;
+	}
+
+	.box{
+		width: 100%;
+		height: 100%;
+		transform-style: preserve-3d;
+		transition: all 0.5s ease-out;
+		transform-origin: 0 0;
+	}
+
+	.scene:hover .box{
+		transform: rotateY(-90deg);
+		cursor: pointer;
+	}
+
+	.face{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		transform-origin: 0 0;
+	}
+
+	.front{
+		transform: rotateY(0deg);
+		background-color: #2a363b;
+	}
+
+	.right{
+		transform: rotateY(90deg);
+		left: 70px;
+		background-color: #fcda05;
+		color: #111;
+		font-size: 0.8rem;
+	}
+</style>
+
+
 <main id="swup">
   <div class="container">
     {{#if listExists}}
@@ -55,17 +155,17 @@
         <tr>
             <td data-title='rno'>{{this.rno}}</td>
             <script>console.log(listExists)</script>
+            {{#equal this.term7mid1 'true'}}
+                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
+            {{else}}
+                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
+            {{/equal}}
+            {{#equal this.term7mid2 'true'}}
+                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
+            {{else}}
+                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
+            {{/equal}}
             {{#equal this.term7 'true'}}
-                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
-            {{else}}
-                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
-            {{/equal}}
-            {{#equal this.oral7 'true'}}
-                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
-            {{else}}
-                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
-            {{/equal}}
-            {{#equal this.term8 'true'}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>

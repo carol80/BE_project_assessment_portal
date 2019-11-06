@@ -118,12 +118,13 @@ app.route('/signup')
                     res.redirect('admin');
                     console.log("inside Admin");
                 } else if (await user.roles() === "Mentor"){
-                    res.redirect("/"+ username);
+                    res.redirect("/"+ user.usernames());
                     console.log("Inside Mentor")
                 }
         })
         .catch(error => {
             res.render('signup');
+            console.log("Error occured while signing up!!")
         });
     });
 

@@ -53,6 +53,9 @@ User.prototype.validPassword = async function(password) {
 User.prototype.roles = async function() {
   return await this.role;
 }
+User.prototype.usernames = async function() {
+  return await this.username;
+}
 
 // User.beforeCreate = (user) => {
 //   const salt = bcrypt.genSaltSync();

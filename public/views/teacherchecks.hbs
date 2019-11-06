@@ -57,7 +57,7 @@
 		<div class="front face">
 			<i class="lnr lnr-exit"></i>
 		</div>
-		<a href="/logout"><div class="right face">
+		<a href="/index"><div class="right face">
 			<p>LOGOUT</p>
 		</div></a>
 	</div>
@@ -158,17 +158,17 @@
         <tr>
             <td data-title='rno'>{{this.rno}}</td>
             <script>console.log(listExists)</script>
+            {{#equal this.term7mid1 'true'}}
+                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
+            {{else}}
+                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
+            {{/equal}}
+            {{#equal this.term7mid2 'true'}}
+                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
+            {{else}}
+                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
+            {{/equal}}
             {{#equal this.term7 'true'}}
-                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
-            {{else}}
-                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
-            {{/equal}}
-            {{#equal this.oral7 'true'}}
-                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
-            {{else}}
-                <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>
-            {{/equal}}
-            {{#equal this.term8 'true'}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:green;">&#x2714</td>
             {{else}}
                 <td align="center" style="text-align:center; font-size:150%; font-weight:bold; color:red;">&#10008</td>

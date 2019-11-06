@@ -202,10 +202,14 @@
 
     <form class="login-container" action="/signup" method="post">
         <p><input type="text" placeholder="Username" name="username"></p>
-        <p><select name="role">
+        {{!-- <p><select name="role">
           <option value="Admin">Admin</option>
           <option value="Mentor">Mentor</option>
-        </select></p>
+        </select></p> --}}
+        {{!-- <p><input type="radio" name="role" value="Admin"> Admin
+        <input type="radio" name="role" value="Mentor"> Mentor</p> --}}
+        {{!-- <input name="role" required> --}}
+        <p><input type="text" placeholder="Admin/Mentor" name="role"></p>
         <p><input type="email" placeholder="E-mail" name="email"></p>
         <p><input type="password" placeholder="Password" name="password"></p>
         <p><input type="submit" value="Signup"></p>

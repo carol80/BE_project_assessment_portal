@@ -16,22 +16,22 @@ var formchecks = sequelize.define('formchecks', {
         unique: true,
         allowNull: false
     },
-    term7: {
+    term7mid1: {
         type: Sequelize.STRING,
         defaultValue: 'true',
         allowNull: false
     },
+    term7mid2: {
+        type: Sequelize.STRING,
+        defaultValue: 'false',
+        allowNull: false
+    },
+    term7: {
+        type: Sequelize.STRING,
+        defaultValue: 'false',
+        allowNull: false
+    },
     oral7: {
-        type: Sequelize.STRING,
-        defaultValue: 'false',
-        allowNull: false
-    },
-    term8: {
-        type: Sequelize.STRING,
-        defaultValue: 'false',
-        allowNull: false
-    },
-    oral8: {
         type: Sequelize.STRING,
         defaultValue: 'false',
         allowNull: false
